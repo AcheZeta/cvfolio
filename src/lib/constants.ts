@@ -27,11 +27,11 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
   baseUrl: astroConfig.site || 'https://getcvfolio.com',
   author: {
     avatar,
-    name: 'Javier Diaz Chamorro',
-    headline: 'Engineering and Design',
-    username: 'coderdiaz',
+    name: 'Hame Elizalde',
+    headline: 'Generalista, Creativa, Interdisciplinaria',
+    username: 'Ache_Zeta',
     location: 'Mexico City',
-    pronouns: 'He/Him',
+    pronouns: 'Ella/She',
   },
   seo: {
     title: 'CV Folio — An Astro template inspired on Read.cv',
