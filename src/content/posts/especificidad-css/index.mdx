@@ -1,0 +1,88 @@
+---
+title: Especificidad en CSS.
+date: 2021-08-05
+image: ./meta.jpg
+seo:
+  title: Especificidad en CSS.
+  description: Uno de los conceptos de CSS que más pasamos por alto es la especificidad.
+  type: article
+  keywords: blog, programación, css, especificidad.
+---
+
+Uno de los conceptos de CSS que más pasamos por alto es la especificidad, y es que CSS es un lenguaje muy noble y flexible. Muchos de los problemas comunes a los que nos enfrentamos al escribir CSS se pueden entender y por lo tanto, corregir con la especificidad. 
+
+### ¿Qué es la especificidad en CSS?
+
+La especificidad es uno de los conceptos claves de CSS. Es la manera en que los navegadores resuelven conflictos si diversas reglas son aplicadas a un mismo elemento, decidiendo qué estilos son más relevantes y por lo tanto, cuales serán aplicados. 
+
+### ¿Cómo funciona?
+
+Cuando un navegador carga una página web, combina el contenido (HTML) con la información de estilos (CSS). Procesa estos archivos en etapas. A continuación te muestro un modelo simplificado de lo que pasa: 
+
+![https://mdn.mozillademos.org/files/11781/rendering.svg](https://mdn.mozillademos.org/files/11781/rendering.svg)
+
+A diferencia de otros lenguajes, CSS no arroja un error ni se interrumpe si detecta una línea que no puede analizar, durante su lectura. La cascada de CSS lee de arriba hacia abajo, filtra y clasifica las reglas de acuerdo a su importancia, si no puede analizar un valor lo tomará como ***no válido*** y por lo tanto lo ignora.
+
+**¿Qué pasa cuando hay coincidencia de elementos?** Cuando se presenta conflicto CSS toma el ultimo valor escrito, si el conflicto es en la importancia de los estilos el navegador hará un cálculo para resolver qué estilo es más relevante.
+
+**¿Cómo se toma el puntaje?** Entre más específico sea un estilo, mayor será la probabilidad de que se aplique. Para esto el navegador determina por medio de “pesos” o puntajes que estilo es el más relevante para un elemento. 
+
+
+![Diagrama de pasos sobre como se muestra una página web](https://i.imgur.com/aXn9icR.png)
+
+!Important es la regla que tendrá más peso, sobreescribiendo casi cualquier estilo y al contrario el menos específico sería el selector universal, cualquier estilo más específico va a sobrescribirlo.
+
+![Puntaje](https://i.imgur.com/LSZWYqw.png)
+
+**!important**
+1, 0, 0, 0, 0
+- Reescribe cualquier estilo.
+- Para el navegador es de alta prioridad.
+- Hay que evitarlo o usarlo con mucha precaución.
+
+**Estilos en línea**
+0, 1, 0, 0, 0
+- Los estilos en línea aplicaran estilos nuevos sobre otros, aunque ya tengan clases o IDs.
+
+**#ID**
+0, 0, 1, 0, 0
+- Los ID tienen mayor peso que las clases y etiquetas.
+- Pero al ser únicos es preferible usarlos para funcionalidad que para estilos.
+
+**.Clases, atributos y pseudo clases**
+0, 0, 0, 1, 0
+- Es mejor usar clases para dar estilos, combinados con una metodología como BEM tendrás una especificidad manejable.
+
+**Elementos**
+0, 0, 0, 0, 1
+- Los estilos aplicados a los elementos son los más básicos y fáciles de reescribir.
+
+**Selector Universal**
+0, 0, 0, 0, 0
+- El selector universal no tiene peso alguno y será reescrito por cualquier otra regla.
+
+Por ejemplo: En este ejercicio hay dos reglas que afectan al mismo elemento. 
+Aunque la regla de elemento botón está al final de la cascada, la regla de clase es más especifica y por tanto es la que se aplicara. 
+
+![Ejemplo de CSS](https://i.imgur.com/aXn9icR.png)
+
+Si nuestra regla incluye varios selectores el puntaje de estos se sumará, dandole mayor especificidadad.
+
+![Ejemplo de suma de puntajes](https://i.imgur.com/URNGpYX.png)
+
+### Algunos consejos:
+
+El balance es mantener nuestro CSS lo suficiente específico cómo que se apliquen y tan general cómo para poder reescribir, o sobre escribir estilos si es necesario.
+
+Tu CSS es tan importante como JS y como HTML.
+
+Comenta y organiza tu código.
+
+Evita selectores demasiado específicos porque dificultan la lectura y cambiar el código si es necesario, por ejemplo:
+
+![Ejemplo de selectores demasiado especificos](https://i.imgur.com/hxWnvBf.png)
+
+Usar alguna metodología puede ayudarte a tener mucho más orden, escribir CSS es un proceso. 
+No existe una forma 100% correcta o incorrecta de hacer las cosas.
+
+Este post se publico originalmente en CodigoFacilito, una comunidad de aprendizaje de programación y tecnología. Puedes leerlo [aquí](https://codigofacilito.com/articulos/especificidad-css).

@@ -1,0 +1,104 @@
+---
+title: ¿Qué Pokémon eres según tu cumpleaños?
+date: 2021-01-01
+image: ./pokemon.webp
+seo:
+  title: ¿Qué Pokémon eres según tu cumpleaños? 
+  description: Un ejercicio con Fetch, Vanilla JS
+  type: article
+  keywords: blog code, fetch, javascript, pokemon, vanilla js, API
+---
+
+---
+
+Está imágen y tratar de aprender más sobre Fetch me animaron a hacer un ejercicio "sencillo" con la API de Pokémon.
+
+### Ve el proyecto aquí: [https://achezeta.github.io/PokeDay/](https://achezeta.github.io/PokeDay/)
+
+![Alt text](https://miro.medium.com/v2/resize:fit:720/format:webp/1*mEkkREm7zN7MNPpEJpzDbA.png)
+
+En este blog te cuento cómo lo hice y el proceso con HTML y JS, pero pueden encontrar todos los archivos en el repositorio al final de este texto.
+
+---
+
+## HTML
+
+Sin duda de las partes más básicas, mi HTML cuenta con un input del tipo fecha, un botón que sirve de disparador y un div donde se mostrará el pokémon.
+
+<script src="[https://gist.github.com/AcheZeta/fb460bd9a23c0c1302413cc5fe5c21f5.js](https://gist.github.com/AcheZeta/fb460bd9a23c0c1302413cc5fe5c21f5.js)"></script>
+
+---
+
+## JS
+
+El código Javascript de este programa tuvo varias tareas:
+
+- Consumir la API.
+- Conseguir el número de día que representaba la fecha en el año.
+
+### FETCH
+
+Fetch es un método que permite interactuar con los datos de manera asíncrona.
+
+> Este tipo de funcionalidad se conseguía previamente haciendo uso de `XMLHttpRequest`.
+Fetch proporciona una mejor alternativa que puede ser empleada fácilmente por otras tecnologías como Service Workers.
+Fetch también aporta un único lugar lógico en el que definir otros conceptos relacionados con HTTP como CORS y extensiones para HTTP.
+[Utilizando Fetch - MDN](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch)
+> 
+
+### Obtener los datos
+
+Para obtener los datos creé la función `getPokemon`, en ella usé `fetch()`.
+
+Fetch necesita como parámetro la URL, en este caso de la API de Pokémon. Esta URL funciona así: 'Base de la URL + parámetro de búsqueda', que puede ser nombre, tipo o habilidad, por ejemplo:
+
+- `https://pokeapi.co/api/v2/pokemon/1/` mostrará los datos de Bulbasaur
+- `https://pokeapi.co/api/v2/pokemon/` mostrará los primeros 20
+- `https://pokeapi.co/api/v2/pokemon/?limit=808` mostrará todos los pokemones (807)
+
+<script src="[https://gist.github.com/AcheZeta/1159eff6df3e2b14f2dbee551f2fcf40.js](https://gist.github.com/AcheZeta/1159eff6df3e2b14f2dbee551f2fcf40.js)"></script>
+
+### Obtener el número de día
+
+Una de las partes que me tomó más tiempo de lo esperado fue entender cómo convertir una fecha a número de día.
+
+La fórmula no parece tan difícil: restar a 365 o 366 el número de días que han transcurrido y asignarle un pokémon según el número obtenido. Pero la ejecución me hizo conocer algunos métodos que desconocía.
+
+> `Date.parse()` transforma una cadena con la representación de una fecha y hora, y devuelve el número de milisegundos.
+**Date.parse() -** [MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Date/parse)
+> 
+
+Así que usé este método para convertir la fecha seleccionada y la fecha inicial a milisegundos.
+
+Para la fecha inicial la obtuve usando `.slice` y concatenando `01-01`. Usar `00` como día de inicio hace que la fecha no sea válida y no pueda *parsearse*.
+
+Resté la fecha seleccionada a la fecha inicial, el resultado lo dividí entre `86400000` (que son los milisegundos en un día), lo redondeé y le sumé uno.
+
+---
+
+## Buscar & Mostrar
+
+Usé dos funciones distintas:
+
+- `searchPoke`: para detectar si el input es una fecha o si está vacía.
+- `renderPokemon`: para imprimir en el `div` el pokémon usando template string.
+
+<script src="[https://gist.github.com/AcheZeta/4f4c550ca261f3e6dd296d761aa5aedc.js](https://gist.github.com/AcheZeta/4f4c550ca261f3e6dd296d761aa5aedc.js)"></script>
+
+Al inicio del documento declaré la variable `userIdPokemon` que `fetch` tomó para hacer la petición.
+
+El código completo de JS sería este:
+
+<script src="[https://gist.github.com/AcheZeta/5d34799ef27cf423ef57d174b3a30409.js](https://gist.github.com/AcheZeta/5d34799ef27cf423ef57d174b3a30409.js)"></script>
+
+---
+
+El código final lo pueden encontrar en mi [repositorio](https://github.com/AcheZeta/PokeDay).
+
+Y si quieres seguir experimentando, puedes leer y usar alguna de las API que se proponen en [**DataLovers**](https://github.com/Laboratoria/LIM012-data-lovers), un proyecto del bootcamp de [**Laboratoria**](https://www.laboratoria.la/) que te ayudará a practicar con `Fetch`, `JSON`, `Objetos`, `Arrays` y otros temas.
+
+Siéntete libre de *forkear* este proyecto, modificarlo, compartirlo o dejar feedback que sin duda me ayudará a mejorar.
+
+❤
+
+Este post fue originalmente publicado en [Medium](https://medium.com/@AcheZeta).
