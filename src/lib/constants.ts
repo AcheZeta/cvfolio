@@ -34,12 +34,12 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
     pronouns: 'Ella/She',
   },
   seo: {
-    title: 'CV Folio — An Astro template inspired on Read.cv',
-    description: 'Clean and aesthetic portfolio website for developers and designers',
+    title: 'Hame Elizalde | Portafolio',
+    description: 'Web Designer',
     type: 'website',
     image: MetaDefaultImage,
     twitter: {
-      creator: '@cvfolio'
+      creator: '@ache_zeta',
     },
     robots: 'noindex, nofollow',
   }
