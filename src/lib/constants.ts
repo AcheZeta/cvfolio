@@ -28,14 +28,14 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
   author: {
     avatar,
     name: 'Hame Elizalde',
-    headline: 'Generalista, Creativa, Interdisciplinaria',
+    headline: 'Product Designer | UX Writer | Digital Strategist',
     username: 'Ache_Zeta',
-    location: 'Mexico City',
+    location: 'México',
     pronouns: 'Ella/She',
   },
   seo: {
     title: 'Hame Elizalde | Portafolio',
-    description: 'Web Designer',
+    description: 'Product Designer | UX Writer | Digital Strategist',
     type: 'website',
     image: MetaDefaultImage,
     twitter: {
