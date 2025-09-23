@@ -28,18 +28,18 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
   author: {
     avatar,
     name: 'Hame Elizalde',
-    headline: 'Generalista, Creativa, Interdisciplinaria',
+    headline: 'Product Designer | UX Writer | Digital Strategist',
     username: 'Ache_Zeta',
-    location: 'Mexico City',
+    location: 'México',
     pronouns: 'Ella/She',
   },
   seo: {
-    title: 'CV Folio — An Astro template inspired on Read.cv',
-    description: 'Clean and aesthetic portfolio website for developers and designers',
+    title: 'Hame Elizalde | Portafolio',
+    description: 'Product Designer | UX Writer | Digital Strategist',
     type: 'website',
     image: MetaDefaultImage,
     twitter: {
-      creator: '@cvfolio'
+      creator: '@ache_zeta',
     },
     robots: 'noindex, nofollow',
   }
