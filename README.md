@@ -6,14 +6,6 @@ Enfocada en crear experiencias digitales centradas en las personas, con impacto 
 
 ## Contactame
 
-<<<<<<< HEAD
-- [**hameelizalde.com**](https://hameelizalde.com/)
-- Email [**hame.elizalde@gmail.com**](mailto:hame.elizalde@gmail.com)
-- [**LinkedIn**](https://www.linkedin.com/in/hame-elizalde/)
-- [**Instagram**](https://www.instagram.com/ache_zeta/)
-- [**Bluesky**](https://bsky.app/profile/achezeta.bsky.social)
-- [**Twitter**](https://x.com/Ache_Zeta)
-=======
 - Website [**hameelizalde.com**](https://hameelizalde.com/)
 - Email [**hame.elizalde@gmail.com**](mailto:hame.elizalde@gmail.com)
 - LinkedIn [**Hameyalli Elizalde**](https://www.linkedin.com/in/hame-elizalde/)
@@ -21,7 +13,6 @@ Enfocada en crear experiencias digitales centradas en las personas, con impacto 
 - Bluesky [**achezeta**](https://bsky.app/profile/achezeta.bsky.social)
 - GitHub [**AcheZeta**](https://github.com/AcheZeta)
 - Twitter [**Ache_Zeta**](https://x.com/Ache_Zeta)
->>>>>>> CV2025
 
 ## SKILLS
 
