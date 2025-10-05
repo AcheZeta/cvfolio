@@ -18,21 +18,21 @@ const isProjectsPage = pathname.startsWith('/projects');
             'font-medium transition-colors block px-5 py-2',
             'hover:text-headings',
             isHomePage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Home</a>
+          ]}>Inicio</a>
         </li>
         <li>
           <a href="/writing" class:list={[
             'font-medium transition-colors block px-5 py-2',
             'hover:text-headings',
             isWritingPage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Writing</a>
+          ]}>Blog</a>
         </li>
         <li>
           <a href="/projects/" class:list={[
             'font-medium transition-colors block px-5 py-2',
             'hover:text-headings',
             isProjectsPage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Projects</a>
+          ]}>Proyectos</a>
         </li>
       </ul>
     </nav>
