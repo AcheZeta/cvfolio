@@ -28,7 +28,7 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
   author: {
     avatar,
     name: 'Hame Elizalde',
-    headline: 'Product Designer | UX Writer | Digital Strategist',
+    headline: 'Product Designer & Digital Strategist | UX Writer especializada en educación y productos digitales de alto impacto.',
     username: 'Ache_Zeta',
     location: 'México',
     pronouns: 'Ella/She',
