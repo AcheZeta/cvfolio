@@ -1,0 +1,27 @@
+---
+import { getEntry, render } from 'astro:content';
+import Author from '@/components/ui/Author.astro';
+import Container from '@/components/Container.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+
+const contactEntry = await getEntry('pages', 'contact');
+if (!contactEntry) {
+  throw new Error('No se encontró la página contact');
+}
+const entry = contactEntry;
+const { Content } = await render(entry);
+---
+
+<BaseLayout seo={entry.data.seo}>
+  <Container as="section" class="py-6">
+    <Author {...DEFAULT_CONFIGURATION.author} />
+  </Container>
+  <Container as="section" class="py-6">
+    <article class="flex flex-col gap-6">
+      <div class="prose dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>

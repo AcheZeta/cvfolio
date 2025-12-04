@@ -4,9 +4,11 @@ import Container from '@/components/Container.astro';
 const pathname = Astro.url.pathname;
 
 const isHomePage = pathname === '/';
-const isWritingPage = pathname.startsWith('/writing');
 const isProjectsPage = pathname.startsWith('/projects');
-
+const isAboutPage = pathname.startsWith('/about');
+// const isWritingPage = pathname.startsWith('/writing');
+// const isContactPage = pathname.startsWith('/contact');
+// const isServicePage = pathname.startsWith('/services');
 ---
 
 <Container as='header' class="w-full max-w-full flex justify-center items-center">
@@ -21,11 +23,11 @@ const isProjectsPage = pathname.startsWith('/projects');
           ]}>Inicio</a>
         </li>
         <li>
-          <a href="/writing" class:list={[
+          <a href="/about" class:list={[
             'font-medium transition-colors block px-5 py-2',
             'hover:text-headings',
-            isWritingPage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Blog</a>
+            isAboutPage && 'text-headings bg-muted-foreground/40 rounded-full',
+          ]}>Sobre mí</a>
         </li>
         <li>
           <a href="/projects/" class:list={[

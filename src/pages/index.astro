@@ -8,21 +8,51 @@ import WorkExperience from '@/components/ui/WorkExperience.astro';
 import Talk from '@/components/ui/Talk.astro';
 import { sortJobsByDate } from '@/lib/utils';
 
-const entry = await getEntry('pages', 'homepage');
+// Obtener datos
+const homeEntry = await getEntry('pages', 'homepage');
+if (!homeEntry) {
+  throw new Error('No se encontró la página homepage');
+}
+const entry = homeEntry;
 const { Content } = await render(entry);
-
-const links = await getCollection('links');
-const jobs = await getCollection('jobs');
-const sortedJobs = sortJobsByDate(jobs);
-const talks = await getCollection('talks');
+const aboutEntry = await getEntry('pages', 'about');
+const allPages = await getCollection('pages');
+const pages = allPages.filter(page => !['homepage', 'experience'].includes(page.id));
 ---
+
 
 <BaseLayout seo={entry.data.seo}>
   <Container as="section" class="py-6">
     <Author {...DEFAULT_CONFIGURATION.author} />
   </Container>
 
-  <Container as="section" class="py-6">
+  <!-- Bento  -->
+  <Container as='section' class='py-6'>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {pages.map((page) => (
+        <a 
+          href={`/${page.id}`}
+          class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-foreground/50 transition-colors"
+        >
+          <div class="flex flex-col h-full">
+            <h3 class="text-lg font-semibold text-headings group-hover:text-foreground transition-colors">
+              {page.data.title}
+            </h3>
+            <p class="text-sm text-muted-foreground mt-2">
+              {page.data.seo.description}
+            </p>
+            <div class="mt-auto pt-4">
+              <span class="text-xs text-muted-foreground group-hover:text-foreground/70 transition-colors">
+                Explorar →
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </Container>
+
+  <!-- <Container as="section" class="py-6">
     <div class="flex flex-col gap-6">
       <div class="flex items-center">
         <span class="text-headings">About</span>
@@ -31,8 +61,8 @@ const talks = await getCollection('talks');
         <Content />
       </div>
     </div>
-  </Container>
-  {
+  </Container>  -->
+  <!-- {
     links.length > 0 && (
       <Container as="section" class="py-8">
         <div class="flex flex-col gap-5">
@@ -56,7 +86,7 @@ const talks = await getCollection('talks');
         </div>
       </Container>
     )
-  }
+  } -->
   <!-- {
     sortedJobs.length > 0 && (
       <Container as="section" class="py-6">
@@ -85,4 +115,5 @@ const talks = await getCollection('talks');
       </Container>
     )
   } -->
+
 </BaseLayout>
