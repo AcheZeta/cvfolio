@@ -15,10 +15,22 @@ const { Content } = await render(entry);
       <span class="text-muted-foreground text-sm">{entry.data.year}</span>
     </div>
     <div class="flex flex-col gap-3">
-      <div class="flex flex-col">
-        <span class="text-headings font-medium">{entry.data.title}</span>
-        <span class="text-foreground text-sm">{entry.data.event}, {entry.data.location}</span>
-      </div>
+      <a
+        href={entry.data.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex flex-col hover:underline"
+      >
+        <div class="flex flex-col">
+          <span class="text-headings font-medium">{entry.data.title}</span>
+          <span class="text-foreground text-sm"
+            >{entry.data.event}, {entry.data.location}</span
+          >
+          <span class="text-xs text-muted-foreground group-hover:text-foreground/70 transition-colors">
+            Ver más →
+          </span>
+        </div>
+      </a>
       <div class="prose dark:prose-invert prose-sm">
         <Content />
       </div>
