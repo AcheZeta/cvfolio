@@ -1,5 +1,5 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getEntry, render, getCollection } from 'astro:content';
 import Author from '@/components/ui/Author.astro';
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -11,6 +11,8 @@ if (!contactEntry) {
 }
 const entry = contactEntry;
 const { Content } = await render(entry);
+
+const links = await getCollection('links');
 ---
 
 <BaseLayout seo={entry.data.seo}>
@@ -24,4 +26,28 @@ const { Content } = await render(entry);
       </div>
     </article>
   </Container>
+  {
+    links.length > 0 && (
+      <Container as="section" class="py-8">
+        <div class="flex flex-col gap-5">
+          <ul class="flex flex-col gap-3">
+            {links.map((link) => (
+              <li class="py-0.5">
+                <div class="flex flex-col gap-3">
+                  <a
+                    href={link.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-2 px-4 py-2 bg-muted-foreground/40 text-headings font-medium rounded-full hover:bg-muted-foreground/60 transition"
+                  >
+                    {link.data.label || link.data.name}
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    )
+  }
 </BaseLayout>
