@@ -29,20 +29,22 @@ const pages = allPages.filter(page => !['homepage', 'experience'].includes(page.
   <!-- Bento  -->
   <Container as='section' class='py-6'>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {pages.map((page) => (
+      {pages
+        .filter(page => !['about', 'projects'].includes(page.id))
+        .map((page) => (
         <a 
           href={`/${page.id}`}
-          class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-foreground/50 transition-colors"
+          class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-amber-100 transition-colors"
         >
           <div class="flex flex-col h-full">
             <h1 class="text-lg font-semibold text-headings group-hover:text-foreground transition-colors">
               {page.data.title}
             </h1>
-            <p class="text-sm text-muted-foreground mt-2">
+            <p class="text-sm mt-2">
               {page.data.seo.description}
             </p>
             <div class="mt-auto pt-4">
-              <span class="text-xs text-muted-foreground group-hover:text-foreground/70 transition-colors">
+              <span class="text-xs group-hover:text-foreground/70 transition-colors">
                 Explorar →
               </span>
             </div>
