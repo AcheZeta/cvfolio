@@ -17,105 +17,124 @@ const entry = homeEntry;
 const { Content } = await render(entry);
 const aboutEntry = await getEntry('pages', 'about');
 const allPages = await getCollection('pages');
-const pages = allPages.filter(page => !['homepage', 'experience'].includes(page.id));
+const pages = allPages.filter(
+  (page) => !['homepage', 'experience'].includes(page.id),
+);
 ---
-
 
 <BaseLayout seo={entry.data.seo}>
   <Container as="section" class="py-6">
     <Author {...DEFAULT_CONFIGURATION.author} />
   </Container>
 
-  <!-- Bento  -->
-  <Container as='section' class='py-6'>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {pages
-        .filter(page => !['about', 'projects'].includes(page.id))
-        .map((page) => (
-        <a 
-          href={`/${page.id}`}
-          class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-amber-100 transition-colors"
+  <!-- LO QUE HAGO -->
+  <Container as="section" class="py-10">
+    <div class="flex flex-col gap-4">
+      <p class="text-sm uppercase tracking-wide text-muted-foreground">
+        Lo que hago
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
         >
-          <div class="flex flex-col h-full">
-            <h1 class="text-lg font-semibold text-headings group-hover:text-foreground transition-colors">
-              {page.data.title}
-            </h1>
-            <p class="text-sm mt-2">
-              {page.data.seo.description}
-            </p>
-            <div class="mt-auto pt-4">
-              <span class="text-xs group-hover:text-foreground/70 transition-colors">
-                Explorar →
-              </span>
-            </div>
-          </div>
-        </a>
-      ))}
+          Producto & UX
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Frontend
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          UX Writing
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Estrategia digital
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Optimización de procesos
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Service Design & experiencia de cliente
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Contenido
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Diseño de producto
+        </span>
+
+        <span
+          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
+                   hover:border-amber-300 transition
+                   select-none cursor-default"
+        >
+          Marketing digital
+        </span>
+      </div>
     </div>
   </Container>
 
-  <!-- <Container as="section" class="py-6">
-    <div class="flex flex-col gap-6">
-      <div class="flex items-center">
-        <span class="text-headings">About</span>
-      </div>
-      <div class="prose dark:prose-invert">
-        <Content />
-      </div>
-    </div>
-  </Container>  -->
-  <!-- {
-    links.length > 0 && (
-      <Container as="section" class="py-8">
-        <div class="flex flex-col gap-5">
-          <span class="text-headings">Contacto</span>
-          <ul class="flex flex-col gap-3">
-            {links.map((link) => (
-              <li class="py-0.5">
-                <div class="flex flex-col gap-3">
-                  <a
-                    href={link.data.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-center justify-center gap-2 px-4 py-2 bg-muted-foreground/40 text-headings font-medium rounded-full hover:bg-muted-foreground/60 transition"
-                  >
-                    {link.data.label || link.data.name}
-                  </a>
+  <!-- Bento  -->
+  <Container as="section" class="py-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        pages
+          .filter((page) => !['about', 'projects'].includes(page.id))
+          .map((page) => (
+            <a
+              href={`/${page.id}`}
+              class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-amber-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+            >
+              <div class="flex flex-col h-full">
+                <h2 class="text-lg font-semibold text-headings group-hover:text-foreground transition-colors">
+                  {page.data.title}
+                </h2>
+                <p class="text-sm mt-2">{page.data.seo.description}</p>
+                <div class="mt-auto pt-4">
+                  <span class="text-xs group-hover:text-foreground/70 transition-colors">
+                    Explorar →
+                  </span>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Container>
-    )
-  } -->
-  <!-- {
-    sortedJobs.length > 0 && (
-      <Container as="section" class="py-6">
-        <div class="flex flex-col gap-5">
-          <span class="text-headings">Experiencia</span>
-          <ul class="flex flex-col gap-8">
-            {sortedJobs.map((job) => (
-              <WorkExperience entry={job} />
-            ))}
-          </ul>
-        </div>
-      </Container>
-    )
-  }
-  {
-    talks.length > 0 && (
-      <Container as="section" class="py-6">
-        <div class="flex flex-col gap-5">
-          <span class="text-headings">Charlas</span>
-          <ul class="flex flex-col gap-8">
-            {talks.map((talk) => (
-              <Talk entry={talk} />
-            ))}
-          </ul>
-        </div>
-      </Container>
-    )
-  } -->
-
+              </div>
+            </a>
+          ))
+      }
+    </div>
+  </Container>
 </BaseLayout>

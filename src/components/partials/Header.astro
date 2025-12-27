@@ -17,24 +17,24 @@ const isAboutPage = pathname.startsWith('/about');
       <ul class="flex items-center gap-1">
         <li>
           <a href="/" class:list={[
-            'font-medium transition-colors block px-5 py-2',
+            'font-medium transition-colors block px-5 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2',
             'hover:text-headings',
             isHomePage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Inicio</a>
+          ]} aria-current={isHomePage ? 'page' : undefined}>Inicio</a>
         </li>
         <li>
           <a href="/about" class:list={[
-            'font-medium transition-colors block px-5 py-2',
+            'font-medium transition-colors block px-5 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2',
             'hover:text-headings',
             isAboutPage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Sobre mí</a>
+          ]} aria-current={isAboutPage ? 'page' : undefined}>Sobre mí</a>
         </li>
         <li>
           <a href="/projects/" class:list={[
-            'font-medium transition-colors block px-5 py-2',
+            'font-medium transition-colors block px-5 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2',
             'hover:text-headings',
             isProjectsPage && 'text-headings bg-muted-foreground/40 rounded-full',
-          ]}>Proyectos</a>
+          ]} aria-current={isProjectsPage ? 'page' : undefined}>Proyectos</a>
         </li>
       </ul>
     </nav>
