@@ -15,9 +15,9 @@ const { Content } = await render(entry);
       <span class="text-sm">{entry.data.year}</span>
     </div>
     <div class="flex flex-col gap-3">
-      {entry.data.link ? (
+      {entry.data.url ? (
         <a
-          href={entry.data.link}
+          href={entry.data.url}
           target="_blank"
           rel="noopener noreferrer"
           class="flex flex-col hover:underline"
@@ -27,7 +27,7 @@ const { Content } = await render(entry);
             <span class="text-foreground text-sm"
               >{entry.data.event}, {entry.data.location}</span
             >
-            <span class="text-xs group-hover:text-foreground/70 transition-colors">
+            <span class="text-xs text-foreground/70 transition-colors">
               Ver charla →
             </span>
           </div>
