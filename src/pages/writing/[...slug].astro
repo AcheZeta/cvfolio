@@ -9,7 +9,13 @@ import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const entries = await getCollection('posts');
 
-  return entries.map((entry) => ({
+  const sortedEntries = entries.sort(
+    (a, b) =>
+      new Date(b.data.date).getTime() -
+      new Date(a.data.date).getTime()
+  );
+
+  return sortedEntries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
   }));
