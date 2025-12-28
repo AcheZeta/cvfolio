@@ -10,16 +10,16 @@ const { label, variant = 'default' } = Astro.props;
 <span
   class:list={[
     // base
-    'px-6 py-2 rounded-full border text-sm font-medium transition',
+    'px-6 py-2 rounded-full border text-sm font-medium transition-colors',
     'select-none cursor-default',
 
-    // colores base
+    // default
     variant === 'default' &&
-      'border-border bg-muted text-headings hover:border-amber-300',
+      'border-border bg-muted text-headings hover:border-[var(--color-border-hover)]',
 
-    // variante opcional
+    // highlight (misma lógica, distinto surface)
     variant === 'highlight' &&
-      'border-amber-300 bg-amber-50 text-headings'
+      'border-border bg-[var(--color-surface)] text-headings hover:border-[var(--color-border-hover)]'
   ]}
 >
   {label}
