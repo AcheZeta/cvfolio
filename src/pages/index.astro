@@ -7,6 +7,7 @@ import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 import WorkExperience from '@/components/ui/WorkExperience.astro';
 import Talk from '@/components/ui/Talk.astro';
 import { sortJobsByDate } from '@/lib/utils';
+import Chip from '@/components/ui/Chip.astro';
 
 // Obtener datos
 const homeEntry = await getEntry('pages', 'homepage');
@@ -28,87 +29,26 @@ const pages = allPages.filter(
   </Container>
 
   <!-- LO QUE HAGO -->
-  <Container as="section" class="py-10">
-    <div class="flex flex-col gap-4">
-      <p class="text-sm uppercase tracking-wide text-muted-foreground">
-        Lo que hago
-      </p>
+<Container as="section" class="py-10">
+  <div class="flex flex-col gap-4">
 
-      <div class="flex flex-wrap gap-4">
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Producto & UX
-        </span>
+    <p class="text-sm uppercase tracking-wide text-muted-foreground">
+      Lo que hago
+    </p>
 
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Frontend
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          UX Writing
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Estrategia digital
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Optimización de procesos
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Service Design & experiencia de cliente
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Contenido
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Diseño de producto
-        </span>
-
-        <span
-          class="px-6 py-2 rounded-full border border-border bg-muted text-headings text-sm font-medium
-                   hover:border-amber-300 transition
-                   select-none cursor-default"
-        >
-          Marketing digital
-        </span>
-      </div>
+    <div class="flex flex-wrap gap-4">
+      <Chip label="Producto & UX" />
+      <Chip label="Frontend" />
+      <Chip label="UX Writing" />
+      <Chip label="Estrategia digital" />
+      <Chip label="Optimización de procesos" />
+      <Chip label="Service Design & experiencia de cliente" />
+      <Chip label="Contenido" />
+      <Chip label="Diseño de producto" />
+      <Chip label="Marketing digital" />
     </div>
-  </Container>
+  </div>
+</Container>
 
   <!-- Bento  -->
   <Container as="section" class="py-6">
@@ -119,7 +59,7 @@ const pages = allPages.filter(
           .map((page) => (
             <a
               href={`/${page.id}`}
-              class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-amber-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+              class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 hover:border-amber-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
             >
               <div class="flex flex-col h-full">
                 <h2 class="text-lg font-semibold text-headings group-hover:text-foreground transition-colors">

@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  variant?: 'default' | 'highlight';
+}
+
+const { label, variant = 'default' } = Astro.props;
+---
+
+<span
+  class:list={[
+    // base
+    'px-6 py-2 rounded-full border text-sm font-medium transition',
+    'select-none cursor-default',
+
+    // colores base
+    variant === 'default' &&
+      'border-border bg-muted text-headings hover:border-amber-300',
+
+    // variante opcional
+    variant === 'highlight' &&
+      'border-amber-300 bg-amber-50 text-headings'
+  ]}
+>
+  {label}
+</span>
