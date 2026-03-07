@@ -8,6 +8,7 @@ import WorkExperience from '@/components/ui/WorkExperience.astro';
 import Talk from '@/components/ui/Talk.astro';
 import { sortJobsByDate } from '@/lib/utils';
 import Chip from '@/components/ui/Chip.astro';
+import { getSiteConfig } from '@/lib/config';
 
 // Obtener datos
 const homeEntry = await getEntry('pages', 'homepage');
@@ -15,23 +16,38 @@ if (!homeEntry) {
   throw new Error('No se encontró la página homepage');
 }
 const entry = homeEntry;
+const links = await getCollection('links');
 const { Content } = await render(entry);
 const aboutEntry = await getEntry('pages', 'about');
 const allPages = await getCollection('pages');
 const pages = allPages.filter(
   (page) => !['homepage', 'experience'].includes(page.id),
 );
+
+const config = getSiteConfig();
 ---
 
 <BaseLayout seo={entry.data.seo}>
+
   <Container as="section" class="py-6">
     <Author {...DEFAULT_CONFIGURATION.author} />
   </Container>
+
+  <Container as="section" class="py-6">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center">
+          <p class="text-sm uppercase tracking-wide">Sobre mí</p>
+        </div>
+        <div class="prose dark:prose-invert">
+          <Content />
+        </div>
+      </div>
+    </Container>
+
   <!-- LO QUE HAGO -->
   <Container as="section" class="py-10">
     <div class="flex flex-col gap-4">
       <p class="text-sm uppercase tracking-wide">Me apasiona</p>
-
       <div class="flex flex-wrap gap-4">
         <Chip label="EdTech" />
         <Chip label="Accesibilidad" />
@@ -43,11 +59,33 @@ const pages = allPages.filter(
         <Chip label="Café" />
         <Chip label="Fotografía" />
         <Chip label="Activismo" />
-        <Chip label="Diseño de Producto" />
-        <Chip label="Marketing Digital" />
       </div>
     </div>
   </Container>
+  <!-- CONTACTO -->
+  {
+    links.length > 0 && (
+      <Container as="section" class="py-10">
+        <div class="flex flex-col gap-4">
+          <p class="text-sm uppercase tracking-wide">Contacto</p>
+          <ul class="flex flex-wrap gap-3">
+            {links.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={link.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-muted-foreground/40 text-headings font-medium rounded-full hover:bg-muted-foreground/60 transition"
+                >
+                  {link.data.label || link.data.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    )
+  }
   <!-- Bento  -->
   <Container as="section" class="py-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
