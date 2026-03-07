@@ -27,7 +27,27 @@ const pages = allPages.filter(
   <Container as="section" class="py-6">
     <Author {...DEFAULT_CONFIGURATION.author} />
   </Container>
+  <!-- LO QUE HAGO -->
+  <Container as="section" class="py-10">
+    <div class="flex flex-col gap-4">
+      <p class="text-sm uppercase tracking-wide">Me apasiona</p>
 
+      <div class="flex flex-wrap gap-4">
+        <Chip label="EdTech" />
+        <Chip label="Accesibilidad" />
+        <Chip label="Diversidad" />
+        <Chip label="Ecología y Sustentabilidad" />
+        <Chip label="Feminismo" />
+        <Chip label="Producto y UX" />
+        <Chip label="Programación" />
+        <Chip label="Café" />
+        <Chip label="Fotografía" />
+        <Chip label="Activismo" />
+        <Chip label="Diseño de Producto" />
+        <Chip label="Marketing Digital" />
+      </div>
+    </div>
+  </Container>
   <!-- Bento  -->
   <Container as="section" class="py-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -68,27 +88,6 @@ const pages = allPages.filter(
             </a>
           ))
       }
-    </div>
-  </Container>
-
-  <!-- LO QUE HAGO -->
-  <Container as="section" class="py-10">
-    <div class="flex flex-col gap-4">
-      <p class="text-sm uppercase tracking-wide">
-        Lo que hago
-      </p>
-
-      <div class="flex flex-wrap gap-4">
-        <Chip label="Producto & UX" />
-        <Chip label="Frontend" />
-        <Chip label="UX Writing" />
-        <Chip label="Estrategia digital" />
-        <Chip label="Optimización de procesos" />
-        <Chip label="Service Design & experiencia de cliente" />
-        <Chip label="Contenido" />
-        <Chip label="Diseño de producto" />
-        <Chip label="Marketing digital" />
-      </div>
     </div>
   </Container>
 </BaseLayout>
