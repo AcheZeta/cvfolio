@@ -15,8 +15,16 @@ const { seo } = Astro.props;
 ---
 
 <html lang="es">
-  <Head seo={seo} />
-  <body class="bg-background text-foreground pb-12">
+  <Head seo={seo}>
+    <!-- Google Fonts: Cormorant Garamond + Forum -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Forum&display=swap"
+      rel="stylesheet"
+    />
+  </Head>
+  <body class="bg-odoe20 text-foreground pb-12">
     <Header />
     <main class="pt-24">
       <slot />

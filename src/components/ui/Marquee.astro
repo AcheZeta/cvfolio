@@ -1,0 +1,68 @@
+---
+// Marquee animado con skills clave
+interface Props {
+  items?: string[];
+  speed?: 'slow' | 'normal' | 'fast';
+}
+
+const {
+  items = [
+    '✦ Redacción UX',
+    '✦ Estrategia',
+    '✦ Producto',
+    '✦ Investigación',
+    '✦ Programación',
+    '✦ Accesibilidad',
+    '✦ Diseño Inclusivo',
+    '✦ Contenido Digital',
+    '✦ Diseño',
+    '✦ IA Aplicada',
+    '✦ Educación Digital',
+    '✦ Feminismo Tech',
+    '✦ Sustentabilidad',
+    '✦ Fotografía',
+    '✦ Activismo',
+    '✦ Café',
+  ],
+  speed = 'normal',
+} = Astro.props;
+
+const durations = { slow: '38s', normal: '26s', fast: '16s' };
+const duration = durations[speed];
+
+// Duplicate items so it scrolls seamlessly
+const doubled = [...items, ...items];
+---
+
+<div
+  class="w-full overflow-hidden py-4 relative select-none"
+  style="background-color: var(--muted-olive);"
+  aria-hidden="true"
+>
+  <!-- Fade edges -->
+  <div
+    class="pointer-events-none absolute inset-y-0 left-0 z-10 w-20"
+    style="background: linear-gradient(to right, var(--muted-olive), transparent);"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 z-10 w-20"
+    style="background: linear-gradient(to left, var(--muted-olive), transparent);"
+  >
+  </div>
+
+  <!-- Scrolling track -->
+  <div class="marquee-track" style={`animation-duration: ${duration};`}>
+    {
+      doubled.map((item, i) => (
+        <span
+          key={i}
+          class="mx-6 whitespace-nowrap text-sm font-medium tracking-wide"
+          style="color: var(--midnight-violet); font-family: 'Forum', sans-serif;"
+        >
+          {item}
+        </span>
+      ))
+    }
+  </div>
+</div>

@@ -46,3 +46,10 @@ export const sortTalksByDate = (talks: CollectionEntry<'talks'>[]) => {
     return nextEnd - currentEnd || next.data.from - current.data.from;
   });
 };
+
+// utils.ts — añadir al final
+export const sortByYear = <T extends { data: { year: number } }>(
+  items: T[],
+) => {
+  return items.sort((a, b) => b.data.year - a.data.year);
+};
