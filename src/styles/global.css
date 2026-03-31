@@ -9,69 +9,62 @@
 @import '../assets/fonts/inter.css';
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ─── BRAND TOKENS ─────────────────────────────── */
 :root {
-  /* Brand palette */
-  --midnight-violet: #250e2c;
+  --black-pearl: #08070B;
+  --lavender-violet: #E6E1FF;
+  --charcoal-violet: #37324B;
+  
   --soft-periwinkle: #837ab6;
-  --space-indigo: #3e3a5d;
   --muted-olive: #b0c49c;
   --sweet-peony: #d183a9;
   --tea-green: #d1efbd;
-  --odoe20: #1C1325;
-  /* Brand palette */
-  --midnight-violet: #250e2c;
-  --soft-periwinkle: #837ab6;
-  --space-indigo: #3e3a5d;
-  --muted-olive: #b0c49c;
-  --sweet-peony: #d183a9;
-  --tea-green: #d1efbd;
+}
 
-  /* Semantic — Light mode */
-  --color-background: #fdf9f7;
-  --color-surface: #f5f0ef;
+/* ─── SEMANTIC — LIGHT MODE ─────────────────────── */
+/* Fondo lavanda muy claro + tipografía charcoal violet = elegancia y alta legibilidad */
+:root {
+  --color-background: #F4F2FF;
+  --color-surface: #EBE8FF;
   --color-card: #ffffff;
 
-  --color-foreground: var(--space-indigo);
-  --color-muted-foreground: #7a7490;
-  --color-heading: var(--midnight-violet);
+  --color-foreground: var(--charcoal-violet);
+  --color-muted-foreground: #625C7E;
+  --color-heading: var(--black-pearl);
 
-  --color-border: #e2d9e8;
+  --color-border: #D8D2F2;
   --color-border-hover: var(--soft-periwinkle);
   --color-focus-ring: var(--soft-periwinkle);
   --color-link-hover: var(--soft-periwinkle);
 
-  /* CTA / Accent */
-  --color-cta: var(--muted-olive);
-  --color-cta-text: var(--midnight-violet);
-  --color-accent: var(--sweet-peony);
+  --color-cta: var(--charcoal-violet);
+  --color-cta-text: #ffffff;
+  --color-accent: var(--lavender-violet);
 
-  /* Legacy compat */
   --accent-primary: var(--soft-periwinkle);
-  --accent-secondary: var(--midnight-violet);
+  --accent-secondary: var(--black-pearl);
 }
 
 /* ─── DARK MODE ─────────────────────────────────── */
 .dark {
-  --color-background: var(--midnight-violet);
-  --color-surface: #2e1436;
-  --color-card: #3a1a42;
+  --color-background: var(--black-pearl);
+  --color-surface: var(--charcoal-violet);
+  --color-card: #0F0E14;
 
-  --color-foreground: #d8cfe8;
-  --color-muted-foreground: var(--soft-periwinkle);
-  --color-heading: #f0e8ff;
+  --color-foreground: var(--lavender-violet);
+  --color-muted-foreground: #948FB0;
+  --color-heading: #ffffff;
 
-  --color-border: #4a2e55;
-  --color-border-hover: var(--soft-periwinkle);
-  --color-focus-ring: var(--soft-periwinkle);
-  --color-link-hover: var(--muted-olive);
+  --color-border: #2A263D;
+  --color-border-hover: var(--lavender-violet);
+  --color-focus-ring: var(--lavender-violet);
+  --color-link-hover: var(--lavender-violet);
 
-  --color-cta: var(--muted-olive);
-  --color-cta-text: var(--midnight-violet);
-  --color-accent: var(--sweet-peony);
+  --color-cta: var(--lavender-violet);
+  --color-cta-text: var(--black-pearl);
+  --color-accent: var(--lavender-violet);
 
-  --accent-primary: var(--muted-olive);
-  --accent-secondary: var(--sweet-peony);
+  --accent-primary: var(--lavender-violet);
+  --accent-secondary: var(--charcoal-violet);
 }
 
 /* ─── TAILWIND THEME INLINE ─────────────────────── */
@@ -101,15 +94,8 @@
   --color-cta-text: var(--color-cta-text);
   --color-accent: var(--color-accent);
 
-  --font-sans:
-    'Forum',
-    ui-sans-serif,
-    system-ui,
-    sans-serif;
-  --font-serif:
-    'Cormorant Garamond',
-    Georgia,
-    serif;
+  --font-sans: 'Forum', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
 }
 
 /* ─── BASE STYLES ───────────────────────────────── */
@@ -120,6 +106,7 @@
 }
 
 html {
+  font-size: 18px;
   scroll-behavior: smooth;
 }
 
@@ -129,25 +116,15 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant Garamond', Georgia, serif;
   color: var(--color-heading);
 }
 
 /* ─── MARQUEE ANIMATION ─────────────────────────── */
 @keyframes marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .marquee-track {
@@ -162,35 +139,15 @@ h6 {
 
 /* ─── BLOB ANIMATIONS ───────────────────────────── */
 @keyframes blob-float {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(18px, -22px) scale(1.05);
-  }
-
-  66% {
-    transform: translate(-14px, 14px) scale(0.97);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(18px, -22px) scale(1.05); }
+  66%       { transform: translate(-14px, 14px) scale(0.97); }
 }
 
 @keyframes blob-float-alt {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  40% {
-    transform: translate(-20px, 16px) scale(1.06);
-  }
-
-  70% {
-    transform: translate(12px, -18px) scale(0.96);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-20px, 16px) scale(1.06); }
+  70%       { transform: translate(12px, -18px) scale(0.96); }
 }
 
 .blob {
@@ -201,69 +158,27 @@ h6 {
   pointer-events: none;
 }
 
-.blob-1 {
-  animation: blob-float 10s ease-in-out infinite;
-}
-
-.blob-2 {
-  animation: blob-float-alt 13s ease-in-out infinite;
-}
-
-.blob-3 {
-  animation: blob-float 15s ease-in-out infinite reverse;
-}
+.blob-1 { animation: blob-float 10s ease-in-out infinite; }
+.blob-2 { animation: blob-float-alt 13s ease-in-out infinite; }
+.blob-3 { animation: blob-float 15s ease-in-out infinite reverse; }
 
 /* ─── SCROLL REVEAL ─────────────────────────────── */
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.reveal {
-  opacity: 0;
-  animation: fade-up 0.6s ease forwards;
-}
-
-.reveal-delay-1 {
-  animation-delay: 0.1s;
-}
-
-.reveal-delay-2 {
-  animation-delay: 0.2s;
-}
-
-.reveal-delay-3 {
-  animation-delay: 0.3s;
-}
-
-.reveal-delay-4 {
-  animation-delay: 0.4s;
-}
-
-.reveal-delay-5 {
-  animation-delay: 0.5s;
-}
+.reveal { opacity: 0; animation: fade-up 0.6s ease forwards; }
+.reveal-delay-1 { animation-delay: 0.1s; }
+.reveal-delay-2 { animation-delay: 0.2s; }
+.reveal-delay-3 { animation-delay: 0.3s; }
+.reveal-delay-4 { animation-delay: 0.4s; }
+.reveal-delay-5 { animation-delay: 0.5s; }
 
 /* ─── AVAILABILITY PULSE ────────────────────────── */
 @keyframes pulse-dot {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: scale(1.35);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.35); }
 }
 
 .pulse-dot {
@@ -290,9 +205,7 @@ h6 {
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top,
-      rgba(37, 14, 44, 0.85) 0%,
-      transparent 60%);
+  background: linear-gradient(to top, rgba(37, 14, 44, 0.85) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.35s ease;
   display: flex;
@@ -314,7 +227,7 @@ h6 {
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(37, 14, 44, 0.15);
+  box-shadow: 0 20px 48px rgba(37, 14, 44, 0.12);
 }
 
 .dark .project-card:hover {
@@ -340,4 +253,24 @@ h6 {
 /* Background utility for ODOE20 */
 .bg-odoe20 {
   background-color: var(--odoe20);
+}
+
+/* ─── MASONRY GRID ──────────────────────────────── */
+.masonry-grid {
+  columns: 1;
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid { columns: 2; }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid { columns: 3; }
+}
+
+.masonry-card {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  display: block;
 }

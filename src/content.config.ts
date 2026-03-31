@@ -50,12 +50,14 @@ const jobCollection = defineCollection({
 
 const talkCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/talks' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     year: z.number(),
     event: z.string(),
     location: z.string(),
     url: z.string(),
+    image: image().optional(),
+    type: z.enum(['conferencia', 'taller', 'podcast', 'panel', 'charla', 'charlas']).optional(),
   }),
 });
 

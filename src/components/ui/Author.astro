@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import { getImage } from 'astro:assets';
 import type { AuthorInfo } from '@/lib/constants';
-import HeroBlobs from '@/components/ui/HeroBlobs.astro';
 
 interface Props extends AuthorInfo {}
 const { avatar, name, headline, username, location, pronouns } = Astro.props;
@@ -10,9 +9,9 @@ const { avatar, name, headline, username, location, pronouns } = Astro.props;
 const image = await getImage({ src: avatar, format: 'avif' });
 ---
 
-<div class="relative flex flex-col md:flex-row items-start md:items-center gap-8 py-6">
-  <!-- Decorative blobs -->
-  <HeroBlobs />
+<div
+  class="relative flex flex-col md:flex-row items-start md:items-center gap-8 py-6"
+>
 
   <!-- Avatar -->
   <div class="relative shrink-0">
@@ -30,11 +29,6 @@ const image = await getImage({ src: avatar, format: 'avif' });
         class="w-full h-full object-cover"
       />
     </div>
-    <!-- Small accent ring -->
-    <div
-      class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full border-4 border-background"
-      style="background-color: var(--sweet-peony);"
-    ></div>
   </div>
 
   <!-- Text -->
@@ -57,21 +51,25 @@ const image = await getImage({ src: avatar, format: 'avif' });
     </h1>
 
     <!-- Headline -->
-    <p class="text-lg md:text-xl leading-relaxed max-w-2xl reveal reveal-delay-2">
+    <p
+      class="text-lg md:text-xl leading-relaxed max-w-2xl reveal reveal-delay-2"
+    >
       {headline}
-      {location && (
-        <span style="color: var(--soft-periwinkle);">
-          {' '}en {location}.
-        </span>
-      )}
-      {pronouns && (
-        <span
-          class="ml-2 text-sm px-3 py-1 rounded-full border font-medium"
-          style="border-color: var(--sweet-peony); color: var(--sweet-peony);"
-        >
-          {pronouns}
-        </span>
-      )}
+      {
+        location && (
+          <span style="color: var(--soft-periwinkle);"> en {location}.</span>
+        )
+      }
+      {
+        pronouns && (
+          <span
+            class="ml-2 text-sm px-3 py-1 rounded-full border font-medium"
+            style="border-color: var(--sweet-peony); color: var(--sweet-peony);"
+          >
+            {pronouns}
+          </span>
+        )
+      }
     </p>
   </div>
 </div>

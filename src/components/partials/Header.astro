@@ -22,10 +22,10 @@ const navItems: NavItem[] = [
 <Container as="header" class="w-full max-w-full flex justify-center items-center">
   <div
     class="w-max fixed top-0 mt-5 z-50
-           bg-white/70 dark:bg-[#250e2c]/80
+           bg-white/70 dark:bg-[var(--black-pearl)]/80
            backdrop-blur-lg
-           border border-[#e2d9e8] dark:border-[#4a2e55]
-           shadow-lg shadow-[#250e2c]/5
+           border border-[var(--color-border)] dark:border-[var(--color-border)]
+           shadow-lg shadow-[var(--black-pearl)]/5
            rounded-full p-1.5
            transition-all duration-300"
   >
@@ -42,8 +42,8 @@ const navItems: NavItem[] = [
                 'focus-visible:outline-none focus-visible:ring-2',
                 'focus-visible:ring-[#837ab6] focus-visible:ring-offset-2',
                 active
-                  ? 'bg-[#250e2c] text-white dark:bg-[#837ab6] dark:text-white shadow-sm'
-                  : 'text-[#3e3a5d] dark:text-[#d8cfe8] hover:bg-[#250e2c]/10 dark:hover:bg-[#837ab6]/20 hover:text-[#250e2c] dark:hover:text-white',
+                  ? 'bg-[var(--black-pearl)] text-white dark:bg-[var(--lavender-violet)] dark:text-[var(--black-pearl)] shadow-sm'
+                  : 'text-[var(--charcoal-violet)] dark:text-[var(--lavender-violet)] hover:bg-[var(--black-pearl)]/10 dark:hover:bg-[var(--lavender-violet)]/20 hover:text-[var(--black-pearl)] dark:hover:text-white',
               ]}
             >
               {label}

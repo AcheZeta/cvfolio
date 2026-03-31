@@ -5,10 +5,12 @@ import Container from '@/components/Container.astro';
 import Author from '@/components/ui/Author.astro';
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 import WorkExperience from '@/components/ui/WorkExperience.astro';
-import Talk from '@/components/ui/Talk.astro';
+import TalksSection from '@/components/ui/TalksSection.astro';
 import { sortJobsByDate } from '@/lib/utils';
 import Chip from '@/components/ui/Chip.astro';
 import { getSiteConfig } from '@/lib/config';
+import Marquee from '@/components/ui/Marquee.astro';
+import MasonryGrid from '@/components/ui/MasonryGrid.astro';
 
 // Obtener datos
 const homeEntry = await getEntry('pages', 'homepage');
@@ -17,6 +19,7 @@ if (!homeEntry) {
 }
 const entry = homeEntry;
 const links = await getCollection('links');
+const talksCollection = await getCollection('talks');
 const { Content } = await render(entry);
 const aboutEntry = await getEntry('pages', 'about');
 const allPages = await getCollection('pages');
@@ -30,8 +33,33 @@ const config = getSiteConfig();
 <BaseLayout seo={entry.data.seo}>
   <Container as="section" class="py-6">
     <Author {...DEFAULT_CONFIGURATION.author} />
+    <!-- CTA buttons -->
+    <div class="flex flex-wrap gap-3 mt-8 reveal reveal-delay-3">
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm
+               transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:outline-none
+               focus-visible:ring-2 focus-visible:ring-[var(--soft-periwinkle)]"
+        style="background-color: var(--muted-olive); color: var(--black-pearl);"
+      >
+        Portafolio
+      </a>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm
+               border border-[var(--color-border)] text-headings
+               transition-all duration-200 hover:border-[var(--soft-periwinkle)]
+               hover:bg-[var(--soft-periwinkle)] hover:text-white
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--soft-periwinkle)]"
+      >
+        Hablemos 💬
+      </a>
+    </div>
   </Container>
-
+  <!-- ════════════════ MARQUEE — Skills ═══════════════════ -->
+  <div class="my-10">
+    <Marquee speed="normal" />
+  </div>
   <Container as="section" class="py-6">
     <div class="flex flex-col gap-6">
       <div class="flex items-center">
@@ -43,88 +71,33 @@ const config = getSiteConfig();
     </div>
   </Container>
 
-  <!-- LO QUE HAGO -->
-  <Container as="section" class="py-10">
-    <div class="flex flex-col gap-4">
-      <p class="text-sm uppercase tracking-wide">Me apasiona</p>
-      <div class="flex flex-wrap gap-4">
-        <Chip label="EdTech" />
-        <Chip label="Accesibilidad" />
-        <Chip label="Diversidad" />
-        <Chip label="Ecología y Sustentabilidad" />
-        <Chip label="Feminismo" />
-        <Chip label="Producto y UX" />
-        <Chip label="Programación" />
-        <Chip label="Café" />
-        <Chip label="Fotografía" />
-        <Chip label="Activismo" />
+<!-- ════════════════ PROYECTOS & BLOG — Masonry ════════════════ -->
+<Container as="section" class="py-6">
+  <MasonryGrid limit={9} />
+</Container>
+
+<!-- CONTACTO -->
+{
+  links.length > 0 && (
+    <Container as="section" class="py-10">
+      <div class="flex flex-col gap-4">
+        <p class="text-sm uppercase tracking-wide">Contacto</p>
+        <ul class="flex flex-wrap gap-3">
+          {links.map((link) => (
+            <li key={link.id}>
+              <a
+                href={link.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-muted-foreground/40 text-headings font-medium rounded-full hover:bg-muted-foreground/60 transition"
+              >
+                {link.data.label || link.data.name}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
-  </Container>
-  <!-- CONTACTO -->
-  {
-    links.length > 0 && (
-      <Container as="section" class="py-10">
-        <div class="flex flex-col gap-4">
-          <p class="text-sm uppercase tracking-wide">Contacto</p>
-          <ul class="flex flex-wrap gap-3">
-            {links.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={link.data.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-muted-foreground/40 text-headings font-medium rounded-full hover:bg-muted-foreground/60 transition"
-                >
-                  {link.data.label || link.data.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Container>
-    )
-  }
-  <!-- Bento  -->
-  <Container as="section" class="py-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {
-        pages
-          .filter((page) => !['about', 'projects'].includes(page.id))
-          .map((page) => (
-            <a
-              href={`/${page.id}`}
-              class="
-                group relative overflow-hidden rounded-lg
-                border border-border bg-card p-6
-                transition-colors
-                hover:border-[var(--color-border-hover)]
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[var(--color-focus-ring)]
-                focus-visible:ring-offset-2
-              "
-            >
-              <div class="flex flex-col h-full">
-                <h2 class="text-lg font-semibold text-headings transition-colors">
-                  {page.data.title}
-                </h2>
-                <p class="text-sm mt-2">{page.data.seo.description}</p>
-                <div class="mt-auto pt-4">
-                  <span
-                    class="
-                      text-xs
-                      transition-colors duration-200 ease-out
-                      group-hover:text-[var(--color-link-hover)]
-                    "
-                  >
-                    Explorar →
-                  </span>
-                </div>
-              </div>
-            </a>
-          ))
-      }
-    </div>
-  </Container>
+    </Container>
+  )
+}
 </BaseLayout>
