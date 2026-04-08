@@ -1,0 +1,131 @@
+21:23:51 [content] Syncing content
+21:23:51 [content] Synced content
+21:23:51 [types] Generated 705ms
+21:23:51 [check] Getting diagnostics for Astro files in /Users/hame/Documents/Proyectos/cvfolio...
+[96mastro.config.mjs[0m:[93m18[0m:[93m15[0m - [91merror[0m[90m ts(2322): [0mType 'Plugin<any>[]' is not assignable to type 'PluginOption'.
+  Type 'Plugin<any>[]' is not assignable to type 'PluginOption[]'.
+    Type 'Plugin<any>' is not assignable to type 'PluginOption'.
+      Type 'import("/Users/hame/Documents/Proyectos/cvfolio/node_modules/vite/dist/node/index").Plugin<any>' is not assignable to type 'import("/Users/hame/Documents/Proyectos/cvfolio/node_modules/astro/node_modules/vite/dist/node/index").Plugin<any>'.
+        Types of property 'hotUpdate' are incompatible.
+          Type 'ObjectHook<(this: MinimalPluginContext & { environment: DevEnvironment; }, options: HotUpdateOptions) => void | EnvironmentModuleNode[] | Promise<...>> | undefined' is not assignable to type 'ObjectHook<(this: HotUpdatePluginContext, options: HotUpdateOptions) => void | EnvironmentModuleNode[] | Promise<void | EnvironmentModuleNode[]>> | undefined'.
+            Type '(this: MinimalPluginContext & { environment: DevEnvironment; }, options: HotUpdateOptions) => void | EnvironmentModuleNode[] | Promise<...>' is not assignable to type 'ObjectHook<(this: HotUpdatePluginContext, options: HotUpdateOptions) => void | EnvironmentModuleNode[] | Promise<void | EnvironmentModuleNode[]>> | undefined'.
+              Type '(this: MinimalPluginContext & { environment: DevEnvironment; }, options: HotUpdateOptions) => void | EnvironmentModuleNode[] | Promise<...>' is not assignable to type '(this: HotUpdatePluginContext, options: HotUpdateOptions) => void | EnvironmentModuleNode[] | Promise<void | EnvironmentModuleNode[]>'.
+                The 'this' types of each signature are incompatible.
+                  Type 'HotUpdatePluginContext' is not assignable to type 'MinimalPluginContext & { environment: DevEnvironment; }'.
+                    Type 'HotUpdatePluginContext' is missing the following properties from type 'MinimalPluginContext': debug, error, info, meta, warn
+
+[7m18[0m     plugins: [tailwindcss()],
+[7m  [0m [91m              ~~~~~~~~~~~~~[0m
+
+[96mtailwind.config.mjs[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(80001): [0mFile is a CommonJS module; it may be converted to an ES module.
+
+[7m2[0m module.exports = {
+[7m [0m [93m~~~~~~~~~~~~~~[0m
+
+[96msrc/components/ui/Author.astro[0m:[93m7[0m:[93m43[0m - [93mwarning[0m[90m ts(6133): [0m'location' is declared but its value is never read.
+
+[7m7[0m const { avatar, name, headline, username, location, pronouns } = Astro.props;
+[7m [0m [93m                                          ~~~~~~~~[0m
+[96msrc/components/ui/Author.astro[0m:[93m7[0m:[93m33[0m - [93mwarning[0m[90m ts(6133): [0m'username' is declared but its value is never read.
+
+[7m7[0m const { avatar, name, headline, username, location, pronouns } = Astro.props;
+[7m [0m [93m                                ~~~~~~~~[0m
+
+[96msrc/components/ui/Marquee.astro[0m:[93m57[0m:[93m26[0m - [93mwarning[0m[90m ts(6133): [0m'i' is declared but its value is never read.
+
+[7m57[0m       doubled.map((item, i) => (
+[7m  [0m [93m                         ~[0m
+
+[96msrc/lib/utils.ts[0m:[93m46[0m:[93m66[0m - [91merror[0m[90m ts(2339): [0mProperty 'from' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m46[0m     return nextEnd - currentEnd || next.data.from - current.data.from;
+[7m  [0m [91m                                                                 ~~~~[0m
+[96msrc/lib/utils.ts[0m:[93m46[0m:[93m46[0m - [91merror[0m[90m ts(2339): [0mProperty 'from' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m46[0m     return nextEnd - currentEnd || next.data.from - current.data.from;
+[7m  [0m [91m                                             ~~~~[0m
+[96msrc/lib/utils.ts[0m:[93m41[0m:[93m67[0m - [91merror[0m[90m ts(2339): [0mProperty 'to' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m41[0m     talk.data.to === 'Now' ? new Date().getFullYear() : talk.data.to;
+[7m  [0m [91m                                                                  ~~[0m
+[96msrc/lib/utils.ts[0m:[93m41[0m:[93m15[0m - [91merror[0m[90m ts(2339): [0mProperty 'to' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m41[0m     talk.data.to === 'Now' ? new Date().getFullYear() : talk.data.to;
+[7m  [0m [91m              ~~[0m
+
+[96msrc/pages/index.astro[0m:[93m83[0m:[93m19[0m - [91merror[0m[90m ts(2322): [0mType '{ children: any; key: string; }' is not assignable to type 'LiHTMLAttributes'.
+  Property 'key' does not exist on type 'LiHTMLAttributes'.
+
+[7m83[0m               <li key={link.id}>
+[7m  [0m [91m                  ~~~[0m
+[96msrc/pages/index.astro[0m:[93m26[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'config' is declared but its value is never read.
+
+[7m26[0m const config = getSiteConfig();
+[7m  [0m [93m      ~~~~~~[0m
+[96msrc/pages/index.astro[0m:[93m22[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'pages' is declared but its value is never read.
+
+[7m22[0m const pages = allPages.filter(
+[7m  [0m [93m      ~~~~~[0m
+[96msrc/pages/index.astro[0m:[93m20[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'aboutEntry' is declared but its value is never read.
+
+[7m20[0m const aboutEntry = await getEntry('pages', 'about');
+[7m  [0m [93m      ~~~~~~~~~~[0m
+[96msrc/pages/index.astro[0m:[93m18[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'talksCollection' is declared but its value is never read.
+
+[7m18[0m const talksCollection = await getCollection('talks');
+[7m  [0m [93m      ~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/about/index.astro[0m:[93m27[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'sortedTalks' is declared but its value is never read.
+
+[7m27[0m const sortedTalks = sortTalksByDate(talks);
+[7m  [0m [93m      ~~~~~~~~~~~[0m
+[96msrc/pages/about/index.astro[0m:[93m25[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'posts' is declared but its value is never read.
+
+[7m25[0m const posts = await getCollection('posts');
+[7m  [0m [93m      ~~~~~[0m
+[96msrc/pages/about/index.astro[0m:[93m24[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'projects' is declared but its value is never read.
+
+[7m24[0m const projects = await getCollection('projects');
+[7m  [0m [93m      ~~~~~~~~[0m
+[96msrc/pages/about/index.astro[0m:[93m10[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'PostPreview' is declared but its value is never read.
+
+[7m10[0m import PostPreview from '@/components/ui/PostPreview.astro';
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/about/index.astro[0m:[93m9[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'ProjectPreview' is declared but its value is never read.
+
+[7m9[0m import ProjectPreview from '@/components/ui/ProjectPreview.astro';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/about/index.astro[0m:[93m8[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Talk' is declared but its value is never read.
+
+[7m8[0m import Talk from '@/components/ui/Talk.astro';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/projects/index.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'getCollection' is declared but its value is never read.
+
+[7m2[0m import { getCollection } from 'astro:content';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/talks/[...slug].astro[0m:[93m36[0m:[93m30[0m - [91merror[0m[90m ts(2339): [0mProperty 'link' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m36[0m             href={entry.data.link}
+[7m  [0m [91m                             ~~~~[0m
+[96msrc/pages/talks/[...slug].astro[0m:[93m34[0m:[93m21[0m - [91merror[0m[90m ts(2339): [0mProperty 'link' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m34[0m         {entry.data.link && (
+[7m  [0m [91m                    ~~~~[0m
+[96msrc/pages/talks/[...slug].astro[0m:[93m21[0m:[93m29[0m - [91merror[0m[90m ts(2339): [0mProperty 'seo' does not exist on type '{ title: string; url: string; location: string; year: number; event: string; type?: "conferencia" | "taller" | "podcast" | "panel" | "charla" | "charlas" | undefined; image?: { src: string; width: number; height: number; format: "png" | ... 6 more ... | "avif"; } | undefined; }'.
+
+[7m21[0m <BaseLayout seo={entry.data.seo}>
+[7m  [0m [91m                            ~~~[0m
+
+[96msrc/pages/talks/index.astro[0m:[93m12[0m:[93m13[0m - [91merror[0m[90m ts(2322): [0mType '{ title: string; }' is not assignable to type 'Seo'.
+  Property 'description' is missing in type '{ title: string; }' but required in type '{ title: string; description: string; type?: string | undefined; keywords?: string | undefined; canonicalUrl?: string | undefined; twitter?: { creator?: string | undefined; } | undefined; robots?: string | undefined; }'.
+
+[7m12[0m <BaseLayout seo={{ title: 'Charlas' }}>
+[7m  [0m [91m            ~~~[0m
+
+Result (45 files): 
+- 10 errors
+- 0 warnings
+- 15 hints
+
