@@ -36,14 +36,8 @@ export const sortJobsByDate = (jobs: CollectionEntry<'jobs'>[]) => {
 };
 
 export const sortTalksByDate = (talks: CollectionEntry<'talks'>[]) => {
-  // Convert "Now" to current year, otherwise returns the year as is
-  const getEndYear = (talk: CollectionEntry<'talks'>) =>
-    talk.data.to === 'Now' ? new Date().getFullYear() : talk.data.to;
-
   return talks.sort((current, next) => {
-    // Compare end years first, then fall back to start years if end years are equal
-    const [currentEnd, nextEnd] = [getEndYear(current), getEndYear(next)];
-    return nextEnd - currentEnd || next.data.from - current.data.from;
+    return next.data.year - current.data.year;
   });
 };
 

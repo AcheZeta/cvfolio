@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
@@ -15,6 +14,7 @@ export default defineConfig({
     },
   },
   vite: {
+    // @ts-expect-error - Vite plugin array type mismatch
     plugins: [tailwindcss()],
   },
   integrations: [

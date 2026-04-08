@@ -18,7 +18,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout seo={entry.data.seo}>
+<BaseLayout seo={{ title: entry.data.title, description: `Charla en ${entry.data.event}` }}>
   <Container as='section'>
     <article class="flex flex-col gap-6">
       <div class="flex flex-col gap-2">
@@ -31,9 +31,9 @@ const { Content } = await render(entry);
         </div>
         <h1 class="text-3xl font-semibold text-headings">{entry.data.title}</h1>
 
-        {entry.data.link && (
+        {entry.data.url && (
           <a
-            href={entry.data.link}
+            href={entry.data.url}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-block mt-3 text-sm font-medium text-primary hover:underline"

@@ -9,7 +9,7 @@ const talks = await getCollection('talks');
 const sortedTalks = sortTalksByDate(talks);
 ---
 
-<BaseLayout seo={{ title: 'Charlas' }}>
+<BaseLayout seo={{ title: 'Charlas', description: 'Charlas, paneles y talleres en los que he participado' }}>
   <Container as="section" class="py-6">
     <div class="flex flex-col gap-5">
       <span class="text-headings">Charlas</span>
