@@ -94,13 +94,13 @@
   --color-cta-text: var(--color-cta-text);
   --color-accent: var(--color-accent);
 
-  --font-sans: 'Forum', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Neulis Alt', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ─── BASE STYLES ───────────────────────────────── */
 :root {
-  font-family: 'Forum', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -117,7 +117,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Neulis Alt', ui-sans-serif, system-ui, sans-serif;
   color: var(--color-heading);
 }
 
@@ -243,11 +243,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── TYPOGRAPHY UTILITIES ──────────────────────── */
 .font-editorial {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Neulis Alt', ui-sans-serif, system-ui, sans-serif;
 }
 
 .font-ui {
-  font-family: 'Forum', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Background utility for ODOE20 */
@@ -273,4 +273,13 @@ h1, h2, h3, h4, h5, h6 {
   break-inside: avoid;
   margin-bottom: 1rem;
   display: block;
+}
+
+/* ─── UTILITIES ─────────────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -24,69 +24,79 @@ const {
   <!-- Availability indicator -->
   <div class="flex items-center gap-3">
     <span class="relative flex h-3 w-3">
-      {available ? (
-        <>
-          <span
-            class="pulse-dot absolute inline-flex h-full w-full rounded-full"
-            style="background-color: #4ade80; opacity: 0.6;"
-          ></span>
-          <span
-            class="relative inline-flex rounded-full h-3 w-3"
-            style="background-color: #22c55e;"
-          ></span>
-        </>
-      ) : (
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-gray-400"></span>
-      )}
+      {
+        available ? (
+          <>
+            <span
+              class="pulse-dot absolute inline-flex h-full w-full rounded-full"
+              style="background-color: #4ade80; opacity: 0.6;"
+            />
+            <span
+              class="relative inline-flex rounded-full h-3 w-3"
+              style="background-color: #22c55e;"
+            />
+          </>
+        ) : (
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-gray-400" />
+        )
+      }
     </span>
-    <p class="text-sm font-medium" style="color: var(--color-muted-foreground);">
+    <p
+      class="text-sm font-medium"
+      style="color: var(--color-muted-foreground);"
+    >
       {availabilityText}
     </p>
   </div>
 
   <!-- Email CTA -->
-  {email && (
-    <a
-      href={`mailto:${email}`}
-      class="group inline-flex items-center gap-4 w-fit"
-    >
-      <span
-        class="font-editorial text-3xl md:text-4xl leading-none text-headings
+  {
+    email && (
+      <a
+        href={`mailto:${email}`}
+        class="group inline-flex items-center gap-4 w-fit"
+      >
+        <span
+          class="font-editorial text-3xl md:text-4xl leading-none text-headings
                group-hover:text-[var(--soft-periwinkle)] transition-colors duration-300"
-      >
-        {email}
-      </span>
-      <span
-        class="text-2xl transition-transform duration-300 group-hover:translate-x-2"
-        style="color: var(--soft-periwinkle);"
-      >
-        →
-      </span>
-    </a>
-  )}
+        >
+          {email}
+        </span>
+        <span
+          class="text-2xl transition-transform duration-300 group-hover:translate-x-2"
+          style="color: var(--soft-periwinkle);"
+        >
+          →
+        </span>
+      </a>
+    )
+  }
 
   <!-- Social links -->
-  {links.length > 0 && (
-    <ul class="flex flex-wrap gap-3">
-      {links.map(({ label, href, icon }) => (
-        <li>
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-5 py-2.5
+  {
+    links.length > 0 && (
+      <ul class="flex flex-wrap gap-3">
+        {links.map(({ label, href, icon }) => (
+          <li>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5
                    rounded-full border border-[var(--color-border)]
                    text-sm font-medium text-headings
                    hover:border-[var(--soft-periwinkle)]
                    hover:bg-[var(--soft-periwinkle)] hover:text-white
                    transition-all duration-200
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--soft-periwinkle)]"
-          >
-            {icon && <span aria-hidden="true">{icon}</span>}
-            {label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )}
+            >
+              {icon && <span aria-hidden="true">{icon}</span>}
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </div>
+

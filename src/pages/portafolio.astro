@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/Container.astro';
+import MasonryGrid from '@/components/ui/MasonryGrid.astro';
+
+const seo = {
+  title: 'Portafolio — Hame Elizalde',
+  description: 'Colección de mis proyectos, artículos de blog y charlas.',
+};
+---
+
+<BaseLayout seo={seo}>
+  <Container as="section" class="py-12 md:py-20 max-w-7xl">
+    <div class="flex flex-col gap-4 mb-12 reveal">
+      <span class="text-xs font-medium uppercase tracking-widest" style="color: var(--soft-periwinkle);">
+        Trabajos, Blog & Charlas
+      </span>
+      <h1 class="font-editorial text-5xl md:text-7xl font-bold text-headings">
+        Todo mi portafolio
+      </h1>
+      <p class="text-lg max-w-3xl" style="color: var(--color-muted-foreground);">
+        Aquí encontrarás una visión completa de lo que he creado, escrito y compartido en mis charlas.
+      </p>
+    </div>
+
+    <!-- Masonry grid sin filtro ni límite para mostrar TODO -->
+    <MasonryGrid hideHeader={true} />
+  </Container>
+</BaseLayout>

@@ -26,7 +26,7 @@ const {
 } = Astro.props;
 
 const categoryLabel = category === 'proyecto' ? 'Proyecto' : category === 'charla' ? 'Charla' : 'Blog';
-const categoryIcon  = category === 'proyecto' ? '✦' : category === 'charla' ? '🎤' : '✍️';
+const categoryIcon  = category === 'proyecto' ? '✦' : category === 'charla' ? '✧' : '✶';
 
 const formattedDate = date
   ? new Date(date).toLocaleDateString('es-MX', { month: 'short', year: 'numeric' })

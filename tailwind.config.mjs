@@ -3,10 +3,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Forum', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        editorial: ['Cormorant Garamond', 'Georgia', 'serif'],
-        ui: ['Forum', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['Neulis Alt', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        editorial: ['Neulis Alt', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        ui: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
@@ -22,7 +22,7 @@ module.exports = {
       typography: () => ({
         DEFAULT: {
           css: {
-            fontFamily: `'Forum', ui-sans-serif, system-ui, sans-serif`,
+            fontFamily: `'Poppins', ui-sans-serif, system-ui, sans-serif`,
             '--tw-prose-body': 'var(--color-foreground)',
             '--tw-prose-headings': 'var(--color-headings)',
             '--tw-prose-bullets': '#837ab6',

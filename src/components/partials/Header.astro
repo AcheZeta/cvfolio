@@ -3,25 +3,26 @@ import Container from '@/components/Container.astro';
 
 const pathname = Astro.url.pathname;
 
-const isHomePage    = pathname === '/';
-const isAboutPage   = pathname.startsWith('/about');
-const isProjectsPage = pathname.startsWith('/projects');
-const isTalksPage   = pathname.startsWith('/talks');
+const isHomePage = pathname === '/';
+const isAboutPage = pathname.startsWith('/about');
+const isPortafolioPage = pathname.startsWith('/portafolio');
 const isContactPage = pathname.startsWith('/contact');
 
 type NavItem = { href: string; label: string; active: boolean };
 const navItems: NavItem[] = [
-  { href: '/',          label: 'Inicio',    active: isHomePage },
-  { href: '/about',     label: 'Sobre mí',  active: isAboutPage },
-  { href: '/projects/', label: 'Proyectos', active: isProjectsPage },
-  { href: '/talks',     label: 'Charlas',   active: isTalksPage },
-  { href: '/contact',   label: 'Contacto',  active: isContactPage },
+  { href: '/', label: 'Inicio', active: isHomePage },
+  { href: '/about', label: 'Sobre mí', active: isAboutPage },
+  { href: '/portafolio', label: 'Portafolio', active: isPortafolioPage },
+  { href: '/contact', label: 'Contacto', active: isContactPage },
 ];
 ---
 
-<Container as="header" class="w-full max-w-full flex justify-center items-center">
+<Container
+  as="header"
+  class="w-full max-w-full flex justify-center items-center"
+>
   <div
-    class="w-max fixed top-0 mt-5 z-50
+    class="w-max max-w-[95vw] overflow-x-auto scrollbar-hide fixed top-0 mt-5 z-50
            bg-white/70 dark:bg-[var(--black-pearl)]/80
            backdrop-blur-lg
            border border-[var(--color-border)] dark:border-[var(--color-border)]
@@ -30,26 +31,28 @@ const navItems: NavItem[] = [
            transition-all duration-300"
   >
     <nav class="flex items-center" aria-label="Navegación principal">
-      <ul class="flex items-center gap-1">
-        {navItems.map(({ href, label, active }) => (
-          <li>
-            <a
-              href={href}
-              aria-current={active ? 'page' : undefined}
-              class:list={[
-                'font-medium text-sm transition-all duration-200',
-                'block px-4 py-2 rounded-full',
-                'focus-visible:outline-none focus-visible:ring-2',
-                'focus-visible:ring-[#837ab6] focus-visible:ring-offset-2',
-                active
-                  ? 'bg-[var(--black-pearl)] text-white dark:bg-[var(--lavender-violet)] dark:text-[var(--black-pearl)] shadow-sm'
-                  : 'text-[var(--charcoal-violet)] dark:text-[var(--lavender-violet)] hover:bg-[var(--black-pearl)]/10 dark:hover:bg-[var(--lavender-violet)]/20 hover:text-[var(--black-pearl)] dark:hover:text-white',
-              ]}
-            >
-              {label}
-            </a>
-          </li>
-        ))}
+      <ul class="flex items-center gap-1 flex-nowrap min-w-max">
+        {
+          navItems.map(({ href, label, active }) => (
+            <li>
+              <a
+                href={href}
+                aria-current={active ? 'page' : undefined}
+                class:list={[
+                  'font-medium text-sm transition-all duration-200',
+                  'block px-4 py-2 rounded-full',
+                  'focus-visible:outline-none focus-visible:ring-2',
+                  'focus-visible:ring-[#837ab6] focus-visible:ring-offset-2',
+                  active
+                    ? 'bg-[var(--black-pearl)] text-white dark:bg-[var(--lavender-violet)] dark:text-[var(--black-pearl)] shadow-sm'
+                    : 'text-[var(--charcoal-violet)] dark:text-[var(--lavender-violet)] hover:bg-[var(--black-pearl)]/10 dark:hover:bg-[var(--lavender-violet)]/20 hover:text-[var(--black-pearl)] dark:hover:text-white',
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>
