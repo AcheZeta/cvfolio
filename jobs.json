@@ -1,0 +1,110 @@
+{
+  "total_count": 2,
+  "jobs": [
+    {
+      "id": 70496941564,
+      "run_id": 24156545533,
+      "workflow_name": "Deploy to GitHub Pages",
+      "head_branch": "CV2025",
+      "run_url": "https://api.github.com/repos/AcheZeta/cvfolio/actions/runs/24156545533",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOPDIils8AAAAQafH1_A",
+      "head_sha": "62f5c5dea84bd8b4df7e9a3d1a7b2f96184ad3f3",
+      "url": "https://api.github.com/repos/AcheZeta/cvfolio/actions/jobs/70496941564",
+      "html_url": "https://github.com/AcheZeta/cvfolio/actions/runs/24156545533/job/70496941564",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-04-08T20:17:32Z",
+      "started_at": "2026-04-08T20:17:35Z",
+      "completed_at": "2026-04-08T20:17:57Z",
+      "name": "build",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-04-08T20:17:35Z",
+          "completed_at": "2026-04-08T20:17:39Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-04-08T20:17:39Z",
+          "completed_at": "2026-04-08T20:17:41Z"
+        },
+        {
+          "name": "Install, build, and upload site",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 3,
+          "started_at": "2026-04-08T20:17:41Z",
+          "completed_at": "2026-04-08T20:17:55Z"
+        },
+        {
+          "name": "Post Install, build, and upload site",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-04-08T20:17:55Z",
+          "completed_at": "2026-04-08T20:17:55Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-04-08T20:17:55Z",
+          "completed_at": "2026-04-08T20:17:56Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-04-08T20:17:56Z",
+          "completed_at": "2026-04-08T20:17:56Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/AcheZeta/cvfolio/check-runs/70496941564",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000259,
+      "runner_name": "GitHub Actions 1000000259",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 70497009493,
+      "run_id": 24156545533,
+      "workflow_name": "Deploy to GitHub Pages",
+      "head_branch": "CV2025",
+      "run_url": "https://api.github.com/repos/AcheZeta/cvfolio/actions/runs/24156545533",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOPDIils8AAAAQafL_VQ",
+      "head_sha": "62f5c5dea84bd8b4df7e9a3d1a7b2f96184ad3f3",
+      "url": "https://api.github.com/repos/AcheZeta/cvfolio/actions/jobs/70497009493",
+      "html_url": "https://github.com/AcheZeta/cvfolio/actions/runs/24156545533/job/70497009493",
+      "status": "completed",
+      "conclusion": "skipped",
+      "created_at": "2026-04-08T20:17:58Z",
+      "started_at": "2026-04-08T20:17:58Z",
+      "completed_at": "2026-04-08T20:17:58Z",
+      "name": "deploy",
+      "steps": [
+
+      ],
+      "check_run_url": "https://api.github.com/repos/AcheZeta/cvfolio/check-runs/70497009493",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": null,
+      "runner_name": null,
+      "runner_group_id": null,
+      "runner_group_name": null
+    }
+  ]
+}
