@@ -21,7 +21,9 @@ jobs:
         uses: withastro/action@v3
         with:
           path: .
-          node-version: 20
+          node-version: 22
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
   deploy:
     needs: build
