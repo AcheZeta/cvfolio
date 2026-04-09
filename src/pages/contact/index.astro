@@ -28,21 +28,20 @@ const links = await getCollection('links');
   </Container>
   {
     links.length > 0 && (
-      <Container as="section" class="py-8">
-        <div class="flex flex-col gap-5">
-          <ul class="flex flex-col gap-3">
+      <Container as="section" class="py-10">
+        <div class="flex flex-col gap-4">
+          <p class="text-sm uppercase tracking-wide">Contacto</p>
+          <ul class="flex flex-wrap gap-3">
             {links.map((link) => (
-              <li class="py-0.5">
-                <div class="flex flex-col gap-3">
-                  <a
-                    href={link.data.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-[var(--color-border)] text-sm font-medium text-headings hover:border-[var(--soft-periwinkle)] hover:bg-[var(--soft-periwinkle)] hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--soft-periwinkle)]"
-                  >
-                    {link.data.label || link.data.name}
-                  </a>
-                </div>
+              <li>
+                <a
+                  href={link.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-[var(--color-border)] text-sm font-medium text-headings hover:border-[var(--soft-periwinkle)] hover:bg-[var(--soft-periwinkle)] hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--soft-periwinkle)]"
+                >
+                  {link.data.label || link.data.name}
+                </a>
               </li>
             ))}
           </ul>

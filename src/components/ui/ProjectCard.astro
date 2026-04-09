@@ -46,8 +46,8 @@ const image = project?.image ?? propImage;
 
 const sizeClasses: Record<string, string> = {
   featured: 'col-span-2 row-span-2 min-h-[320px]',
-  normal:   'col-span-1 row-span-1 min-h-[200px]',
-  small:    'col-span-1 row-span-1 min-h-[160px]',
+  normal: 'col-span-1 row-span-1 min-h-[200px]',
+  small: 'col-span-1 row-span-1 min-h-[160px]',
 };
 ---
 
@@ -68,17 +68,20 @@ const sizeClasses: Record<string, string> = {
   <div
     class="w-10 h-1 rounded-full mb-4 transition-all duration-300 group-hover:w-16"
     style={`background-color: ${accentColor};`}
-  ></div>
+  >
+  </div>
 
   <div class="flex flex-col gap-3 flex-1">
-    {area && (
-      <span
-        class="text-xs font-medium uppercase tracking-widest"
-        style="color: var(--color-muted-foreground);"
-      >
-        {area}
-      </span>
-    )}
+    {
+      area && (
+        <span
+          class="text-xs font-medium uppercase tracking-widest"
+          style="color: var(--color-muted-foreground);"
+        >
+          {area}
+        </span>
+      )
+    }
 
     <h3
       class="font-editorial leading-tight text-headings"
@@ -87,31 +90,30 @@ const sizeClasses: Record<string, string> = {
       {title}
     </h3>
 
-    {date && (
-      <p class="text-xs opacity-70" style="color: var(--color-muted-foreground);">
-        {new Date(date).toLocaleDateString('es-MX', { month: 'short', year: 'numeric' })}
-      </p>
-    )}
-
-    <p class="text-sm leading-relaxed" style="color: var(--color-muted-foreground);">
+    <p
+      class="text-sm leading-relaxed"
+      style="color: var(--color-muted-foreground);"
+    >
       {description}
     </p>
   </div>
 
   <!-- Tags + CTA -->
   <div class="mt-4 flex items-end justify-between gap-3">
-    {tags && tags.length > 0 && (
-      <div class="flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span
-            class="text-xs px-2.5 py-1 rounded-full font-medium"
-            style="background-color: var(--space-indigo); color: var(--tea-green); opacity: 0.85;"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    )}
+    {
+      tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span
+              class="text-xs px-2.5 py-1 rounded-full font-medium"
+              style="background-color: var(--space-indigo); color: var(--tea-green); opacity: 0.85;"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
     <span
       class="ml-auto shrink-0 text-xs font-medium transition-all duration-200 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0"
       style="color: var(--soft-periwinkle);"
@@ -121,18 +123,20 @@ const sizeClasses: Record<string, string> = {
   </div>
 
   <!-- Image or placeholder -->
-  {image ? (
-    <img
-      src={image.src}
-      alt={title}
-      class:list={[size === 'featured' ? 'mt-5 h-36 md:h-44' : 'mt-5 h-24']}
-    />
-  ) : (
-    <div
-      class="mt-5 rounded-xl overflow-hidden"
-      class:list={[size === 'featured' ? 'h-36 md:h-44' : 'h-24']}
-      style="background: linear-gradient(135deg, var(--space-indigo), var(--soft-periwinkle)); opacity: 0.25;"
-      aria-label="Placeholder de imagen del proyecto"
-    ></div>
-  )}
+  {
+    image ? (
+      <img
+        src={image.src}
+        alt={title}
+        class:list={[size === 'featured' ? 'mt-5 h-36 md:h-44' : 'mt-5 h-24']}
+      />
+    ) : (
+      <div
+        class="mt-5 rounded-xl overflow-hidden"
+        class:list={[size === 'featured' ? 'h-36 md:h-44' : 'h-24']}
+        style="background: linear-gradient(135deg, var(--space-indigo), var(--soft-periwinkle)); opacity: 0.25;"
+        aria-label="Placeholder de imagen del proyecto"
+      />
+    )
+  }
 </a>

@@ -35,7 +35,6 @@ const formattedDate = date
 
 <a
   href={href}
-  target="_blank"
   rel="noopener noreferrer"
   class="masonry-card group block rounded-2xl overflow-hidden border border-[var(--color-border)] bg-card transition-all duration-300 hover:border-[var(--color-border-hover)] hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
   style="break-inside: avoid; margin-bottom: 1rem;"
@@ -87,11 +86,6 @@ const formattedDate = date
       >
         {categoryIcon} {categoryLabel}
       </span>
-      {formattedDate && (
-        <span class="text-xs" style="color: var(--color-muted-foreground);">
-          {formattedDate}
-        </span>
-      )}
     </div>
 
     <!-- Title -->
@@ -100,15 +94,5 @@ const formattedDate = date
     >
       {title}
     </h3>
-
-    <!-- Description (subtle) -->
-    {description && (
-      <p
-        class="text-xs leading-relaxed line-clamp-2"
-        style="color: var(--color-muted-foreground);"
-      >
-        {description}
-      </p>
-    )}
   </div>
 </a>
