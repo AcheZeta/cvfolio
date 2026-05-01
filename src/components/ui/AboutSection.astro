@@ -3,7 +3,7 @@
  * AboutSection.astro
  * Layout sticky-scroll:
  *   - LEFT sticky: bio, heading, íconos decorativos (tecla + lapiz)
- *   - RIGHT scrolls: "Un poco de mi trabajo" + todos los items del portafolio
+ *   - RIGHT scrolls: "Un poco de mi trabajo" + proyectos
  */
 import { getCollection } from 'astro:content';
 import Icon from '@/components/ui/Icon.astro';
@@ -49,7 +49,7 @@ const sorted = projects.sort(
       </div>
     </div>
 
-    <!-- ─── RIGHT: Feed completo del portafolio ────── -->
+    <!-- ─── RIGHT: Proyectos ──────────────────────── -->
     <div class="about-right">
       <h3 class="projects-heading reveal-item">Un poco de mi trabajo</h3>
 
