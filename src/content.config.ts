@@ -78,6 +78,8 @@ const projectsCollection = defineCollection({
     date: z.date(),
     description: z.string(),
     image: image().optional(),
+    tags: z.array(z.string()).optional(),
+    role: z.string().optional(),
     seo: seoSchema(image),
   }),
 });

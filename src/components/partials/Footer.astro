@@ -1,32 +1,26 @@
 ---
-import Container from '@/components/Container.astro';
-
 const currentYear = new Date().getFullYear();
 ---
 
-<Container as="footer" class="pt-24 pb-8">
-  <div class="flex flex-col items-center gap-3">
-    <!-- Availability indicator -->
-    <div
-      class="flex items-center gap-2 text-sm text-[var(--color-muted-foreground)]"
-    >
-      <span class="relative flex h-2.5 w-2.5">
-        <span
-          class="pulse-dot absolute inline-flex h-full w-full rounded-full opacity-75"
-          style="background-color: #4ade80;"></span>
-        <span
-          class="relative inline-flex rounded-full h-2.5 w-2.5"
-          style="background-color: #22c55e;"></span>
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- Izquierda: nombre -->
+    <span class="footer-name">Hame Elizalde</span>
+
+    <!-- Centro: copyright -->
+    <p class="footer-copy">
+      &copy; {currentYear} Hame Elizalde
+    </p>
+
+    <!-- Derecha: disponibilidad -->
+    <div class="footer-availability">
+      <span class="footer-dot" aria-hidden="true">
+        <span class="footer-dot-pulse"></span>
+        <span class="footer-dot-solid"></span>
       </span>
-      <span>Disponible para proyectos y colaboraciones</span>
+      <span>Disponible</span>
     </div>
 
-    <p class="text-center text-[var(--color-muted-foreground)] text-xs">
-      &copy; {currentYear} Hame Elizalde &mdash; Powered by <a
-        href="https://astro.build"
-        target="_blank"
-        rel="noopener noreferrer">Astro</a
-      > and CVfolio.
-    </p>
   </div>
-</Container>
+</footer>

@@ -11,6 +11,7 @@ export type AuthorInfo = {
   username?: string;
   location?: string;
   pronouns?: string;
+  email?: string;
 }
 
 export type Seo = z.infer<typeof seoSchemaWithoutImage> & {
@@ -32,6 +33,7 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
     username: 'Ache_Zeta',
     location: 'México',
     pronouns: 'Ella/She',
+    email: 'hame.elizalde@gmail.com',
   },
   seo: {
     title: 'Hame Elizalde | Portafolio',

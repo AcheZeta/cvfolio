@@ -6,13 +6,13 @@ import { type Seo } from '@/lib/constants';
 import Header from '@/components/partials/Header.astro';
 import Footer from '@/components/partials/Footer.astro';
 import Head from '@/components/partials/Head.astro';
-import SwitchTheme from '@/components/SwitchTheme.tsx';
 
 interface Props {
-  seo?: Seo
+  seo?: Seo;
+  fullBleed?: boolean;
 }
 
-const { seo } = Astro.props;
+const { seo, fullBleed = false } = Astro.props;
 ---
 
 <html lang="es">
@@ -27,10 +27,9 @@ const { seo } = Astro.props;
   </Head>
   <body class="text-foreground pb-12">
     <Header />
-    <main class="pt-24">
+    <main class:list={[!fullBleed && 'pt-24']}>
       <slot />
     </main>
     <Footer />
-    <SwitchTheme client:only="react" />
   </body>
 </html>

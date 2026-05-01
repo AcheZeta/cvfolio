@@ -1,0 +1,72 @@
+/* ===================================================
+   HAME ELIZALDE — BRAND TOKENS
+   Colores, tipografía y semántica del sistema de diseño
+   =================================================== */
+
+/* ─── BRAND PALETTE ─────────────────────────────── */
+:root {
+  /* Colores de marca */
+  --color-lavender:   #C4BAE0;
+  --color-sage:       #C5DC98;
+  --color-cream:      #F5F0E8;
+  --color-tangerine:  #F0783A;
+  --color-plum:       #251520;
+
+  /* ─── TIPOGRAFÍA ─────────────────────────────── */
+  --font-heading: 'Neulis', sans-serif;
+  --font-body:    'Poppins', sans-serif;
+}
+
+/* ─── SEMÁNTICA — LIGHT MODE ─────────────────────
+   Fondo lavanda suave, texto plum oscuro.
+   ─────────────────────────────────────────────── */
+:root {
+  --brand-bg:           var(--color-lavender);   /* body background */
+  --brand-surface:      #DDD5F0;                 /* cards / surfaces ligeramente más oscuras */
+  --brand-fg:           var(--color-plum);        /* texto principal */
+  --brand-fg-muted:     #5A3E56;                  /* texto secundario / muted */
+  --brand-heading:      var(--color-plum);        /* headings */
+
+  --brand-accent:       var(--color-tangerine);   /* CTA / highlight */
+  --brand-accent-soft:  var(--color-sage);        /* accent secundario */
+  --brand-neutral:      var(--color-cream);       /* fondos neutros / cards claras */
+
+  --brand-border:       rgba(37, 21, 32, 0.15);   /* bordes sutiles sobre lavanda */
+  --brand-border-hover: var(--color-tangerine);
+  --brand-focus-ring:   var(--color-tangerine);
+}
+
+/* ─── SEMÁNTICA — DARK MODE ──────────────────────
+   Fondo plum profundo, texto lavanda claro.
+   ─────────────────────────────────────────────── */
+.dark {
+  --brand-bg:           var(--color-plum);
+  --brand-surface:      #3A1F32;
+  --brand-fg:           var(--color-lavender);
+  --brand-fg-muted:     #A094C4;
+  --brand-heading:      var(--color-cream);
+
+  --brand-accent:       var(--color-tangerine);
+  --brand-accent-soft:  var(--color-sage);
+  --brand-neutral:      #3A1F32;
+
+  --brand-border:       rgba(196, 186, 224, 0.15);
+  --brand-border-hover: var(--color-tangerine);
+  --brand-focus-ring:   var(--color-tangerine);
+}
+
+/* ─── BODY — FONDO Y COLOR BASE ─────────────────
+   Aplica el fondo lavanda y el texto plum al body.
+   ─────────────────────────────────────────────── */
+body {
+  background-color: var(--brand-bg);
+  color:            var(--brand-fg);
+  font-family:      var(--font-body);
+}
+
+/* ─── HEADINGS ──────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color:       var(--brand-heading);
+  font-weight: 700;
+}

@@ -1,59 +1,94 @@
 ---
-import { getCollection } from 'astro:content';
-import Container from '@/components/Container.astro';
+/**
+ * ContactSection.astro
+ * Sección de contacto con heading enorme, social pills y CTA de email.
+ */
+import Icon from '@/components/ui/Icon.astro';
 
 interface Props {
   email?: string;
 }
 
-const { email = '' } = Astro.props;
+const { email = 'hame.elizalde@gmail.com' } = Astro.props;
 
-const links = await getCollection('links');
+const socials = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/AcheZeta',
+    icon: 'github' as const,
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/ache_zeta/',
+    icon: 'instagram' as const,
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/hame-elizalde/',
+    icon: 'linkedin' as const,
+  },
+  {
+    label: 'Email',
+    href: `mailto:${email}`,
+    icon: 'email' as const,
+  },
+];
 ---
 
-<!-- Email CTA -->{
-  email && (
-    <a
-      href={`mailto:${email}`}
-      class="group inline-flex items-center gap-4 w-fit"
-    >
-      <span
-        class="font-editorial text-3xl md:text-4xl leading-none text-headings
-               group-hover:text-[var(--soft-periwinkle)] transition-colors duration-300"
-      >
-        {email}
-      </span>
-      <span
-        class="text-2xl transition-transform duration-300 group-hover:translate-x-2"
-        style="color: var(--soft-periwinkle);"
-      >
-        →
-      </span>
-    </a>
-  )
-}
+<section id="contacto" class="contact-section">
+  <!-- ─── Fondo con noise sutil ────────────────── -->
+  <div class="contact-bg" aria-hidden="true"></div>
 
-<!-- Social links -->
-{
-  links.length > 0 && (
-    <Container as="section" class="py-10">
-      <div class="flex flex-col gap-4">
-        <p class="text-sm uppercase tracking-wide">Contacto</p>
-        <ul class="flex flex-wrap gap-3">
-          {links.map((link) => (
-            <li>
-              <a
-                href={link.data.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-[var(--color-border)] text-sm font-medium text-headings hover:border-[var(--soft-periwinkle)] hover:bg-[var(--soft-periwinkle)] hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--soft-periwinkle)]"
-              >
-                {link.data.label || link.data.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Container>
-  )
-}
+  <div class="contact-inner">
+
+    <!-- ─── Heading ─────────────────────────────── -->
+    <div class="contact-heading-wrap">
+      <h2 class="contact-heading">
+        <span class="contact-heading-black">Trabajemos</span>
+        <br />
+        <span class="contact-heading-orange">juntas.</span>
+        <!-- Cursor decorativo SVG -->
+        <Icon
+          name="cursor"
+          size={56}
+          class="contact-cursor"
+          aria-hidden={true}
+        />
+      </h2>
+      <p class="contact-subtitle">
+        ¿Tienes un proyecto en mente? Me encantará escucharte.
+      </p>
+    </div>
+
+    <!-- ─── Social pills grid ────────────────────── -->
+    <ul class="contact-pills" role="list">
+      {socials.map(({ label, href, icon }) => (
+        <li>
+          <a
+            href={href}
+            target={href.startsWith('mailto') ? undefined : '_blank'}
+            rel="noopener noreferrer"
+            class="contact-pill"
+          >
+            <span class="contact-pill-icon">
+              <Icon name={icon} size={18} />
+            </span>
+            <span class="contact-pill-label">{label}</span>
+            <span class="contact-pill-arrow" aria-hidden="true">
+              <Icon name="arrow-right" size={14} />
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- ─── CTA principal ────────────────────────── -->
+    <div class="contact-cta-wrap">
+      <a href={`mailto:${email}`} class="contact-cta">
+        Envíame un mensaje
+        <Icon name="arrow-right" size={16} class="contact-cta-arrow" />
+      </a>
+    </div>
+
+  </div>
+</section>

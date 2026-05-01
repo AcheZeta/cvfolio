@@ -1,142 +1,47 @@
 ---
+/**
+ * ProjectCard.astro
+ * Tarjeta de proyecto estilo bento: fondo lavanda, tags tipo pill,
+ * franja sage en la sección ROL.
+ */
 interface Props {
-  // Pass a full project object from content/projects or individual fields
-  project?: {
-    title: string;
-    description: string;
-    date?: string | Date;
-    image?: any;
-    tags?: string[];
-    href?: string;
-    area?: string;
-  };
-  // Individual overrides (optional)
-  title?: string;
+  title: string;
+  href: string;
   description?: string;
-  date?: string | Date;
   tags?: string[];
-  href?: string;
-  area?: string;
-  size?: 'featured' | 'normal' | 'small';
-  accentColor?: string;
-  image?: any;
+  role?: string;
+  accentIndex?: number;
 }
 
-const {
-  project,
-  title: propTitle,
-  description: propDescription,
-  date: propDate,
-  tags: propTags = [],
-  href: propHref = '#',
-  area: propArea = '',
-  size = 'normal',
-  accentColor = 'var(--soft-periwinkle)',
-  image: propImage,
-} = Astro.props;
+const { title, href, description, tags = [], role, accentIndex = 0 } = Astro.props;
 
-// Resolve values – project fields take precedence if provided
-const title = project?.title ?? propTitle;
-const description = project?.description ?? propDescription;
-const date = project?.date ?? propDate;
-const tags = project?.tags ?? propTags;
-const href = project?.href ?? propHref;
-const area = project?.area ?? propArea;
-const image = project?.image ?? propImage;
-
-const sizeClasses: Record<string, string> = {
-  featured: 'col-span-2 row-span-2 min-h-[320px]',
-  normal: 'col-span-1 row-span-1 min-h-[200px]',
-  small: 'col-span-1 row-span-1 min-h-[160px]',
-};
+// Tags con colores alternados: blanco → sage → blanco → …
+const tagColors = ['#fff', 'var(--color-sage, #C5DC98)', '#fff'];
 ---
 
-<a
-  href={href}
-  class:list={[
-    'project-card group',
-    'flex flex-col justify-between',
-    'border border-[var(--color-border)] bg-card',
-    'p-6 rounded-2xl',
-    'hover:border-[var(--color-border-hover)]',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]',
-    'transition-all duration-300',
-    sizeClasses[size],
-  ]}
->
-  <!-- Top bar accent -->
-  <div
-    class="w-10 h-1 rounded-full mb-4 transition-all duration-300 group-hover:w-16"
-    style={`background-color: ${accentColor};`}
-  >
+<a href={href} class="project-card" data-accent={accentIndex}>
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    {description && <p class="card-desc">{description}</p>}
+
+    {tags.length > 0 && (
+      <div class="card-tags" aria-label="Disciplinas">
+        {tags.map((tag, i) => (
+          <span
+            class="card-tag"
+            style={`background-color: ${tagColors[i % tagColors.length]};`}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
   </div>
 
-  <div class="flex flex-col gap-3 flex-1">
-    {
-      area && (
-        <span
-          class="text-xs font-medium uppercase tracking-widest"
-          style="color: var(--color-muted-foreground);"
-        >
-          {area}
-        </span>
-      )
-    }
-
-    <h3
-      class="font-editorial leading-tight text-headings"
-      class:list={[size === 'featured' ? 'text-2xl md:text-3xl' : 'text-xl']}
-    >
-      {title}
-    </h3>
-
-    <p
-      class="text-sm leading-relaxed"
-      style="color: var(--color-muted-foreground);"
-    >
-      {description}
-    </p>
-  </div>
-
-  <!-- Tags + CTA -->
-  <div class="mt-4 flex items-end justify-between gap-3">
-    {
-      tags && tags.length > 0 && (
-        <div class="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span
-              class="text-xs px-2.5 py-1 rounded-full font-medium"
-              style="background-color: var(--space-indigo); color: var(--tea-green); opacity: 0.85;"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )
-    }
-    <span
-      class="ml-auto shrink-0 text-xs font-medium transition-all duration-200 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0"
-      style="color: var(--soft-periwinkle);"
-    >
-      Ver más →
-    </span>
-  </div>
-
-  <!-- Image or placeholder -->
-  {
-    image ? (
-      <img
-        src={image.src}
-        alt={title}
-        class:list={[size === 'featured' ? 'mt-5 h-36 md:h-44' : 'mt-5 h-24']}
-      />
-    ) : (
-      <div
-        class="mt-5 rounded-xl overflow-hidden"
-        class:list={[size === 'featured' ? 'h-36 md:h-44' : 'h-24']}
-        style="background: linear-gradient(135deg, var(--space-indigo), var(--soft-periwinkle)); opacity: 0.25;"
-        aria-label="Placeholder de imagen del proyecto"
-      />
-    )
-  }
+  {role && (
+    <div class="card-role">
+      <span class="role-label">ROL</span>
+      <span class="role-value">{role}</span>
+    </div>
+  )}
 </a>

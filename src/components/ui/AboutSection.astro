@@ -1,0 +1,95 @@
+---
+/**
+ * AboutSection.astro
+ * Layout sticky-scroll:
+ *   - LEFT sticky: bio, heading, íconos decorativos (tecla + lapiz)
+ *   - RIGHT scrolls: "Un poco de mi trabajo" + todos los items del portafolio
+ */
+import { getCollection } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import ProjectCard from '@/components/ui/ProjectCard.astro';
+
+interface Props {
+  bio?: string;
+}
+
+const {
+  bio = 'Tengo más de 15 años creando experiencias con enfoque humano. Combino visión centrada en las personas con habilidades técnicas y escritura estratégica.',
+} = Astro.props;
+
+const projects = await getCollection('projects');
+const sorted = projects.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<section id="sobre-mi" class="about-section" aria-label="Sobre mí">
+  <div class="about-grid">
+    <!-- ─── LEFT: Bio sticky ──────────────────────── -->
+    <div class="about-left">
+      <div class="about-content">
+        <p class="about-label reveal-item">SOBRE MÍ</p>
+
+        <h2 class="about-heading reveal-item">
+          Hola, soy Hame&nbsp;✦<br />
+          Diseño, escribo,<br />empatizo
+        </h2>
+
+        <p class="about-bio reveal-item">{bio}</p>
+      </div>
+
+      <!-- Íconos decorativos flotantes -->
+      <div class="about-decos" aria-hidden="true">
+        <div class="deco deco--tecla">
+          <Icon name="tecla" size={80} />
+        </div>
+        <div class="deco deco--lapiz">
+          <Icon name="lapiz" size={56} />
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── RIGHT: Feed completo del portafolio ────── -->
+    <div class="about-right">
+      <h3 class="projects-heading reveal-item">Un poco de mi trabajo</h3>
+
+      <div class="projects-list">
+        {
+          sorted.map((p, i) => (
+            <div
+              class="project-entry reveal-item"
+              style={`--delay: ${Math.min(i * 60, 400)}ms`}
+            >
+              <ProjectCard
+                title={p.data.title}
+                href={`/projects/${p.id}`}
+                description={p.data.description}
+                tags={p.data.tags}
+                role={p.data.role}
+                accentIndex={i}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>(
+    '#sobre-mi .reveal-item',
+  );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
+  items.forEach((el) => observer.observe(el));
+</script>
