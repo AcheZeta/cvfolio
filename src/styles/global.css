@@ -420,14 +420,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-100%);
 }
 .site-header--dark {
-  background: transparent;
-  border-bottom: 1px solid rgba(245,240,232,0.08);
-}
-.site-header--light {
-  background: rgba(245,240,232,0.82);
+  background: rgba(28, 15, 37, 0.7);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(37,21,32,0.08);
+  border-bottom: 1px solid rgba(245,240,232,0.08);
 }
 .header-inner {
   max-width: 1100px;
