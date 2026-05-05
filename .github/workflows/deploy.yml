@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [CV2025]
+    branches: [CV2026]
   workflow_dispatch:
 
 permissions:
