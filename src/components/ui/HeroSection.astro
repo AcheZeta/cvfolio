@@ -10,42 +10,41 @@ import Icon from '@/components/ui/Icon.astro';
 <section class="hero" aria-label="Presentación">
 
   <!-- ─── Flores decorativas ──────────────────────── -->
-  <!-- Esquina sup izq -->
-  <div class="parallax-layer" data-speed="2" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="2" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--tl">
       <Icon name="flor" size={220} />
     </div>
   </div>
   <!-- Esquina sup der -->
-  <div class="parallax-layer" data-speed="-3" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="-3" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--tr">
       <Icon name="flor" size={180} />
     </div>
   </div>
   <!-- Esquina inf izq -->
-  <div class="parallax-layer" data-speed="-1.5" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="-1.5" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--bl">
       <Icon name="flor" size={160} />
     </div>
   </div>
   <!-- Esquina inf der -->
-  <div class="parallax-layer" data-speed="2.5" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="2.5" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--br">
       <Icon name="flor" size={200} />
     </div>
   </div>
   <!-- Flores pequeñas dispersas -->
-  <div class="parallax-layer" data-speed="4" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="4" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--sm1">
       <Icon name="flor" size={80} />
     </div>
   </div>
-  <div class="parallax-layer" data-speed="-4" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="-4" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--sm2">
       <Icon name="flor" size={64} />
     </div>
   </div>
-  <div class="parallax-layer" data-speed="3" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);">
+  <div class="parallax-layer" data-speed="3" aria-hidden="true" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1;">
     <div class="hero-flor hero-flor--sm3">
       <Icon name="flor" size={56} />
     </div>
@@ -84,39 +83,3 @@ import Icon from '@/components/ui/Icon.astro';
 
   </div>
 </section>
-
-<script>
-  // Parallax animation for Hero flowers
-  document.addEventListener('DOMContentLoaded', () => {
-    const hero = document.querySelector('.hero');
-    const layers = document.querySelectorAll('.parallax-layer');
-
-    if (!hero || layers.length === 0) return;
-
-    hero.addEventListener('mousemove', (e) => {
-      // Usamos aserción de tipo para TypeScript o ignoramos el error en Astro.
-      // Ya que esto corre en cliente, no habrá problema.
-      const event = e as MouseEvent;
-      
-      const x = (window.innerWidth - event.pageX * 2) / 100;
-      const y = (window.innerHeight - event.pageY * 2) / 100;
-
-      layers.forEach((layer) => {
-        const speedAttr = layer.getAttribute('data-speed');
-        if (!speedAttr) return;
-        const speed = parseFloat(speedAttr);
-        const xOffset = x * speed;
-        const yOffset = y * speed;
-        
-        (layer as HTMLElement).style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-      });
-    });
-    
-    // Resetear posición si sale de la sección
-    hero.addEventListener('mouseleave', () => {
-      layers.forEach((layer) => {
-        (layer as HTMLElement).style.transform = `translate(0px, 0px)`;
-      });
-    });
-  });
-</script>

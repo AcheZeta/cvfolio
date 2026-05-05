@@ -25,9 +25,9 @@ const { seo, fullBleed = false } = Astro.props;
       rel="stylesheet"
     />
   </Head>
-  <body class="text-foreground pb-12">
+  <body class="text-foreground min-h-screen flex flex-col">
     <Header />
-    <main class:list={[!fullBleed && 'pt-24']}>
+    <main class:list={['flex-1', !fullBleed && 'pt-24']}>
       <slot />
     </main>
     <Footer />
