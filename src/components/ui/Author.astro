@@ -5,8 +5,6 @@ import type { AuthorInfo } from '@/lib/constants';
 
 interface Props extends AuthorInfo {}
 const { avatar, name, headline, username, location, pronouns } = Astro.props;
-
-const image = await getImage({ src: avatar, format: 'avif' });
 ---
 
 <div
@@ -15,14 +13,16 @@ const image = await getImage({ src: avatar, format: 'avif' });
   <!-- Avatar -->
   <div class="relative shrink-0">
     <div
-      class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden
+      class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden bg-[var(--surface)]
              ring-4 ring-[var(--soft-periwinkle)]/30
              shadow-xl shadow-[var(--midnight-violet)]/10"
     >
       <Image
         loading="eager"
-        src={image.src}
+        fetchpriority="high"
+        src={avatar}
         alt={name}
+        format="avif"
         width={144}
         height={144}
         class="w-full h-full object-cover object-top"

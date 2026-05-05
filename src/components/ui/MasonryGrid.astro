@@ -15,6 +15,12 @@ type FeedItem = {
   date: Date;
   description?: string;
   category: 'proyecto' | 'blog' | 'charla';
+  tags?: string[];
+};
+
+// Helper to clean tags (we are only using explicit tags, not SEO keywords)
+const processTags = (tags: string[] = []) => {
+  return tags.filter(Boolean).map(tag => tag.trim());
 };
 
 const projectItems: FeedItem[] = projects.map((p) => ({
@@ -24,6 +30,7 @@ const projectItems: FeedItem[] = projects.map((p) => ({
   date: p.data.date,
   description: p.data.description,
   category: 'proyecto',
+  tags: processTags(p.data.tags),
 }));
 
 const postItems: FeedItem[] = posts.map((p) => ({
@@ -33,6 +40,7 @@ const postItems: FeedItem[] = posts.map((p) => ({
   date: p.data.date,
   description: p.data.seo?.description,
   category: 'blog',
+  tags: processTags(p.data.tags),
 }));
 
 const talkItems: FeedItem[] = talks.map((t) => ({
@@ -42,6 +50,7 @@ const talkItems: FeedItem[] = talks.map((t) => ({
   date: new Date(t.data.year, 0, 1),
   description: `${t.data.event} · ${t.data.location}`,
   category: 'charla',
+  tags: processTags(t.data.tags), 
 }));
 
 // Mix and sort by date descending
@@ -58,12 +67,22 @@ interface Props {
 }
 const { limit, filter, hideHeader = false } = Astro.props;
 
-// Filter items if needed
+// Filter items if needed (server-side initial state)
 const filteredItems = filter 
   ? feedItems.filter(item => item.category === filter)
   : feedItems;
 
 const displayItems = limit ? filteredItems.slice(0, limit) : filteredItems;
+
+// Extract unique tags for the filter bar (case-insensitive deduplication)
+const uniqueTagsMap = new Map<string, string>();
+displayItems.flatMap(item => item.tags || []).forEach(tag => {
+  const lowerTag = tag.toLowerCase();
+  if (!uniqueTagsMap.has(lowerTag)) {
+    uniqueTagsMap.set(lowerTag, tag);
+  }
+});
+const availableTags = Array.from(uniqueTagsMap.values()).sort().slice(0, 12);
 ---
 
 <section class="py-6">
@@ -92,8 +111,47 @@ const displayItems = limit ? filteredItems.slice(0, limit) : filteredItems;
     )
   }
 
+  <!-- Filter Bar -->
+  <div class="flex flex-wrap gap-2 mb-10 reveal reveal-delay-1">
+    <button 
+      class="filter-btn active px-4 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 bg-foreground text-background border-foreground"
+      data-filter="all"
+    >
+      Todos
+    </button>
+    <button 
+      class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border border-[var(--color-border)] text-[var(--color-foreground)] hover:border-[var(--color-border-hover)] transition-all duration-200"
+      data-filter="proyecto"
+    >
+      Proyectos
+    </button>
+    <button 
+      class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border border-[var(--color-border)] text-[var(--color-foreground)] hover:border-[var(--color-border-hover)] transition-all duration-200"
+      data-filter="blog"
+    >
+      Blog
+    </button>
+    <button 
+      class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border border-[var(--color-border)] text-[var(--color-foreground)] hover:border-[var(--color-border-hover)] transition-all duration-200"
+      data-filter="charla"
+    >
+      Charlas
+    </button>
+
+    <div class="w-px h-6 bg-[var(--color-border)] mx-2 self-center hidden sm:block"></div>
+
+    {availableTags.map(tag => (
+      <button 
+        class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border border-transparent text-[var(--color-muted-foreground)] hover:border-[var(--color-border)] transition-all duration-200"
+        data-filter={tag}
+      >
+        #{tag}
+      </button>
+    ))}
+  </div>
+
   <!-- Masonry grid via CSS columns (defined in global.css) -->
-  <div class="masonry-grid reveal reveal-delay-1">
+  <div id="masonry-container" class="masonry-grid reveal reveal-delay-2">
     {
       displayItems.map((item) => (
         <MasonryCard
@@ -103,8 +161,71 @@ const displayItems = limit ? filteredItems.slice(0, limit) : filteredItems;
           date={item.date}
           description={item.description}
           category={item.category}
+          tags={item.tags}
         />
       ))
     }
   </div>
 </section>
+
+<script>
+  function initFilters() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.masonry-card');
+
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        
+        // Update active classes
+        buttons.forEach(b => {
+          b.classList.remove('active', 'bg-foreground', 'text-background', 'border-foreground');
+          b.classList.add('border-[var(--color-border)]', 'text-[var(--color-foreground)]');
+        });
+
+        btn.classList.add('active', 'bg-foreground', 'text-background', 'border-foreground');
+        btn.classList.remove('border-[var(--color-border)]', 'text-[var(--color-foreground)]', 'border-transparent');
+
+        const applyFilter = () => {
+          cards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            const cardTags = JSON.parse(card.getAttribute('data-tags') || '[]');
+            
+            const isMatch = filter === 'all' || cardCategory === filter || (filter && cardTags.some((t: string) => t.toLowerCase() === filter.toLowerCase()));
+
+            if (isMatch) {
+              (card as HTMLElement).style.display = 'block';
+            } else {
+              (card as HTMLElement).style.display = 'none';
+            }
+          });
+        };
+
+        // Use View Transitions API if available for butter-smooth masonry layout changes
+        if ('startViewTransition' in document) {
+          // @ts-ignore
+          document.startViewTransition(() => applyFilter());
+        } else {
+          // Fallback: instant snap (fixes the lag)
+          applyFilter();
+        }
+      });
+    });
+  }
+
+  // Run on initial load
+  initFilters();
+
+  // Run on view transitions (if using them)
+  document.addEventListener('astro:after-swap', initFilters);
+</script>
+
+<style>
+  /* Removing the manual transition on opacity/transform as View Transitions handles it better 
+     and avoids conflicting states */
+  .masonry-card {
+    /* Base styles */
+  }
+</style>
