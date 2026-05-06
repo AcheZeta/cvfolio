@@ -27,27 +27,37 @@ const navItems: NavItem[] = [
       Hame Elizalde
     </a>
 
-    <!-- Nav links centrados -->
-    <nav class="header-nav">
-      <ul role="list">
-        {navItems.map(({ href, label, active }) => (
-          <li>
-            <a
-              href={href}
-              aria-current={active ? 'page' : undefined}
-              class:list={['nav-link', active && 'nav-link--active']}
-            >
-              {label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <!-- Menú Hamburguesa -->
+    <button class="mobile-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <span class="mobile-toggle-line"></span>
+      <span class="mobile-toggle-line"></span>
+      <span class="mobile-toggle-line"></span>
+    </button>
 
-    <!-- CTA Hablemos -->
-    <a href="/#contacto" class="header-cta">
-      Hablemos <Icon name="arrow-right" size={14} class="header-cta-arrow" />
-    </a>
+    <!-- Contenedor de Nav + CTA -->
+    <div class="header-actions">
+      <!-- Nav links centrados -->
+      <nav class="header-nav">
+        <ul role="list">
+          {navItems.map(({ href, label, active }) => (
+            <li>
+              <a
+                href={href}
+                aria-current={active ? 'page' : undefined}
+                class:list={['nav-link', active && 'nav-link--active']}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- CTA Hablemos -->
+      <a href="/#contacto" class="header-cta">
+        Hablemos <Icon name="arrow-right" size={14} class="header-cta-arrow" />
+      </a>
+    </div>
 
   </div>
 </header>
@@ -55,10 +65,34 @@ const navItems: NavItem[] = [
 <script>
   let lastScroll = 0;
   const header = document.querySelector('.site-header');
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const headerActions = document.querySelector('.header-actions');
 
+  // Lógica de menú móvil
+  if (toggleBtn && headerActions) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      headerActions.classList.toggle('is-open');
+    });
+
+    // Cerrar menú al hacer click en un enlace
+    const links = headerActions.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        headerActions.classList.remove('is-open');
+      });
+    });
+  }
+
+  // Ocultar header en scroll hacia abajo
   window.addEventListener('scroll', () => {
     if (!header) return;
     const currentScroll = window.scrollY;
+
+    // Si el menú está abierto, no ocultar el header
+    if (headerActions?.classList.contains('is-open')) return;
 
     if (currentScroll > lastScroll && currentScroll > 100) {
       header.classList.add('site-header--hidden');
