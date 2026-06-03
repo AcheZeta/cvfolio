@@ -3,70 +3,78 @@
    Colores, tipografía y semántica del sistema de diseño
    =================================================== */
 
-/* ─── BRAND PALETTE ─────────────────────────────── */
+/* ─── NUEVA PALETA — VANILLA CREAM ──────────────── */
 :root {
-  /* Colores de marca */
-  --color-lavender:   #C4BAE0;
-  --color-sage:       #C5DC98;
-  --color-cream:      #F5F0E8;
-  --color-tangerine:  #F0783A;
-  --color-plum:       #251520;
+  /* Paleta base */
+  --color-bg:          #F5F0E8;   /* Vanilla Cream — fondo general */
+  --color-dark:        #1A0F2E;   /* Plum Ink — texto, bordes, fondos oscuros */
+  --color-lavender:    #C4BAED;   /* Lavender — cards, hero bg */
+  --color-sage:        #A8DCC8;   /* Sage Vivid — acento positivo */
+  --color-butter:      #FFD97D;   /* Butter Pop — highlights */
+  --color-tangerine:   #FF8C61;   /* Tangerine Bold — CTA principal */
+  --color-bubblegum:   #F7A3C0;   /* Bubblegum — acento extra */
+  --color-dark-text:   #3A2A5E;   /* Para texto sobre lavender */
+
+  /* Aliases de compatibilidad (mantienen referencias existentes sin romperse) */
+  --color-cream:       var(--color-bg);
+  --color-plum:        var(--color-dark);
+  --color-tangerine-old: #F0783A; /* referencia legacy — no usar en código nuevo */
 
   /* ─── TIPOGRAFÍA ─────────────────────────────── */
-  --font-heading: 'Neulis', sans-serif;
-  --font-body:    'Poppins', sans-serif;
+  --font-heading: 'Poppins', ui-sans-serif, sans-serif;
+  --font-body:    'Poppins', ui-sans-serif, sans-serif;
 }
 
-/* ─── SEMÁNTICA — LIGHT MODE ─────────────────────
-   Fondo lavanda suave, texto plum oscuro.
-   ─────────────────────────────────────────────── */
+/* ─── SEMÁNTICA — LIGHT / DEFAULT ───────────────── */
 :root {
-  --brand-bg:           var(--color-lavender);   /* body background */
-  --brand-surface:      #DDD5F0;                 /* cards / surfaces ligeramente más oscuras */
-  --brand-fg:           var(--color-plum);        /* texto principal */
-  --brand-fg-muted:     #5A3E56;                  /* texto secundario / muted */
-  --brand-heading:      var(--color-plum);        /* headings */
-
-  --brand-accent:       var(--color-tangerine);   /* CTA / highlight */
-  --brand-accent-soft:  var(--color-sage);        /* accent secundario */
-  --brand-neutral:      var(--color-cream);       /* fondos neutros / cards claras */
-
-  --brand-border:       rgba(37, 21, 32, 0.15);   /* bordes sutiles sobre lavanda */
-  --brand-border-hover: var(--color-tangerine);
-  --brand-focus-ring:   var(--color-tangerine);
-}
-
-/* ─── SEMÁNTICA — DARK MODE ──────────────────────
-   Fondo plum profundo, texto lavanda claro.
-   ─────────────────────────────────────────────── */
-.dark {
-  --brand-bg:           var(--color-plum);
-  --brand-surface:      #3A1F32;
-  --brand-fg:           var(--color-lavender);
-  --brand-fg-muted:     #A094C4;
-  --brand-heading:      var(--color-cream);
+  --brand-bg:           var(--color-bg);
+  --brand-surface:      var(--color-lavender);
+  --brand-fg:           var(--color-dark-text);
+  --brand-fg-muted:     rgba(58, 42, 94, 0.6);
+  --brand-heading:      var(--color-dark);
 
   --brand-accent:       var(--color-tangerine);
   --brand-accent-soft:  var(--color-sage);
-  --brand-neutral:      #3A1F32;
+  --brand-neutral:      var(--color-butter);
 
-  --brand-border:       rgba(196, 186, 224, 0.15);
+  --brand-border:       var(--color-dark);
   --brand-border-hover: var(--color-tangerine);
   --brand-focus-ring:   var(--color-tangerine);
 }
 
-/* ─── BODY — FONDO Y COLOR BASE ─────────────────
-   Aplica el fondo lavanda y el texto plum al body.
+/* ─── DARK MODE — apunta a la misma paleta clara ──
+   El rediseño usa un solo tema (vanilla cream).
+   Mapeamos .dark a los mismos tokens para que los
+   componentes legacy no rompan durante la migración.
    ─────────────────────────────────────────────── */
+.dark {
+  --brand-bg:           var(--color-bg);
+  --brand-surface:      var(--color-lavender);
+  --brand-fg:           var(--color-dark-text);
+  --brand-fg-muted:     rgba(58, 42, 94, 0.6);
+  --brand-heading:      var(--color-dark);
+
+  --brand-accent:       var(--color-tangerine);
+  --brand-accent-soft:  var(--color-sage);
+  --brand-neutral:      var(--color-butter);
+
+  --brand-border:       var(--color-dark);
+  --brand-border-hover: var(--color-tangerine);
+  --brand-focus-ring:   var(--color-tangerine);
+}
+
+/* ─── BODY — FONDO Y COLOR BASE ─────────────────── */
 body {
-  background-color: var(--brand-bg);
-  color:            var(--brand-fg);
+  background-color: var(--color-bg);
+  color:            var(--color-dark-text);
   font-family:      var(--font-body);
+  font-size:        14px;
+  line-height:      1.7;
 }
 
 /* ─── HEADINGS ──────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  color:       var(--brand-heading);
-  font-weight: 700;
+  color:       var(--color-dark);
+  font-weight: 800;
 }

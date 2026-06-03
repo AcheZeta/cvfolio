@@ -3,9 +3,9 @@ import '@/styles/global.css';
 import '@/assets/fonts/inter.css';
 import '@/assets/fonts/neulis.css';
 import { type Seo } from '@/lib/constants';
-import Header from '@/components/partials/Header.astro';
-import Footer from '@/components/partials/Footer.astro';
 import Head from '@/components/partials/Head.astro';
+import Sidebar from '@/components/partials/Sidebar.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   seo?: Seo;
@@ -17,19 +17,21 @@ const { seo, fullBleed = false } = Astro.props;
 
 <html lang="es" class="dark">
   <Head seo={seo}>
-    <!-- Google Fonts: Poppins -->
+    <ViewTransitions />
+    <!-- Google Fonts: Poppins (400 regular, 600 semibold, 800 extrabold, 800 italic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;1,800&display=swap"
       rel="stylesheet"
     />
   </Head>
-  <body class="text-foreground min-h-screen flex flex-col">
-    <Header />
-    <main class:list={['flex-1', !fullBleed && 'pt-24']}>
-      <slot />
-    </main>
-    <Footer />
+  <body class="tumblr-body">
+    <div class="app-shell">
+      <Sidebar />
+      <main class="main-content">
+        <slot />
+      </main>
+    </div>
   </body>
 </html>

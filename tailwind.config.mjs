@@ -31,6 +31,7 @@ export default {
             '--tw-prose-invert-body': 'var(--color-foreground)',
             '--tw-prose-invert-headings': 'var(--color-headings)',
             '--tw-prose-invert-bullets': '#837ab6',
+            '--tw-prose-invert-bold': 'var(--color-headings)',
           },
         },
       }),

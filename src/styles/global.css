@@ -3,6 +3,7 @@
    Design System / Global Styles
    =================================================== */
 
+/* Fuente Poppins cargada via <link> en BaseLayout.astro */
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 @config '../../tailwind.config.mjs';
@@ -11,61 +12,61 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --black-pearl: #08070B;
-  --lavender-violet: #E6E1FF;
-  --charcoal-violet: #37324B;
-  
-  --soft-periwinkle: #837ab6;
-  --muted-olive: #b0c49c;
-  --sweet-peony: #d183a9;
-  --tea-green: #d1efbd;
+  /* Aliases legacy para compatibilidad con componentes existentes */
+  --black-pearl:      #08070B;
+  --lavender-violet:  #C4BAED;   /* ahora apunta a la nueva lavender */
+  --charcoal-violet:  #3A2A5E;   /* ahora apunta a dark-text */
+
+  --soft-periwinkle:  #837ab6;
+  --muted-olive:      #b0c49c;
+  --sweet-peony:      #d183a9;
+  --tea-green:        #d1efbd;
 }
 
-/* ─── SEMANTIC — LIGHT MODE ─────────────────────── */
-/* Fondo lavanda muy claro + tipografía charcoal violet = elegancia y alta legibilidad */
+/* ─── SEMANTIC — NUEVA PALETA (DEFAULT) ─────────── */
 :root {
-  --color-background: #1c0f25;
-  --color-surface: #EBE8FF;
-  --color-card: #ffffff;
+  --color-background:      var(--color-bg);         /* Vanilla Cream */
+  --color-surface:         var(--color-lavender);    /* Lavender cards */
+  --color-card:            var(--color-bg);
 
-  --color-foreground: var(--charcoal-violet);
-  --color-muted-foreground: #625C7E;
-  --color-heading: var(--black-pearl);
+  --color-foreground:      var(--color-dark-text);   /* #3A2A5E */
+  --color-muted-foreground: rgba(58, 42, 94, 0.6);
+  --color-heading:         var(--color-dark);        /* #1A0F2E */
 
-  --color-border: #D8D2F2;
-  --color-border-hover: var(--soft-periwinkle);
-  --color-focus-ring: var(--soft-periwinkle);
-  --color-link-hover: var(--soft-periwinkle);
+  --color-border:          var(--color-dark);
+  --color-border-hover:    var(--color-tangerine);
+  --color-focus-ring:      var(--color-tangerine);
+  --color-link-hover:      var(--color-tangerine);
 
-  --color-cta: var(--charcoal-violet);
-  --color-cta-text: #ffffff;
-  --color-accent: var(--lavender-violet);
+  --color-cta:             var(--color-dark);
+  --color-cta-text:        var(--color-bg);
+  --color-accent:          var(--color-lavender);
 
-  --accent-primary: var(--soft-periwinkle);
-  --accent-secondary: var(--black-pearl);
+  --accent-primary:        var(--color-tangerine);
+  --accent-secondary:      var(--color-sage);
 }
 
-/* ─── DARK MODE ─────────────────────────────────── */
+/* ─── DARK MODE — misma paleta vanilla cream ────── */
 .dark {
-  --color-background: #1c0f25;
-  --color-surface: var(--charcoal-violet);
-  --color-card: #0F0E14;
+  --color-background:      var(--color-bg);
+  --color-surface:         var(--color-lavender);
+  --color-card:            var(--color-bg);
 
-  --color-foreground: var(--lavender-violet);
-  --color-muted-foreground: #948FB0;
-  --color-heading: #ffffff;
+  --color-foreground:      var(--color-dark-text);
+  --color-muted-foreground: rgba(58, 42, 94, 0.6);
+  --color-heading:         var(--color-dark);
 
-  --color-border: #2A263D;
-  --color-border-hover: var(--lavender-violet);
-  --color-focus-ring: var(--lavender-violet);
-  --color-link-hover: var(--lavender-violet);
+  --color-border:          var(--color-dark);
+  --color-border-hover:    var(--color-tangerine);
+  --color-focus-ring:      var(--color-tangerine);
+  --color-link-hover:      var(--color-tangerine);
 
-  --color-cta: var(--lavender-violet);
-  --color-cta-text: var(--black-pearl);
-  --color-accent: var(--lavender-violet);
+  --color-cta:             var(--color-dark);
+  --color-cta-text:        var(--color-bg);
+  --color-accent:          var(--color-lavender);
 
-  --accent-primary: var(--lavender-violet);
-  --accent-secondary: var(--charcoal-violet);
+  --accent-primary:        var(--color-tangerine);
+  --accent-secondary:      var(--color-sage);
 }
 
 /* ─── TAILWIND THEME INLINE ─────────────────────── */
@@ -75,28 +76,37 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
-  --color-muted-foreground: var(--color-muted-foreground);
-  --color-headings: var(--color-heading);
-  --color-border: var(--color-border);
-  --color-card: var(--color-card);
-  --color-surface: var(--color-surface);
-  --color-muted: var(--color-surface);
+  /* Paleta nueva */
+  --color-bg:           var(--color-bg);
+  --color-dark:         var(--color-dark);
+  --color-lavender:     var(--color-lavender);
+  --color-sage:         var(--color-sage);
+  --color-butter:       var(--color-butter);
+  --color-tangerine:    var(--color-tangerine);
+  --color-bubblegum:    var(--color-bubblegum);
+  --color-dark-text:    var(--color-dark-text);
 
-  /* Brand */
-  --color-midnight-violet: var(--midnight-violet);
+  /* Semánticas Tailwind */
+  --color-background:       var(--color-background);
+  --color-foreground:       var(--color-foreground);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-headings:         var(--color-heading);
+  --color-border:           var(--color-border);
+  --color-card:             var(--color-card);
+  --color-surface:          var(--color-surface);
+  --color-muted:            var(--color-surface);
+  --color-cta:              var(--color-cta);
+  --color-cta-text:         var(--color-cta-text);
+  --color-accent:           var(--color-accent);
+
+  /* Aliases de paleta legacy */
   --color-soft-periwinkle: var(--soft-periwinkle);
-  --color-space-indigo: var(--space-indigo);
-  --color-muted-olive: var(--muted-olive);
-  --color-sweet-peony: var(--sweet-peony);
-  --color-tea-green: var(--tea-green);
-  --color-cta: var(--color-cta);
-  --color-cta-text: var(--color-cta-text);
-  --color-accent: var(--color-accent);
+  --color-muted-olive:     var(--muted-olive);
+  --color-sweet-peony:     var(--sweet-peony);
+  --color-tea-green:       var(--tea-green);
 
   --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Neulis Alt', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ─── BASE STYLES ───────────────────────────────── */
@@ -107,19 +117,23 @@
 }
 
 html {
-  font-size: 18px;
+  font-size: 14px;      /* base 14px para el nuevo diseño */
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-bg);
+  color: var(--color-dark-text);
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Neulis Alt', ui-sans-serif, system-ui, sans-serif;
-  color: var(--color-heading);
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  color: var(--color-dark);
 }
 
 /* ─── MARQUEE ANIMATION ─────────────────────────── */
@@ -782,4 +796,488 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 480px) {
   .contact-pills { grid-template-columns: 1fr; }
   .contact-cursor { right: -1.5rem; width: 28px; height: auto; }
+}
+
+/* ═══════════════════════════════════════════════
+   TUMBLR LAYOUT — PASO 2
+   ═══════════════════════════════════════════════ */
+
+/* Body global del nuevo diseño */
+.tumblr-body {
+  background-color: var(--color-bg);
+  color: var(--color-dark-text);
+  min-height: 100vh;
+  font-family: 'Poppins', ui-sans-serif, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ─── APP SHELL (Layout principal) ──────────────── */
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.main-content {
+  overflow-y: auto;
+  height: 100vh;
+  padding: 32px 36px;
+}
+
+/* ─── SIDEBAR ────────────────────────────────── */
+.tumblr-sidebar {
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg);
+  border-right: 2px solid var(--color-dark);
+  padding: 28px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 50;
+  scrollbar-width: none;
+}
+.tumblr-sidebar::-webkit-scrollbar { display: none; }
+
+/* Perfil */
+.sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.sidebar-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid var(--color-dark);
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}
+.sidebar-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sidebar-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--color-dark);
+  margin: 0;
+  line-height: 1.2;
+}
+.sidebar-headline {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-dark-text);
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+.sidebar-available {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  opacity: 0.7;
+  margin-top: 2px;
+}
+.sidebar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-sage);
+  border: 1.5px solid var(--color-dark);
+  flex-shrink: 0;
+  animation: sidebar-pulse 2.5s ease-in-out infinite;
+}
+@keyframes sidebar-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.3); }
+}
+
+/* Nav */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sidebar-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.sidebar-nav__link:hover {
+  background: rgba(26,15,46,0.07);
+  color: var(--color-dark);
+}
+.sidebar-nav__link--active {
+  background: var(--color-dark);
+  color: var(--color-bg);
+}
+.sidebar-nav__link--active:hover {
+  background: var(--color-dark);
+  color: var(--color-bg);
+}
+.sidebar-nav__emoji {
+  font-size: 10px;
+  opacity: 0.6;
+  display: none;
+}
+.sidebar-nav__link--active .sidebar-nav__emoji {
+  display: inline-block;
+  opacity: 1;
+}
+
+.sidebar-nav__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.sidebar-nav__link--active .sidebar-nav__dot {
+  display: none;
+}
+
+/* Divider */
+.sidebar-divider {
+  height: 1.5px;
+  background: var(--color-dark);
+  opacity: 0.12;
+  border-radius: 99px;
+  margin: 0;
+}
+
+/* Skills */
+.sidebar-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.sidebar-skill {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-dark);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--color-dark);
+  background: transparent;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.sidebar-skill:hover {
+  background: var(--color-lavender);
+}
+
+/* Sociales */
+.sidebar-socials {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.sidebar-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-dark);
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--color-dark);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.sidebar-social:hover {
+  background: var(--color-dark);
+  color: var(--color-bg);
+}
+
+/* Bio */
+.sidebar-bio {
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--color-dark-text);
+  opacity: 0.65;
+  margin: 0;
+}
+
+
+
+/* ─── FEED HEADER ────────────────────────────── */
+.feed-header {
+  margin-bottom: 20px;
+}
+.feed-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  margin: 0 0 2px;
+}
+.feed-subtitle {
+  font-size: 11.5px;
+  color: var(--color-dark-text);
+  opacity: 0.55;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ─── FILTROS ────────────────────────────────── */
+.feed-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.feed-filter {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--color-dark);
+  background: transparent;
+  color: var(--color-dark);
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.feed-filter:hover {
+  background: rgba(26,15,46,0.07);
+}
+.feed-filter--active {
+  background: var(--color-dark);
+  color: var(--color-bg);
+}
+.feed-filter--active:hover {
+  background: var(--color-dark);
+  color: var(--color-bg);
+}
+
+/* ─── FEED GRID ──────────────────────────────── */
+.feed-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.feed-item {
+  transition: opacity 0.2s ease;
+}
+
+/* ═══════════════════════════════════════════════
+   POST CARD — PASO 3
+   ═══════════════════════════════════════════════ */
+.post-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 28px 22px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  overflow: visible;
+}
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(26,15,46,0.12);
+}
+
+/* Etiqueta flotante */
+.post-card__label {
+  position: absolute;
+  top: -13px;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+.post-card__label--left  { left: 18px; }
+.post-card__label--right { right: 18px; }
+
+/* Cuerpo */
+.post-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.post-card__title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+.post-card__desc {
+  font-size: 12.5px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Tags internos */
+.post-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.post-card__tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Footer de la card */
+.post-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-top: 0;
+  gap: 8px;
+}
+.post-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.65;
+  font-family: 'Poppins', sans-serif;
+}
+.post-card__role {
+  font-weight: 600;
+}
+.post-card__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.post-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1.5px solid currentColor;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  opacity: 0.5;
+}
+.post-card:hover .post-card__icon {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+/* Botón CTA card de contacto */
+.contact-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 14px;
+  background: var(--color-dark);
+  color: var(--color-bg);
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.contact-card-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .tumblr-sidebar {
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-y: visible;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 2px solid var(--color-dark);
+    padding: 16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .main-content {
+    height: auto;
+    overflow-y: visible;
+    padding: 24px 20px;
+  }
+  .sidebar-profile {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+  .sidebar-avatar {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0;
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    width: 100%;
+  }
+  .sidebar-nav__link {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+  .sidebar-skills,
+  .sidebar-socials,
+  .sidebar-bio,
+  .sidebar-contact {
+    display: none;
+  }
 }
