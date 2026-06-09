@@ -22,10 +22,10 @@ const linksRaw = await getCollection('links');
 // Mapa de id → nombre de ícono en Icon.astro
 type IconName = 'github' | 'linkedin' | 'instagram' | 'email';
 const iconMap: Record<string, IconName> = {
-  github:    'github',
-  linkedin:  'linkedin',
+  github: 'github',
+  linkedin: 'linkedin',
   instagram: 'instagram',
-  email:     'email',
+  email: 'email',
 };
 
 // Orden preferido de visualización
@@ -35,8 +35,8 @@ const socialLinks = linkOrder
   .filter(Boolean)
   .map((link) => ({
     label: link!.data.label,
-    href:  link!.data.url,
-    icon:  iconMap[link!.id] ?? 'email',
+    href: link!.data.url,
+    icon: iconMap[link!.id] ?? 'email',
   }));
 
 // Extraer email para la sección de contacto
@@ -47,10 +47,10 @@ const emailHref = emailLink?.data.url ?? 'mailto:hame.elizalde@gmail.com';
 const pathname = Astro.url.pathname;
 
 const navItems = [
-  { href: '/',           label: 'Feed',      emoji: '◈' },
+  { href: '/', label: 'Feed', emoji: '◈' },
   { href: '/portafolio', label: 'Proyectos', emoji: '◉' },
-  { href: '/writing',    label: 'Blog',      emoji: '◎' },
-  { href: '/about',      label: 'Sobre mí',  emoji: '◍' },
+  { href: '/writing', label: 'Blog', emoji: '◎' },
+  { href: '/about', label: 'Sobre mí', emoji: '◍' },
 ];
 
 // Colores rotativos para puntos inactivos
@@ -71,7 +71,11 @@ const skills = [
 const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
 ---
 
-<aside class="tumblr-sidebar" aria-label="Perfil y navegación" transition:persist>
+<aside
+  class="tumblr-sidebar"
+  aria-label="Perfil y navegación"
+  transition:persist
+>
   <!-- ─── Avatar + nombre ──────────────────────── -->
   <div class="sidebar-profile">
     <div class="sidebar-avatar">
@@ -131,10 +135,11 @@ const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
     document.addEventListener('astro:page-load', () => {
       const pathname = window.location.pathname;
       const links = document.querySelectorAll('[data-nav-link]');
-      links.forEach(link => {
+      links.forEach((link) => {
         const href = link.getAttribute('href');
         if (!href) return;
-        const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+        const isActive =
+          href === '/' ? pathname === '/' : pathname.startsWith(href);
         if (isActive) {
           link.classList.add('sidebar-nav__link--active');
           link.setAttribute('aria-current', 'page');
@@ -151,11 +156,13 @@ const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
 
   <!-- ─── Skills tags ──────────────────────────── -->
   <div class="sidebar-skills" aria-label="Disciplinas">
-    {skills.map((skill) => (
-      <span class="sidebar-skill" style="cursor: pointer;">
-        {skill}
-      </span>
-    ))}
+    {
+      skills.map((skill) => (
+        <span class="sidebar-skill" style="cursor: pointer;">
+          {skill}
+        </span>
+      ))
+    }
   </div>
 
   <!-- ─── Divider ───────────────────────────────── -->
@@ -181,9 +188,7 @@ const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
 
   <!-- ─── Contacto ──────────────────────────────── -->
   <div class="sidebar-contact">
-    <p class="sidebar-contact__label">¿Tienes un proyecto?</p>
-    <a href={emailHref} class="sidebar-contact__btn">
-      Envíame un mensaje →
-    </a>
+    <p class="sidebar-contact__label">¿Tienes un proyecto en mente?</p>
+    <a href={emailHref} class="sidebar-contact__btn"> Envíame un mensaje → </a>
   </div>
 </aside>

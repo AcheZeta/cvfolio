@@ -11,7 +11,7 @@ import { getCardColor } from '@/utils/cardColors';
 
 // Recopilar proyectos y posts
 const projects = await getCollection('projects');
-const posts    = await getCollection('posts');
+const posts = await getCollection('posts');
 
 // Mapa de color hex → nombre de variante de PostCard
 const hexToVariant: Record<string, CardVariant> = {
@@ -48,15 +48,15 @@ const projectItems: FeedItem[] = projects.map((p) => {
   const bgHex = getCardColor(p.data.tags ?? [], p.id, prevColor);
   prevColor = bgHex;
   return {
-    id:          `project-${p.id}`,
-    kind:        'project' as const,
-    title:       p.data.title,
-    href:        `/projects/${p.id}`,
+    id: `project-${p.id}`,
+    kind: 'project' as const,
+    title: p.data.title,
+    href: `/projects/${p.id}`,
     description: p.data.description,
-    tags:        p.data.tags,
-    role:        p.data.role,
-    date:        p.data.date,
-    variant:     toVariant(bgHex),
+    tags: p.data.tags,
+    role: p.data.role,
+    date: p.data.date,
+    variant: toVariant(bgHex),
     bgHex,
     floatingLabel: p.data.role ?? 'Proyecto',
   };
@@ -66,14 +66,14 @@ const postItems: FeedItem[] = posts.map((p) => {
   const bgHex = getCardColor(p.data.tags ?? [], p.id, prevColor);
   prevColor = bgHex;
   return {
-    id:          `post-${p.id}`,
-    kind:        'blog' as const,
-    title:       p.data.title,
-    href:        `/writing/${p.id}`,
+    id: `post-${p.id}`,
+    kind: 'blog' as const,
+    title: p.data.title,
+    href: `/writing/${p.id}`,
     description: p.data.seo?.description,
-    tags:        p.data.tags,
-    date:        p.data.date,
-    variant:     toVariant(bgHex),
+    tags: p.data.tags,
+    date: p.data.date,
+    variant: toVariant(bgHex),
     bgHex,
   };
 });
@@ -85,44 +85,56 @@ const feed: FeedItem[] = [...projectItems, ...postItems].sort(
 
 // Categorías para los filtros
 const filterCategories = [
-  { id: 'all',       label: 'Todo' },
-  { id: 'project',   label: 'Proyectos' },
-  { id: 'blog',      label: 'Blog' },
-  { id: 'ux',        label: 'UX' },
-  { id: 'frontend',  label: 'Frontend' },
+  { id: 'all', label: 'Todo' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'ux', label: 'UX' },
+  { id: 'frontend', label: 'Frontend' },
 ];
 ---
 
 <!-- ─── Filtros de categoría ─────────────────────── -->
 <div class="feed-filters" role="group" aria-label="Filtrar contenido">
-  {filterCategories.map(({ id, label }) => (
-    <button
-      class:list={['feed-filter', id === 'all' && 'feed-filter--active']}
-      data-filter={id}
-      type="button"
-    >
-      {label}
-    </button>
-  ))}
+  {
+    filterCategories.map(({ id, label }) => (
+      <button
+        class:list={['feed-filter', id === 'all' && 'feed-filter--active']}
+        data-filter={id}
+        type="button"
+      >
+        {label}
+      </button>
+    ))
+  }
 </div>
 
 <!-- ─── Feed de cards ─────────────────────────────── -->
-<div class="feed-grid" id="feed-grid" role="feed" aria-label="Feed de proyectos y artículos">
-  {feed.map((item) => (
-    <div class="feed-item" data-kind={item.kind} data-tags={(item.tags ?? []).join(',').toLowerCase()}>
-      <PostCard
-        title={item.title}
-        href={item.href}
-        description={item.description}
-        tags={item.tags}
-        role={item.role}
-        date={item.date}
-        variant={item.variant}
-        kind={item.kind}
-        floatingLabel={item.floatingLabel}
-      />
-    </div>
-  ))}
+<div
+  class="feed-grid"
+  id="feed-grid"
+  role="feed"
+  aria-label="Feed de proyectos y artículos"
+>
+  {
+    feed.map((item) => (
+      <div
+        class="feed-item"
+        data-kind={item.kind}
+        data-tags={(item.tags ?? []).join(',').toLowerCase()}
+      >
+        <PostCard
+          title={item.title}
+          href={item.href}
+          description={item.description}
+          tags={item.tags}
+          role={item.role}
+          date={item.date}
+          variant={item.variant}
+          kind={item.kind}
+          floatingLabel={item.floatingLabel}
+        />
+      </div>
+    ))
+  }
 
   <!-- ─── Card de contacto (última del feed) ─────── -->
   <div class="feed-item feed-item--contact" data-kind="contact">
@@ -140,7 +152,10 @@ const filterCategories = [
       </span>
 
       <div class="post-card__body">
-        <h3 class="post-card__title" style="color: var(--color-dark); font-size: 1.4rem;">
+        <h3
+          class="post-card__title"
+          style="color: var(--color-dark); font-size: 1.4rem;"
+        >
           ¿Tienes un proyecto en mente?
         </h3>
         <p class="post-card__desc" style="color: rgba(26,15,46,0.7);">
@@ -148,7 +163,10 @@ const filterCategories = [
         </p>
       </div>
 
-      <div class="post-card__footer" style="border-top: 1.5px solid rgba(26,15,46,0.15);">
+      <div
+        class="post-card__footer"
+        style="border-top: 1.5px solid rgba(26,15,46,0.15);"
+      >
         <div></div>
         <a
           href="mailto:hame.elizalde@gmail.com"
@@ -156,8 +174,18 @@ const filterCategories = [
           aria-label="Enviar email a Hame Elizalde"
         >
           Envíame un mensaje
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17L17 7M17 7H7M17 7V17"></path>
           </svg>
         </a>
       </div>
@@ -167,7 +195,7 @@ const filterCategories = [
 
 <!-- ─── Script de filtros ────────────────────────── -->
 <script>
-  const filters  = document.querySelectorAll<HTMLButtonElement>('.feed-filter');
+  const filters = document.querySelectorAll<HTMLButtonElement>('.feed-filter');
   const feedGrid = document.getElementById('feed-grid');
 
   if (feedGrid) {
@@ -178,7 +206,7 @@ const filterCategories = [
         btn.classList.add('feed-filter--active');
 
         const filter = btn.dataset.filter ?? 'all';
-        const items  = feedGrid.querySelectorAll<HTMLElement>('.feed-item');
+        const items = feedGrid.querySelectorAll<HTMLElement>('.feed-item');
 
         items.forEach((item) => {
           if (filter === 'all' || filter === 'contact') {
@@ -189,11 +217,11 @@ const filterCategories = [
           const kind = item.dataset.kind ?? '';
           const tags = (item.dataset.tags ?? '').split(',');
 
-          const matchKind  = kind === filter;
-          const matchTag   = tags.some((t) => t.includes(filter));
-          const isContact  = kind === 'contact';
+          const matchKind = kind === filter;
+          const matchTag = tags.some((t) => t.includes(filter));
+          const isContact = kind === 'contact';
 
-          item.style.display = (matchKind || matchTag || isContact) ? '' : 'none';
+          item.style.display = matchKind || matchTag || isContact ? '' : 'none';
         });
       });
     });
