@@ -8,10 +8,12 @@
 import { getCollection } from 'astro:content';
 import PostCard, { type CardVariant } from '@/components/ui/PostCard.astro';
 import { getCardColor } from '@/utils/cardColors';
+import MasonryCard from '@/components/ui/MasonryCard.astro';
 
 // Recopilar proyectos y posts
 const projects = await getCollection('projects');
 const posts = await getCollection('posts');
+const talks = await getCollection('talks');
 
 // Mapa de color hex → nombre de variante de PostCard
 const hexToVariant: Record<string, CardVariant> = {
@@ -37,6 +39,7 @@ type FeedItem = {
   tags?: string[];
   role?: string;
   date: Date;
+  image?: any;
   variant: CardVariant;
   bgHex: string;
   floatingLabel?: string;
@@ -56,6 +59,7 @@ const projectItems: FeedItem[] = projects.map((p) => {
     tags: p.data.tags,
     role: p.data.role,
     date: p.data.date,
+    image: p.data.image,
     variant: toVariant(bgHex),
     bgHex,
     floatingLabel: p.data.role ?? 'Proyecto',
@@ -73,6 +77,7 @@ const postItems: FeedItem[] = posts.map((p) => {
     description: p.data.seo?.description,
     tags: p.data.tags,
     date: p.data.date,
+    image: p.data.image,
     variant: toVariant(bgHex),
     bgHex,
   };
@@ -109,7 +114,7 @@ const filterCategories = [
 
 <!-- ─── Feed de cards ─────────────────────────────── -->
 <div
-  class="feed-grid"
+  class="feed-masonry"
   id="feed-grid"
   role="feed"
   aria-label="Feed de proyectos y artículos"
@@ -121,16 +126,14 @@ const filterCategories = [
         data-kind={item.kind}
         data-tags={(item.tags ?? []).join(',').toLowerCase()}
       >
-        <PostCard
+        <MasonryCard
           title={item.title}
           href={item.href}
-          description={item.description}
-          tags={item.tags}
-          role={item.role}
+          image={item.image}
           date={item.date}
-          variant={item.variant}
-          kind={item.kind}
-          floatingLabel={item.floatingLabel}
+          description={item.description}
+          category={item.kind === 'project' ? 'proyecto' : 'blog'}
+          tags={item.tags}
         />
       </div>
     ))
@@ -209,17 +212,16 @@ const filterCategories = [
         const items = feedGrid.querySelectorAll<HTMLElement>('.feed-item');
 
         items.forEach((item) => {
-          if (filter === 'all' || filter === 'contact') {
+          if (filter === 'all') {
             item.style.display = '';
             return;
           }
 
           const kind = item.dataset.kind ?? '';
           const tags = (item.dataset.tags ?? '').split(',');
-
+          const isContact = kind === 'contact';
           const matchKind = kind === filter;
           const matchTag = tags.some((t) => t.includes(filter));
-          const isContact = kind === 'contact';
 
           item.style.display = matchKind || matchTag || isContact ? '' : 'none';
         });
@@ -227,3 +229,27 @@ const filterCategories = [
     });
   }
 </script>
+
+<style>
+  .feed-masonry {
+    columns: 2;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .feed-masonry {
+      columns: 3;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .feed-masonry {
+      columns: 1;
+    }
+  }
+
+  .feed-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+</style>
