@@ -1,7 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import FeedSection from '@/components/ui/FeedSection.astro';
+import FeedGrid from '@/components/ui/FeedGrid.astro';
 
 // Obtener datos de SEO de la página homepage
 const homeEntry = await getEntry('pages', 'homepage');
@@ -14,9 +14,9 @@ if (!homeEntry) {
   <!-- ─── Cabecera del feed ──────────────────────── -->
   <div class="feed-header">
     <h2 class="feed-title">Proyectos</h2>
-    <p class="feed-subtitle">Explora mis proyectos y artículos <3</p>
+    <p class="feed-subtitle">Explora mis proyectos y artículos &lt;3</p>
   </div>
 
   <!-- ─── Feed principal ───────────────────────── -->
-  <FeedSection />
+  <FeedGrid showContactCard={true} />
 </BaseLayout>

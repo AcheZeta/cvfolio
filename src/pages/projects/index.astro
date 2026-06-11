@@ -1,7 +1,7 @@
 ---
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import MasonryGrid from '@/components/ui/MasonryGrid.astro';
+import FeedGrid from '@/components/ui/FeedGrid.astro';
 
 const seo = {
   title: 'Proyectos — Hame Elizalde',
@@ -33,6 +33,6 @@ const seo = {
     </div>
 
     <!-- Masonry grid filtered to show only projects -->
-    <MasonryGrid filter="proyecto" hideHeader={true} />
+    <FeedGrid filter="proyecto" hideHeader={true} />
   </Container>
 </BaseLayout>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/Container.astro';
-import MasonryGrid from '@/components/ui/MasonryGrid.astro';
+import FeedGrid from '@/components/ui/FeedGrid.astro';
 
 const seo = {
   title: 'Portafolio — Hame Elizalde',
@@ -24,6 +24,6 @@ const seo = {
     </div>
 
     <!-- Masonry grid sin filtro ni límite para mostrar TODO -->
-    <MasonryGrid hideHeader={true} />
+    <FeedGrid hideHeader={true} />
   </Container>
 </BaseLayout>

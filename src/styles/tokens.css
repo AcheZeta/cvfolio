@@ -42,26 +42,7 @@
   --brand-focus-ring:   var(--color-tangerine);
 }
 
-/* ─── DARK MODE — apunta a la misma paleta clara ──
-   El rediseño usa un solo tema (vanilla cream).
-   Mapeamos .dark a los mismos tokens para que los
-   componentes legacy no rompan durante la migración.
-   ─────────────────────────────────────────────── */
-.dark {
-  --brand-bg:           var(--color-bg);
-  --brand-surface:      var(--color-lavender);
-  --brand-fg:           var(--color-dark-text);
-  --brand-fg-muted:     rgba(58, 42, 94, 0.6);
-  --brand-heading:      var(--color-dark);
 
-  --brand-accent:       var(--color-tangerine);
-  --brand-accent-soft:  var(--color-sage);
-  --brand-neutral:      var(--color-butter);
-
-  --brand-border:       var(--color-dark);
-  --brand-border-hover: var(--color-tangerine);
-  --brand-focus-ring:   var(--color-tangerine);
-}
 
 /* ─── BODY — FONDO Y COLOR BASE ─────────────────── */
 body {

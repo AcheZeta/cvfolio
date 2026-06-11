@@ -2,7 +2,7 @@
 import { getEntry } from 'astro:content';
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import MasonryGrid from '@/components/ui/MasonryGrid.astro';
+import FeedGrid from '@/components/ui/FeedGrid.astro';
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 
 const writingEntry = await getEntry('pages', 'writing');
@@ -35,6 +35,6 @@ const entry = writingEntry;
     </div>
 
     <!-- Masonry grid filtered to show only blog posts -->
-    <MasonryGrid filter="blog" hideHeader={true} />
+    <FeedGrid filter="blog" hideHeader={true} />
   </Container>
 </BaseLayout>
