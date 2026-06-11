@@ -2,26 +2,26 @@
 import { getCollection } from 'astro:content';
 import MasonryCard from '@/components/ui/MasonryCard.astro';
 
-// Fetch all three collections
+// Fetch all collections
 const projects = await getCollection('projects');
-const posts = await getCollection('posts');
-const talks = await getCollection('talks');
+const posts    = await getCollection('posts');
+const talks    = await getCollection('talks');
+const photos   = await getCollection('photos');
 
-// Normalize all three into a unified shape
+// Normalize all into a unified shape
 type FeedItem = {
   title: string;
   href: string;
   image?: any;
   date: Date;
   description?: string;
-  category: 'proyecto' | 'blog' | 'charla';
+  category: 'proyecto' | 'blog' | 'charla' | 'foto';
   tags?: string[];
 };
 
-// Helper to clean tags (we are only using explicit tags, not SEO keywords)
-const processTags = (tags: string[] = []) => {
-  return tags.filter(Boolean).map(tag => tag.trim());
-};
+// Helper to clean tags
+const processTags = (tags: string[] = []) =>
+  tags.filter(Boolean).map(tag => tag.trim());
 
 const projectItems: FeedItem[] = projects.map((p) => ({
   title: p.data.title,
@@ -50,7 +50,17 @@ const talkItems: FeedItem[] = talks.map((t) => ({
   date: new Date(t.data.year, 0, 1),
   description: `${t.data.event} · ${t.data.location}`,
   category: 'charla',
-  tags: processTags(t.data.tags), 
+  tags: processTags(t.data.tags),
+}));
+
+const photoItems: FeedItem[] = photos.map((p) => ({
+  title: p.data.title,
+  href: `/photos/${p.id}`,
+  image: p.data.cover,
+  date: p.data.date,
+  description: p.data.description ?? p.data.location,
+  category: 'foto',
+  tags: processTags(p.data.tags),
 }));
 
 // Mix and sort by date descending
@@ -58,11 +68,12 @@ const feedItems: FeedItem[] = [
   ...projectItems,
   ...postItems,
   ...talkItems,
+  ...photoItems,
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
 interface Props {
   limit?: number;
-  filter?: 'proyecto' | 'blog' | 'charla';
+  filter?: 'proyecto' | 'blog' | 'charla' | 'foto';
   hideHeader?: boolean;
 }
 const { limit, filter, hideHeader = false } = Astro.props;
@@ -136,6 +147,12 @@ const availableTags = Array.from(uniqueTagsMap.values()).sort().slice(0, 12);
       data-filter="charla"
     >
       Charlas
+    </button>
+    <button 
+      class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border border-[var(--color-border)] text-[var(--color-foreground)] hover:border-[var(--color-border-hover)] transition-all duration-200"
+      data-filter="foto"
+    >
+      Fotografía
     </button>
 
     <div class="w-px h-6 bg-[var(--color-border)] mx-2 self-center hidden sm:block"></div>

@@ -86,6 +86,23 @@ const projectsCollection = defineCollection({
   }),
 });
 
+const photosCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/photos' }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    date: z.date(),
+    /** Imagen principal (cover y card del feed) */
+    cover: image(),
+    /** Imágenes adicionales de la serie — se muestran en la página de detalle */
+    gallery: z.array(image()).optional(),
+    description: z.string().optional(),
+    location: z.string().optional(),
+    camera: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    seo: seoSchemaWithoutImage,
+  }),
+});
+
 export const collections = {
   pages: pageCollection,
   links: linkCollection,
@@ -93,4 +110,5 @@ export const collections = {
   talks: talkCollection,
   posts: postCollection,
   projects: projectsCollection,
+  photos: photosCollection,
 };

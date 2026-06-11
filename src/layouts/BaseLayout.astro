@@ -2,6 +2,7 @@
 import '@/styles/global.css';
 import '@/assets/fonts/inter.css';
 import '@/assets/fonts/neulis.css';
+import '@/assets/fonts/poppins.css';
 import { type Seo } from '@/lib/constants';
 import Head from '@/components/partials/Head.astro';
 import Sidebar from '@/components/partials/Sidebar.astro';
@@ -18,13 +19,6 @@ const { seo, fullBleed = false } = Astro.props;
 <html lang="es" class="dark">
   <Head seo={seo}>
     <ViewTransitions />
-    <!-- Google Fonts: Poppins (400 regular, 600 semibold, 800 extrabold, 800 italic) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;1,800&display=swap"
-      rel="stylesheet"
-    />
   </Head>
   <body class="tumblr-body">
     <div class="app-shell">

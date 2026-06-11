@@ -1,13 +1,21 @@
 ---
+/**
+ * ContentPreview.astro
+ * Vista de lista compacta para posts y proyectos.
+ * Reemplaza PostPreview.astro y ProjectPreview.astro (eran idénticos).
+ */
 import type { CollectionEntry } from 'astro:content';
 import { formatDate } from '@/lib/utils';
 import { render } from 'astro:content';
+
 interface Props {
-  entry: CollectionEntry<'posts'>;
+  entry: CollectionEntry<'posts'> | CollectionEntry<'projects'>;
+  collection: 'posts' | 'projects';
 }
 
-const { entry } = Astro.props;
+const { entry, collection } = Astro.props;
 const { remarkPluginFrontmatter } = await render(entry);
+const href = collection === 'posts' ? `/writing/${entry.id}/` : `/projects/${entry.id}/`;
 ---
 
 <li class="py-2">
@@ -15,7 +23,7 @@ const { remarkPluginFrontmatter } = await render(entry);
     <div class="relative min-w-22 shrink-0">
       <span class="text-sm">{formatDate(entry.data.date)}</span>
     </div>
-    <a href={`/writing/${entry.id}/`} class="flex flex-col gap-3">
+    <a href={href} class="flex flex-col gap-3">
       <div class="flex flex-col">
         <span class="text-headings font-medium">{entry.data.title}</span>
         <span>{remarkPluginFrontmatter.minutesRead}</span>

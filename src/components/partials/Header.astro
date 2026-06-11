@@ -1,5 +1,8 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+
+const { name } = DEFAULT_CONFIGURATION.author;
 
 const pathname = Astro.url.pathname;
 const isHomePage   = pathname === '/';
@@ -23,8 +26,8 @@ const navItems: NavItem[] = [
   <div class="header-inner">
 
     <!-- Logo / nombre -->
-    <a href="/" class="header-logo" aria-label="Inicio — Hame Elizalde">
-      Hame Elizalde
+    <a href="/" class="header-logo" aria-label={`Inicio — ${name}`}>
+      {name}
     </a>
 
     <!-- Menú Hamburguesa -->

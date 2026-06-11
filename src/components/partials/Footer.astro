@@ -1,4 +1,6 @@
 ---
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+const { name } = DEFAULT_CONFIGURATION.author;
 const currentYear = new Date().getFullYear();
 ---
 
@@ -6,11 +8,11 @@ const currentYear = new Date().getFullYear();
   <div class="footer-inner">
 
     <!-- Izquierda: nombre -->
-    <span class="footer-name">Hame Elizalde</span>
+    <span class="footer-name">{name}</span>
 
     <!-- Centro: copyright -->
     <p class="footer-copy">
-      &copy; {currentYear} Hame Elizalde
+      &copy; {currentYear} {name}
     </p>
 
     <!-- Derecha: disponibilidad -->

@@ -2,9 +2,11 @@
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import MasonryGrid from '@/components/ui/MasonryGrid.astro';
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 
+const { name } = DEFAULT_CONFIGURATION.author;
 const seo = {
-  title: 'Proyectos — Hame Elizalde',
+  title: `Proyectos — ${name}`,
   description: 'Una selección de mis proyectos más recientes y destacados.',
 };
 ---
