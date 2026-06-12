@@ -5,7 +5,7 @@ import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 
 interface Props {
   limit?: number;
-  filter?: 'proyecto' | 'blog' | 'charla';
+  filter?: 'proyecto' | 'blog' | 'charla' | 'foto';
   hideHeader?: boolean;
   showContactCard?: boolean;
 }
@@ -150,6 +150,9 @@ const emailHref = emailLink?.data.url ?? `mailto:${DEFAULT_CONFIGURATION.author.
         </button>
         <button class="feed-filter" data-filter="charla" type="button">
           Charlas
+        <button class="feed-filter" data-filter="foto" type="button">
+          Fotografía
+        </button>
         </button>
       </>
     )}
