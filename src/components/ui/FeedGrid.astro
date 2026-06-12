@@ -12,10 +12,11 @@ interface Props {
 
 const { limit, filter, hideHeader = false, showContactCard = false } = Astro.props;
 
-// Fetch all three collections
+// Fetch all collections
 const projects = await getCollection('projects');
-const posts = await getCollection('posts');
-const talks = await getCollection('talks');
+const posts    = await getCollection('posts');
+const talks    = await getCollection('talks');
+const photos   = await getCollection('photos');
 
 type FeedItem = {
   title: string;
@@ -23,7 +24,7 @@ type FeedItem = {
   image?: any;
   date: Date;
   description?: string;
-  category: 'proyecto' | 'blog' | 'charla';
+  category: 'proyecto' | 'blog' | 'charla' | 'foto';
   tags?: string[];
 };
 
@@ -59,7 +60,17 @@ const talkItems: FeedItem[] = talks.map((t) => ({
   date: new Date(t.data.year, 0, 1),
   description: `${t.data.event} · ${t.data.location}`,
   category: 'charla',
-  tags: processTags(t.data.tags), 
+  tags: processTags(t.data.tags),
+}));
+
+const photoItems: FeedItem[] = photos.map((p) => ({
+  title: p.data.title,
+  href: `/photos/${p.id}`,
+  image: p.data.cover,
+  date: p.data.date,
+  description: p.data.description ?? p.data.location,
+  category: 'foto',
+  tags: processTags(p.data.tags),
 }));
 
 // Mix and sort by date descending
@@ -67,6 +78,7 @@ const feedItems: FeedItem[] = [
   ...projectItems,
   ...postItems,
   ...talkItems,
+  ...photoItems,
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
 // Filter items if needed (server-side initial state)

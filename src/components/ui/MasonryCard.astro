@@ -7,7 +7,7 @@ interface Props {
   image?: any;
   date?: Date | string;
   description?: string;
-  category: 'proyecto' | 'blog' | 'charla';
+  category: 'proyecto' | 'blog' | 'charla' | 'foto';
   tags?: string[];
   accentColor?: string;
 }
@@ -23,11 +23,13 @@ const {
     ? 'var(--muted-olive)'
     : category === 'charla'
     ? 'var(--sweet-peony)'
+    : category === 'foto'
+    ? 'var(--color-tangerine)'
     : 'var(--soft-periwinkle)',
 } = Astro.props;
 
-const categoryLabel = category === 'proyecto' ? 'Proyecto' : category === 'charla' ? 'Charla' : 'Blog';
-const categoryIcon  = category === 'proyecto' ? '✦' : category === 'charla' ? '✧' : '✶';
+const categoryLabel = category === 'proyecto' ? 'Proyecto' : category === 'charla' ? 'Charla' : category === 'foto' ? 'Foto' : 'Blog';
+const categoryIcon  = category === 'proyecto' ? '✦' : category === 'charla' ? '✧' : category === 'foto' ? '⬡' : '✶';
 
 const formattedDate = date
   ? new Date(date).toLocaleDateString('es-MX', { month: 'short', year: 'numeric' })
