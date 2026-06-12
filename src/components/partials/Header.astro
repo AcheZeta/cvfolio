@@ -1,30 +1,27 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
+import { getNavItems } from '@/lib/utils';
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 
 const { name } = DEFAULT_CONFIGURATION.author;
 
 const pathname = Astro.url.pathname;
-const isHomePage   = pathname === '/';
-const isAboutPage  = pathname.startsWith('/about');
-const isPortafolioPage = pathname.startsWith('/portafolio');
+const allNavItems = getNavItems(pathname);
 
-type NavItem = { href: string; label: string; active: boolean };
-const navItems: NavItem[] = [
-  { href: '/portafolio', label: 'Portafolio', active: isPortafolioPage },
-  { href: '/about',      label: 'Sobre mí',   active: isAboutPage },
-];
+const navItems = allNavItems
+  .filter((item) => item.href === '/portafolio' || item.href === '/about')
+  .map((item) => ({
+    href: item.href,
+    label: item.href === '/portafolio' ? 'Portafolio' : item.label,
+    active: item.isActive,
+  }));
 ---
 
 <header
-  class:list={[
-    'site-header',
-    'site-header--dark',
-  ]}
+  class:list={['site-header', 'site-header--dark']}
   aria-label="Navegación principal"
 >
   <div class="header-inner">
-
     <!-- Logo / nombre -->
     <a href="/" class="header-logo" aria-label={`Inicio — ${name}`}>
       {name}
@@ -42,17 +39,19 @@ const navItems: NavItem[] = [
       <!-- Nav links centrados -->
       <nav class="header-nav">
         <ul role="list">
-          {navItems.map(({ href, label, active }) => (
-            <li>
-              <a
-                href={href}
-                aria-current={active ? 'page' : undefined}
-                class:list={['nav-link', active && 'nav-link--active']}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
+          {
+            navItems.map(({ href, label, active }) => (
+              <li>
+                <a
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  class:list={['nav-link', active && 'nav-link--active']}
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
 
@@ -61,7 +60,6 @@ const navItems: NavItem[] = [
         Hablemos <Icon name="arrow-right" size={14} class="header-cta-arrow" />
       </a>
     </div>
-
   </div>
 </header>
 
@@ -81,7 +79,7 @@ const navItems: NavItem[] = [
 
     // Cerrar menú al hacer click en un enlace
     const links = headerActions.querySelectorAll('a');
-    links.forEach(link => {
+    links.forEach((link) => {
       link.addEventListener('click', () => {
         toggleBtn.setAttribute('aria-expanded', 'false');
         headerActions.classList.remove('is-open');
@@ -90,19 +88,23 @@ const navItems: NavItem[] = [
   }
 
   // Ocultar header en scroll hacia abajo
-  window.addEventListener('scroll', () => {
-    if (!header) return;
-    const currentScroll = window.scrollY;
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!header) return;
+      const currentScroll = window.scrollY;
 
-    // Si el menú está abierto, no ocultar el header
-    if (headerActions?.classList.contains('is-open')) return;
+      // Si el menú está abierto, no ocultar el header
+      if (headerActions?.classList.contains('is-open')) return;
 
-    if (currentScroll > lastScroll && currentScroll > 100) {
-      header.classList.add('site-header--hidden');
-    } else {
-      header.classList.remove('site-header--hidden');
-    }
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add('site-header--hidden');
+      } else {
+        header.classList.remove('site-header--hidden');
+      }
 
-    lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-  }, { passive: true });
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    },
+    { passive: true },
+  );
 </script>

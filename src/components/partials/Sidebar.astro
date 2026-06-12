@@ -9,6 +9,7 @@ import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Icon from '@/components/ui/Icon.astro';
+import { getNavItems } from '@/lib/utils';
 
 // ─── Avatar ───────────────────────────────────
 const image = await getImage({
@@ -45,13 +46,7 @@ const emailHref = emailLink?.data.url ?? 'mailto:hame.elizalde@gmail.com';
 
 // ─── Estado de la página ──────────────────────
 const pathname = Astro.url.pathname;
-
-const navItems = [
-  { href: '/', label: 'Feed', emoji: '◈' },
-  { href: '/portafolio', label: 'Proyectos', emoji: '◉' },
-  { href: '/writing', label: 'Blog', emoji: '◎' },
-  { href: '/about', label: 'Sobre mí', emoji: '◍' },
-];
+const navItems = getNavItems(pathname);
 
 // Colores rotativos para puntos inactivos
 const accentColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
@@ -101,9 +96,7 @@ const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
   <!-- ─── Nav links ─────────────────────────────── -->
   <nav class="sidebar-nav" aria-label="Navegación principal">
     {
-      navItems.map(({ href, label, emoji }, index) => {
-        const isActive =
-          href === '/' ? pathname === '/' : pathname.startsWith(href);
+      navItems.map(({ href, label, emoji, isActive }, index) => {
         return (
           <a
             href={href}

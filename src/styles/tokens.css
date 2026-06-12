@@ -6,60 +6,69 @@
 /* ─── NUEVA PALETA — VANILLA CREAM ──────────────── */
 :root {
   /* Paleta base */
-  --color-bg:          #F5F0E8;   /* Vanilla Cream — fondo general */
-  --color-dark:        #1A0F2E;   /* Plum Ink — texto, bordes, fondos oscuros */
-  --color-lavender:    #C4BAED;   /* Lavender — cards, hero bg */
-  --color-sage:        #A8DCC8;   /* Sage Vivid — acento positivo */
-  --color-butter:      #FFD97D;   /* Butter Pop — highlights */
-  --color-tangerine:   #FF8C61;   /* Tangerine Bold — CTA principal */
-  --color-bubblegum:   #F7A3C0;   /* Bubblegum — acento extra */
-  --color-dark-text:   #3A2A5E;   /* Para texto sobre lavender */
+  --color-bg: #F5F0E8;
+  /* Vanilla Cream — fondo general */
+  --color-dark: #1A0F2E;
+  /* Plum Ink — texto, bordes, fondos oscuros */
+  --color-lavender: #C4BAED;
+  /* Lavender — cards, hero bg */
+  --color-sage: #A8DCC8;
+  /* Sage Vivid — acento positivo */
+  --color-butter: #FFD97D;
+  /* Butter Pop — highlights */
+  --color-tangerine: #FF8C61;
+  /* Tangerine Bold — CTA principal */
+  --color-bubblegum: #F7A3C0;
+  /* Bubblegum — acento extra */
+  --color-dark-text: #3A2A5E;
+  /* Para texto sobre lavender */
 
   /* Aliases de compatibilidad (mantienen referencias existentes sin romperse) */
-  --color-cream:       var(--color-bg);
-  --color-plum:        var(--color-dark);
-  --color-tangerine-old: #F0783A; /* referencia legacy — no usar en código nuevo */
+  --color-cream: var(--color-bg);
+  --color-plum: var(--color-dark);
+  --color-tangerine-old: #F0783A;
+  /* referencia legacy — no usar en código nuevo */
 
   /* ─── TIPOGRAFÍA ─────────────────────────────── */
   --font-heading: 'Poppins', ui-sans-serif, sans-serif;
-  --font-body:    'Poppins', ui-sans-serif, sans-serif;
+  --font-body: 'Poppins', ui-sans-serif, sans-serif;
 }
 
 /* ─── SEMÁNTICA — LIGHT / DEFAULT ───────────────── */
 :root {
-  --brand-bg:           var(--color-bg);
-  --brand-surface:      var(--color-lavender);
-  --brand-fg:           var(--color-dark-text);
-  --brand-fg-muted:     rgba(58, 42, 94, 0.6);
-  --brand-heading:      var(--color-dark);
+  --brand-bg: var(--color-bg);
+  --brand-surface: var(--color-lavender);
+  --brand-fg: var(--color-dark-text);
+  --brand-fg-muted: rgba(58, 42, 94, 0.6);
+  --brand-heading: var(--color-dark);
 
-  --brand-accent:       var(--color-tangerine);
-  --brand-accent-soft:  var(--color-sage);
-  --brand-neutral:      var(--color-butter);
+  --brand-accent: var(--color-tangerine);
+  --brand-accent-soft: var(--color-sage);
+  --brand-neutral: var(--color-butter);
 
-  --brand-border:       var(--color-dark);
+  --brand-border: var(--color-dark);
   --brand-border-hover: var(--color-tangerine);
-  --brand-focus-ring:   var(--color-tangerine);
+  --brand-focus-ring: var(--color-tangerine);
 }
 
-/* ─── DARK MODE ──────────────────────────────────
-   El rediseño usa un solo tema (vanilla cream).
-   Si en el futuro se implementa dark mode real,
-   agregar aquí los tokens con valores distintos.
-   ─────────────────────────────────────────────── */
 
 /* ─── BODY — FONDO Y COLOR BASE ─────────────────── */
 body {
   background-color: var(--color-bg);
-  color:            var(--color-dark-text);
-  font-family:      var(--font-body);
-  font-size:        14px;
-  line-height:      1.7;
+  color: var(--color-dark-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 /* ─── HEADINGS ──────────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
-  color:       var(--color-dark);
+  color: var(--color-dark);
   font-weight: 800;
 }

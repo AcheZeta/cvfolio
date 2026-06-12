@@ -47,3 +47,24 @@ export const sortByYear = <T extends { data: { year: number } }>(
 ) => {
   return items.sort((a, b) => b.data.year - a.data.year);
 };
+
+export interface NavItem {
+  href: string;
+  label: string;
+  emoji: string;
+  isActive: boolean;
+}
+
+export const getNavItems = (pathname: string): NavItem[] => {
+  const items = [
+    { href: '/', label: 'Feed', emoji: '◈' },
+    { href: '/portafolio', label: 'Proyectos', emoji: '◉' },
+    { href: '/writing', label: 'Blog', emoji: '◎' },
+    { href: '/about', label: 'Sobre mí', emoji: '◍' },
+  ];
+
+  return items.map((item) => ({
+    ...item,
+    isActive: item.href === '/' ? pathname === '/' : pathname.startsWith(item.href),
+  }));
+};
