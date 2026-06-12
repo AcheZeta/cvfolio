@@ -17,11 +17,18 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "astro": "^5.14.1",
+    "js-yaml": "^4.1.1",
     "lucide-react": "^0.519.0",
     "mdast-util-to-string": "^4.0.0",
+    "photoswipe": "^5.4.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "reading-time": "^1.5.0",
     "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@types/js-yaml": "^4.0.9",
+    "typescript": "^5.9.3"
   }
 }

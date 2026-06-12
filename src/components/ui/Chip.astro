@@ -1,0 +1,29 @@
+---
+interface Props {
+  label: string;
+  variant?: 'default' | 'periwinkle' | 'olive' | 'peony' | 'tea' | 'indigo';
+}
+
+const { label, variant = 'default' } = Astro.props;
+
+// Using hex values directly to avoid CSS variable interpolation issues in style attr
+type StyleConfig = { bg: string; text: string; border: string };
+const variantStyles: Record<string, StyleConfig> = {
+  default:    { bg: 'transparent',  text: 'var(--color-foreground)', border: 'var(--color-border)' },
+  periwinkle: { bg: '#837ab61a',    text: '#837ab6', border: '#837ab666' },
+  olive:      { bg: '#b0c49c26',    text: '#4a5a38', border: '#b0c49c99' },
+  peony:      { bg: '#d183a91a',    text: '#d183a9', border: '#d183a966' },
+  tea:        { bg: '#d1efbd33',    text: '#3d5c2a', border: '#d1efbd' },
+  indigo:     { bg: '#3e3a5d1a',    text: '#3e3a5d', border: '#3e3a5d66' },
+};
+
+const v = variantStyles[variant] ?? variantStyles.default;
+---
+
+<span
+  class="inline-flex items-center px-4 py-1.5 rounded-full border text-sm font-medium
+         select-none cursor-default transition-all duration-200 hover:scale-105 hover:shadow-sm"
+  style={`background-color:${v.bg};color:${v.text};border-color:${v.border};`}
+>
+  {label}
+</span>

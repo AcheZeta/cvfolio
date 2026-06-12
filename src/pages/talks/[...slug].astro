@@ -1,0 +1,50 @@
+---
+import Container from '@/components/Container.astro';
+import Avatar from '@/components/ui/Avatar.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('talks');
+
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout seo={{ title: entry.data.title, description: `Charla en ${entry.data.event}` }}>
+  <Container as='section'>
+    <article class="flex flex-col gap-6">
+      <div class="flex flex-col gap-2">
+        <a href="/talks" class="transition-all hover:text-foreground pb-4 text-sm w-max">
+          Volver a Charlas
+        </a>
+        <div class="flex flex-col gap-1.5">
+          <Avatar />
+          <span class="text-foreground">{DEFAULT_CONFIGURATION.author.name}</span>
+        </div>
+        <h1 class="text-3xl font-semibold text-headings">{entry.data.title}</h1>
+
+        {entry.data.url && (
+          <a
+            href={entry.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-3 text-sm font-medium text-primary hover:underline"
+          >
+            Ver charla
+          </a>
+        )}
+      </div>
+      <div class="prose dark:prose-invert">
+        <Content />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>

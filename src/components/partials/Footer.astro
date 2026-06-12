@@ -1,11 +1,28 @@
 ---
-import Container from '@/components/Container.astro';
-
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+const { name } = DEFAULT_CONFIGURATION.author;
 const currentYear = new Date().getFullYear();
 ---
 
-<Container as='footer' class='pt-24'>
-  <p class="text-center text-muted-foreground text-sm">
-    &copy; {currentYear}. Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> and CVfolio.
-  </p>
-</Container>
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- Izquierda: nombre -->
+    <span class="footer-name">{name}</span>
+
+    <!-- Centro: copyright -->
+    <p class="footer-copy">
+      &copy; {currentYear} {name}
+    </p>
+
+    <!-- Derecha: disponibilidad -->
+    <div class="footer-availability">
+      <span class="footer-dot" aria-hidden="true">
+        <span class="footer-dot-pulse"></span>
+        <span class="footer-dot-solid"></span>
+      </span>
+      <span>Disponible</span>
+    </div>
+
+  </div>
+</footer>

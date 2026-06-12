@@ -50,12 +50,15 @@ const jobCollection = defineCollection({
 
 const talkCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/talks' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     year: z.number(),
     event: z.string(),
     location: z.string(),
     url: z.string(),
+    image: image().optional(),
+    type: z.enum(['conferencia', 'taller', 'podcast', 'panel', 'charla', 'charlas']).optional(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 
@@ -65,6 +68,7 @@ const postCollection = defineCollection({
     title: z.string(),
     date: z.date(),
     image: image().optional(),
+    tags: z.array(z.string()).optional(),
     seo: seoSchema(image),
   }),
 });
@@ -76,7 +80,26 @@ const projectsCollection = defineCollection({
     date: z.date(),
     description: z.string(),
     image: image().optional(),
+    tags: z.array(z.string()).optional(),
+    role: z.string().optional(),
     seo: seoSchema(image),
+  }),
+});
+
+const photosCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/photos' }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    date: z.date(),
+    /** Imagen principal (cover y card del feed) */
+    cover: image(),
+    /** Imágenes adicionales de la serie — se muestran en la página de detalle */
+    gallery: z.array(image()).optional(),
+    description: z.string().optional(),
+    location: z.string().optional(),
+    camera: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    seo: seoSchemaWithoutImage,
   }),
 });
 
@@ -87,4 +110,5 @@ export const collections = {
   talks: talkCollection,
   posts: postCollection,
   projects: projectsCollection,
+  photos: photosCollection,
 };

@@ -1,0 +1,47 @@
+---
+/**
+ * ProjectCard.astro
+ * Tarjeta de proyecto estilo bento: fondo lavanda, tags tipo pill,
+ * franja sage en la sección ROL.
+ */
+interface Props {
+  title: string;
+  href: string;
+  description?: string;
+  tags?: string[];
+  role?: string;
+  accentIndex?: number;
+}
+
+const { title, href, description, tags = [], role, accentIndex = 0 } = Astro.props;
+
+// Tags con colores alternados: blanco → sage → blanco → …
+const tagColors = ['#fff', 'var(--color-sage, #C5DC98)', '#fff'];
+---
+
+<a href={href} class="project-card" data-accent={accentIndex}>
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    {description && <p class="card-desc">{description}</p>}
+
+    {tags.length > 0 && (
+      <div class="card-tags" aria-label="Disciplinas">
+        {tags.map((tag, i) => (
+          <span
+            class="card-tag"
+            style={`background-color: ${tagColors[i % tagColors.length]};`}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {role && (
+    <div class="card-role">
+      <span class="role-label">ROL</span>
+      <span class="role-value">{role}</span>
+    </div>
+  )}
+</a>

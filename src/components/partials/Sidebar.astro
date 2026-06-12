@@ -1,0 +1,187 @@
+---
+/**
+ * Sidebar.astro
+ * Sidebar fija de 260px — avatar, nombre, nav, skill tags, redes y contacto.
+ * Estilo Tumblr: borde derecho sólido, fondo vanilla cream.
+ * Los enlaces de redes sociales se cargan desde src/content/links/*.yml.
+ */
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+import { getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import { getNavItems } from '@/lib/utils';
+
+// ─── Avatar ───────────────────────────────────
+const image = await getImage({
+  src: DEFAULT_CONFIGURATION.author.avatar,
+  format: 'avif',
+});
+
+// ─── Redes sociales desde content/links ───────
+const linksRaw = await getCollection('links');
+
+// Mapa de id → nombre de ícono en Icon.astro
+type IconName = 'github' | 'linkedin' | 'instagram' | 'email';
+const iconMap: Record<string, IconName> = {
+  github: 'github',
+  linkedin: 'linkedin',
+  instagram: 'instagram',
+  email: 'email',
+};
+
+// Orden preferido de visualización
+const linkOrder = ['github', 'linkedin', 'instagram', 'email'];
+const socialLinks = linkOrder
+  .map((id) => linksRaw.find((l) => l.id === id))
+  .filter(Boolean)
+  .map((link) => ({
+    label: link!.data.label,
+    href: link!.data.url,
+    icon: iconMap[link!.id] ?? 'email',
+  }));
+
+// Extraer email para la sección de contacto
+const emailLink = linksRaw.find((l) => l.id === 'email');
+const emailHref = emailLink?.data.url ?? 'mailto:hame.elizalde@gmail.com';
+
+// ─── Estado de la página ──────────────────────
+const pathname = Astro.url.pathname;
+const navItems = getNavItems(pathname);
+
+// Colores rotativos para puntos inactivos
+const accentColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
+
+const skills = [
+  'UX Writing',
+  'Estrategia',
+  'Producto',
+  'Investigación',
+  'Accesibilidad',
+  'Diseño',
+  'IA Aplicada',
+  'Educación Digital',
+];
+
+// Colores de skill tags (rotativos de la paleta)
+const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
+---
+
+<aside
+  class="tumblr-sidebar"
+  aria-label="Perfil y navegación"
+  transition:persist
+>
+  <!-- ─── Avatar + nombre ──────────────────────── -->
+  <div class="sidebar-profile">
+    <div class="sidebar-avatar">
+      <img
+        src={image.src}
+        alt={DEFAULT_CONFIGURATION.author.name}
+        width="80"
+        height="80"
+        loading="eager"
+      />
+    </div>
+    <h1 class="sidebar-name">{DEFAULT_CONFIGURATION.author.name}</h1>
+    <p class="sidebar-headline">
+      {DEFAULT_CONFIGURATION.author.headline}
+    </p>
+    <!-- Indicador de disponibilidad -->
+    <div class="sidebar-available">
+      <span class="sidebar-dot" aria-hidden="true"></span>
+      Disponible para proyectos
+    </div>
+  </div>
+
+  <!-- ─── Nav links ─────────────────────────────── -->
+  <nav class="sidebar-nav" aria-label="Navegación principal">
+    {
+      navItems.map(({ href, label, emoji, isActive }, index) => {
+        return (
+          <a
+            href={href}
+            class:list={[
+              'sidebar-nav__link',
+              isActive && 'sidebar-nav__link--active',
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+            aria-label={label}
+            data-nav-link
+          >
+            <span class="sidebar-nav__emoji" aria-hidden="true">
+              {emoji}
+            </span>
+            <span
+              class="sidebar-nav__dot"
+              aria-hidden="true"
+              style={`background-color: ${accentColors[index % accentColors.length]};`}
+            />
+            {label}
+          </a>
+        );
+      })
+    }
+  </nav>
+
+  <script is:inline>
+    // Actualizar estado activo en cliente para soportar ViewTransitions (transition:persist)
+    document.addEventListener('astro:page-load', () => {
+      const pathname = window.location.pathname;
+      const links = document.querySelectorAll('[data-nav-link]');
+      links.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const isActive =
+          href === '/' ? pathname === '/' : pathname.startsWith(href);
+        if (isActive) {
+          link.classList.add('sidebar-nav__link--active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('sidebar-nav__link--active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    });
+  </script>
+
+  <!-- ─── Divider ───────────────────────────────── -->
+  <div class="sidebar-divider" aria-hidden="true"></div>
+
+  <!-- ─── Skills tags ──────────────────────────── -->
+  <div class="sidebar-skills" aria-label="Disciplinas">
+    {
+      skills.map((skill) => (
+        <span class="sidebar-skill" style="cursor: pointer;">
+          {skill}
+        </span>
+      ))
+    }
+  </div>
+
+  <!-- ─── Divider ───────────────────────────────── -->
+  <div class="sidebar-divider" aria-hidden="true"></div>
+
+  <!-- ─── Redes sociales (desde content/links) ──── -->
+  <div class="sidebar-socials" aria-label="Redes sociales">
+    {
+      socialLinks.map(({ label, href, icon }) => (
+        <a
+          href={href}
+          class="sidebar-social"
+          target={href.startsWith('mailto') ? undefined : '_blank'}
+          rel="noopener noreferrer"
+          title={label}
+          aria-label={label}
+        >
+          <Icon name={icon} size={18} aria-hidden="true" />
+        </a>
+      ))
+    }
+  </div>
+
+  <!-- ─── Contacto ──────────────────────────────── -->
+  <div class="sidebar-contact">
+    <p class="sidebar-contact__label">¿Tienes un proyecto en mente?</p>
+    <a href={emailHref} class="sidebar-contact__btn"> Envíame un mensaje → </a>
+  </div>
+</aside>

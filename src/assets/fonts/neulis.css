@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Neulis Alt';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./NeulisAlt-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Neulis';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./Neulis-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Neulis';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./Neulis-Bold.woff2') format('woff2');
+}

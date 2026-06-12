@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [CV2025]
+    branches: [CV2026]
   workflow_dispatch:
 
 permissions:
@@ -21,7 +21,7 @@ jobs:
         uses: withastro/action@v3
         with:
           path: .
-          node-version: 20
+          node-version: 22
 
   deploy:
     needs: build

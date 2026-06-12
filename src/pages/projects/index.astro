@@ -1,39 +1,40 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
-import Author from '@/components/ui/Author.astro';
 import Container from '@/components/Container.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import FeedGrid from '@/components/ui/FeedGrid.astro';
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
-import ProjectPreview from '@/components/ui/ProjectPreview.astro';
 
-// Obtener proyectos ordenados por fecha
-const projects = await getCollection('projects', ({ data }) => {
-  return true;
-});
-
-// Ordenar por fecha descendente
-const sortedProjects = projects.sort((a, b) => 
-  b.data.date.getTime() - a.data.date.getTime()
-);
-
+const { name } = DEFAULT_CONFIGURATION.author;
 const seo = {
-  title: 'Proyectos — Hame Elizalde',
-  description: 'Una colección de mis proyectos más recientes'
+  title: `Proyectos — ${name}`,
+  description: 'Una selección de mis proyectos más recientes y destacados.',
 };
 ---
 
 <BaseLayout seo={seo}>
-  <Container as='section' class='py-6'>
-    <Author {...DEFAULT_CONFIGURATION.author} />
-  </Container>
-  <Container as='section' class='py-6'>
-    <div class="flex flex-col gap-6">
-      <span class="text-headings">Proyectos Recientes</span>
-      <ul class="flex flex-col gap-3">
-        {sortedProjects.map((project) => 
-          <ProjectPreview entry={project} />
-        )}
-      </ul>
+  <Container as="section" class="pb-12">
+    <div class="flex flex-col gap-2 mb-8 reveal">
+      <span
+        class="text-xs font-medium uppercase tracking-widest"
+        style="color: var(--soft-periwinkle);"
+      >
+        Portfolio
+      </span>
+      <h1
+        class="font-editorial text-4xl md:text-5xl font-semibold text-headings"
+      >
+        Mis Proyectos
+      </h1>
+      <p
+        class="text-lg max-w-2xl"
+        style="color: var(--color-muted-foreground);"
+      >
+        Aquí puedes explorar el trabajo en el que he estado enfocada
+        últimamente.
+      </p>
     </div>
+
+    <!-- Masonry grid filtered to show only projects -->
+    <FeedGrid filter="proyecto" hideHeader={true} />
   </Container>
 </BaseLayout>

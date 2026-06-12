@@ -34,3 +34,37 @@ export const sortJobsByDate = (jobs: CollectionEntry<'jobs'>[]) => {
     return nextEnd - currentEnd || next.data.from - current.data.from;
   });
 };
+
+export const sortTalksByDate = (talks: CollectionEntry<'talks'>[]) => {
+  return talks.sort((current, next) => {
+    return next.data.year - current.data.year;
+  });
+};
+
+// utils.ts — añadir al final
+export const sortByYear = <T extends { data: { year: number } }>(
+  items: T[],
+) => {
+  return items.sort((a, b) => b.data.year - a.data.year);
+};
+
+export interface NavItem {
+  href: string;
+  label: string;
+  emoji: string;
+  isActive: boolean;
+}
+
+export const getNavItems = (pathname: string): NavItem[] => {
+  const items = [
+    { href: '/', label: 'Feed', emoji: '◈' },
+    { href: '/portafolio', label: 'Proyectos', emoji: '◉' },
+    { href: '/writing', label: 'Blog', emoji: '◎' },
+    { href: '/about', label: 'Sobre mí', emoji: '◍' },
+  ];
+
+  return items.map((item) => ({
+    ...item,
+    isActive: item.href === '/' ? pathname === '/' : pathname.startsWith(item.href),
+  }));
+};

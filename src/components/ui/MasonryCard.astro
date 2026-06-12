@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  href: string;
+  image?: any;
+  date?: Date | string;
+  description?: string;
+  category: 'proyecto' | 'blog' | 'charla' | 'foto';
+  tags?: string[];
+  accentColor?: string;
+}
+
+const {
+  title,
+  href,
+  image,
+  date,
+  description,
+  category,
+  accentColor = category === 'proyecto'
+    ? 'var(--muted-olive)'
+    : category === 'charla'
+    ? 'var(--sweet-peony)'
+    : category === 'foto'
+    ? 'var(--color-tangerine)'
+    : 'var(--soft-periwinkle)',
+} = Astro.props;
+
+const categoryLabel = category === 'proyecto' ? 'Proyecto' : category === 'charla' ? 'Charla' : category === 'foto' ? 'Foto' : 'Blog';
+const categoryIcon  = category === 'proyecto' ? '✦' : category === 'charla' ? '✧' : category === 'foto' ? '⬡' : '✶';
+
+const formattedDate = date
+  ? new Date(date).toLocaleDateString('es-MX', { month: 'short', year: 'numeric' })
+  : null;
+---
+
+<a
+  href={href}
+  rel="noopener noreferrer"
+  class="masonry-card group block rounded-2xl overflow-hidden border border-[var(--color-border)] bg-card transition-all duration-300 hover:border-[var(--color-border-hover)] hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+  style="break-inside: avoid; margin-bottom: 1rem;"
+  data-category={category}
+  data-tags={JSON.stringify(Astro.props.tags || [])}
+>
+  <!-- Image area -->
+  <div class="relative overflow-hidden">
+    {image ? (
+      <Image
+        src={image}
+        alt={title}
+        width={600}
+        class="w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+        style="display: block;"
+      />
+    ) : (
+      <!-- Gradient placeholder when no image -->
+      <div
+        class="w-full h-44"
+        style={`background: linear-gradient(135deg, ${accentColor}40, var(--space-indigo)60);`}
+        aria-hidden="true"
+      >
+        <div class="flex items-center justify-center h-full text-4xl opacity-30">
+          {categoryIcon}
+        </div>
+      </div>
+    )}
+
+    <!-- Overlay that appears on hover -->
+    <div
+      class="masonry-overlay absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      style="background: linear-gradient(to top, rgba(37, 14, 44, 0.92) 0%, rgba(37,14,44,0.4) 55%, transparent 100%);"
+    >
+      <span
+        class="text-xs font-medium uppercase tracking-widest translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
+        style="color: var(--muted-olive);"
+      >
+        Ver {categoryLabel} →
+      </span>
+    </div>
+  </div>
+
+  <!-- Text content always visible below image -->
+  <div class="p-4 flex flex-col gap-1.5">
+    <!-- Category badge -->
+    <div class="flex items-center justify-between gap-2">
+      <span
+        class="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full capitalize"
+        style={`background-color: ${accentColor}20; color: ${accentColor};`}
+      >
+        {categoryIcon} {categoryLabel}
+      </span>
+    </div>
+
+    <!-- Title -->
+    <h3
+      class="font-editorial text-base leading-snug text-headings group-hover:text-[var(--soft-periwinkle)] transition-colors duration-200"
+    >
+      {title}
+    </h3>
+  </div>
+</a>

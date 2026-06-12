@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/Container.astro';
+import Talk from '@/components/ui/Talk.astro';
+import { sortTalksByDate } from '@/lib/utils';
+
+const talks = await getCollection('talks');
+const sortedTalks = sortTalksByDate(talks);
+---
+
+<BaseLayout seo={{ title: 'Charlas', description: 'Charlas, paneles y talleres en los que he participado' }}>
+  <Container as="section" class="py-6">
+    <div class="flex flex-col gap-5">
+      <span class="text-headings">Charlas</span>
+      {sortedTalks.length > 0 && (
+        <ul class="flex flex-col gap-8">
+          {sortedTalks.map((talk) => (
+            <Talk entry={talk} />
+          ))}
+        </ul>
+      )}
+
+      {sortedTalks.length === 0 && (
+        <p class="text-muted">No hay charlas publicadas aún.</p>
+      )}
+    </div>
+  </Container>
+</BaseLayout>

@@ -1,27 +1,31 @@
 ---
 import '@/styles/global.css';
 import '@/assets/fonts/inter.css';
+import '@/assets/fonts/neulis.css';
+import '@/assets/fonts/poppins.css';
 import { type Seo } from '@/lib/constants';
-import Header from '@/components/partials/Header.astro';
-import Footer from '@/components/partials/Footer.astro';
 import Head from '@/components/partials/Head.astro';
-import SwitchTheme from '@/components/SwitchTheme.tsx';
+import Sidebar from '@/components/partials/Sidebar.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
-  seo?: Seo
+  seo?: Seo;
+  fullBleed?: boolean;
 }
 
-const { seo } = Astro.props;
+const { seo, fullBleed = false } = Astro.props;
 ---
 
-<html lang="en">
-  <Head seo={seo} />
-  <body class="bg-background text-foreground pb-12">
-    <Header />
-    <main class="pt-24">
-      <slot />
-    </main>
-    <Footer />
-    <SwitchTheme client:only="react" />
+<html lang="es">
+  <Head seo={seo}>
+    <ViewTransitions />
+  </Head>
+  <body class="tumblr-body">
+    <div class="app-shell">
+      <Sidebar />
+      <main class="main-content">
+        <slot />
+      </main>
+    </div>
   </body>
 </html>

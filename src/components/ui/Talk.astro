@@ -11,14 +11,40 @@ const { Content } = await render(entry);
 
 <li class="py-0.5">
   <div class="flex gap-5">
-    <div class="relative min-w-28 shrink-0">
-      <span class="text-muted-foreground text-sm">{entry.data.year}</span>
+      <div class="relative min-w-28 shrink-0">
+      <span class="text-sm">{entry.data.year}</span>
     </div>
     <div class="flex flex-col gap-3">
-      <div class="flex flex-col">
-        <span class="text-headings font-medium">{entry.data.title}</span>
-        <span class="text-foreground text-sm">{entry.data.event}, {entry.data.location}</span>
-      </div>
+      {entry.data.url ? (
+        <a
+          href={entry.data.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-col hover:underline"
+        >
+          <div class="flex flex-col">
+            <span class="text-headings font-medium">{entry.data.title}</span>
+            <span class="text-foreground text-sm"
+              >{entry.data.event}, {entry.data.location}</span
+            >
+            <span class="text-xs text-foreground/70 transition-colors">
+              Ver charla →
+            </span>
+          </div>
+        </a>
+      ) : (
+        <a href={`/talks/${entry.id}`} class="flex flex-col hover:underline">
+          <div class="flex flex-col">
+            <span class="text-headings font-medium">{entry.data.title}</span>
+            <span class="text-foreground text-sm"
+              >{entry.data.event}, {entry.data.location}</span
+            >
+            <span class="text-xs group-hover:text-foreground/70 transition-colors">
+              Ver más →
+            </span>
+          </div>
+        </a>
+      )}
       <div class="prose dark:prose-invert prose-sm">
         <Content />
       </div>
