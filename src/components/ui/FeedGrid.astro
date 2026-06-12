@@ -160,16 +160,6 @@ const emailHref = emailLink?.data.url ?? `mailto:${DEFAULT_CONFIGURATION.author.
     {availableTags.length > 0 && (
       <div style="width: 2px; height: 20px; background-color: var(--color-dark); opacity: 0.15; align-self: center;" class="hidden sm:block mx-1"></div>
     )}
-
-    {availableTags.map(tag => (
-      <button 
-        class="feed-filter"
-        data-filter={tag.toLowerCase()}
-        type="button"
-      >
-        #{tag}
-      </button>
-    ))}
   </div>
 
   <!-- Masonry grid via CSS columns (defined in global.css) -->
