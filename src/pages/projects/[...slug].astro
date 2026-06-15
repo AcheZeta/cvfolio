@@ -20,39 +20,35 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout seo={entry.data.seo}>
-  <Container as="section">
-    <article class="flex flex-col gap-6">
-      <div class="flex flex-col gap-2">
-        <a
-          href="/portafolio"
-          class="transition-all hover:text-foreground pb-4 text-sm w-max"
-        >
-          Back to projects
-        </a>
-        <div class="flex flex-col gap-1.5">
-          <Avatar />
-          <span class="text-foreground"
-            >{DEFAULT_CONFIGURATION.author.name}</span
-          >
+  <article class="flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <a
+        href="/portafolio"
+        class="transition-all hover:text-foreground pb-4 text-sm w-max"
+      >
+        Back to projects
+      </a>
+      <div class="flex flex-col gap-1.5">
+        <Avatar />
+        <span class="text-foreground">{DEFAULT_CONFIGURATION.author.name}</span>
+      </div>
+      <h1 class="text-3xl font-semibold text-headings">{entry.data.title}</h1>
+    </div>
+    {
+      entry.data.image && (
+        <div class="relative aspect-video overflow-hidden rounded-lg">
+          <Image
+            src={entry.data.image}
+            alt={entry.data.title}
+            class="object-cover"
+          />
         </div>
-        <h1 class="text-3xl font-semibold text-headings">{entry.data.title}</h1>
-      </div>
-      {
-        entry.data.image && (
-          <div class="relative aspect-video overflow-hidden rounded-lg">
-            <Image
-              src={entry.data.image}
-              alt={entry.data.title}
-              class="object-cover"
-            />
-          </div>
-        )
-      }
-      <div class="prose dark:prose-invert">
-        <Content />
-      </div>
-    </article>
-  </Container>
+      )
+    }
+    <div class="prose dark:prose-invert">
+      <Content />
+    </div>
+  </article>
 </BaseLayout>
 
 <script>
@@ -62,7 +58,7 @@ const { Content } = await render(entry);
   const initLightbox = () => {
     // Select all images within the article
     const images = document.querySelectorAll<HTMLImageElement>('article img');
-    
+
     if (images.length === 0) return;
 
     let lightbox: PhotoSwipeLightbox | null = null;
@@ -70,10 +66,10 @@ const { Content } = await render(entry);
     images.forEach((img, index) => {
       // Add zoom-in cursor to indicate it's clickable
       img.style.cursor = 'zoom-in';
-      
+
       img.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         if (!lightbox) {
           lightbox = new PhotoSwipeLightbox({
             // Generate the data source on click so that naturalWidth/Height are loaded
@@ -81,7 +77,7 @@ const { Content } = await render(entry);
               src: i.src,
               width: i.naturalWidth || 1200,
               height: i.naturalHeight || 800,
-              alt: i.alt
+              alt: i.alt,
             })),
             pswpModule: () => import('photoswipe'),
             padding: { top: 20, bottom: 20, left: 20, right: 20 },
@@ -90,7 +86,7 @@ const { Content } = await render(entry);
           });
           lightbox.init();
         }
-        
+
         lightbox.loadAndOpen(index);
       });
     });

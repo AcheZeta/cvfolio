@@ -9,21 +9,28 @@ const talks = await getCollection('talks');
 const sortedTalks = sortTalksByDate(talks);
 ---
 
-<BaseLayout seo={{ title: 'Charlas', description: 'Charlas, paneles y talleres en los que he participado' }}>
-  <Container as="section" class="py-6">
-    <div class="flex flex-col gap-5">
-      <span class="text-headings">Charlas</span>
-      {sortedTalks.length > 0 && (
+<BaseLayout
+  seo={{
+    title: 'Charlas',
+    description: 'Charlas, paneles y talleres en los que he participado',
+  }}
+>
+  <div class="flex flex-col gap-5">
+    <span class="text-headings">Charlas</span>
+    {
+      sortedTalks.length > 0 && (
         <ul class="flex flex-col gap-8">
           {sortedTalks.map((talk) => (
             <Talk entry={talk} />
           ))}
         </ul>
-      )}
+      )
+    }
 
-      {sortedTalks.length === 0 && (
+    {
+      sortedTalks.length === 0 && (
         <p class="text-muted">No hay charlas publicadas aún.</p>
-      )}
-    </div>
-  </Container>
+      )
+    }
+  </div>
 </BaseLayout>

@@ -14,14 +14,10 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout seo={entry.data.seo}>
-  <Container as="section" class="py-6">
-    <Author {...DEFAULT_CONFIGURATION.author} />
-  </Container>
-  <Container as="section" class="py-6">
-    <article class="flex flex-col gap-6">
-      <div class="prose dark:prose-invert max-w-none">
-        <Content />
-      </div>
-    </article>
-  </Container>
+  <Author {...DEFAULT_CONFIGURATION.author} />
+  <article class="flex flex-col gap-6">
+    <div class="prose dark:prose-invert max-w-none">
+      <Content />
+    </div>
+  </article>
 </BaseLayout>
