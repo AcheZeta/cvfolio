@@ -86,11 +86,6 @@ const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
     <p class="sidebar-headline">
       {DEFAULT_CONFIGURATION.author.headline}
     </p>
-    <!-- Indicador de disponibilidad -->
-    <div class="sidebar-available">
-      <span class="sidebar-dot" aria-hidden="true"></span>
-      Disponible para proyectos
-    </div>
   </div>
 
   <!-- ─── Nav links ─────────────────────────────── -->
@@ -142,6 +137,38 @@ const skillColors = ['#C4BAED', '#FFD97D', '#A8DCC8', '#F7A3C0', '#FF8C61'];
         }
       });
     });
+
+    // Lógica de scroll para ocultar sidebar en móvil
+    let lastScroll = 0;
+    window.addEventListener(
+      'scroll',
+      () => {
+        const nav = document.querySelector('.sidebar-nav');
+        if (!nav || window.innerWidth > 768) return;
+
+        const currentScroll = window.scrollY;
+
+        // Cuando scrolleamos más allá de la info del perfil (~140px), fijamos la navegación
+        if (currentScroll > 140) {
+          nav.classList.add('sidebar-nav--fixed');
+
+          // Ignoramos movimientos muy pequeños para evitar parpadeos
+          if (Math.abs(currentScroll - lastScroll) < 10) return;
+
+          if (currentScroll > lastScroll) {
+            nav.classList.add('sidebar-nav--hidden');
+          } else {
+            nav.classList.remove('sidebar-nav--hidden');
+          }
+        } else {
+          nav.classList.remove('sidebar-nav--fixed');
+          nav.classList.remove('sidebar-nav--hidden');
+        }
+
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+      },
+      { passive: true },
+    );
   </script>
 
   <!-- ─── Divider ───────────────────────────────── -->
