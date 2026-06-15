@@ -58,9 +58,10 @@ export interface NavItem {
 export const getNavItems = (pathname: string): NavItem[] => {
   const items = [
     { href: '/', label: 'Ver todo', emoji: '◈' },
-    { href: '/portafolio', label: 'Proyectos', emoji: '◉' },
+    { href: '/portafolio', label: 'Portafolio', emoji: '◉' },
     { href: '/writing', label: 'Blog', emoji: '◎' },
-    { href: '/about', label: 'Quién soy', emoji: '◍' },
+    { href: '/talks', label: 'Charlas', emoji: '◇' },
+    { href: '/about', label: 'Sobre mí', emoji: '◍' },
   ];
 
   return items.map((item) => ({
