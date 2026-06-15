@@ -8,9 +8,10 @@ interface Props {
   filter?: 'proyecto' | 'blog' | 'charla' | 'foto';
   hideHeader?: boolean;
   showContactCard?: boolean;
+  showFilter?: boolean;
 }
 
-const { limit, filter, hideHeader = false, showContactCard = false } = Astro.props;
+const { limit, filter, hideHeader = false, showContactCard = false, showFilter = false } = Astro.props;
 
 // Fetch all collections
 const projects = await getCollection('projects');
@@ -125,36 +126,38 @@ const emailHref = emailLink?.data.url ?? `mailto:${DEFAULT_CONFIGURATION.author.
   }
 
   <!-- Filter Bar -->
-  <div class="feed-filters mb-8 reveal" role="group" aria-label="Filtrar contenido">
-    <button 
-      class="feed-filter feed-filter--active"
-      data-filter="all"
-      type="button"
-    >
-      Todos
-    </button>
-    
-    {!filter && (
-      <>
-        <button class="feed-filter" data-filter="proyecto" type="button">
-          Proyectos
-        </button>
-        <button class="feed-filter" data-filter="blog" type="button">
-          Blog
-        </button>
-        <button class="feed-filter" data-filter="charla" type="button">
-          Charlas
-        <button class="feed-filter" data-filter="foto" type="button">
-          Fotografía
-        </button>
-        </button>
-      </>
-    )}
+  {showFilter && (
+    <div class="feed-filters mb-8 reveal" role="group" aria-label="Filtrar contenido">
+      <button 
+        class="feed-filter feed-filter--active"
+        data-filter="all"
+        type="button"
+      >
+        Todos
+      </button>
+      
+      {!filter && (
+        <>
+          <button class="feed-filter" data-filter="proyecto" type="button">
+            Proyectos
+          </button>
+          <button class="feed-filter" data-filter="blog" type="button">
+            Blog
+          </button>
+          <button class="feed-filter" data-filter="charla" type="button">
+            Charlas
+          </button>
+          <button class="feed-filter" data-filter="foto" type="button">
+            Fotografía
+          </button>
+        </>
+      )}
 
-    {availableTags.length > 0 && (
-      <div style="width: 2px; height: 20px; background-color: var(--color-dark); opacity: 0.15; align-self: center;" class="hidden sm:block mx-1"></div>
-    )}
-  </div>
+      {availableTags.length > 0 && (
+        <div style="width: 2px; height: 20px; background-color: var(--color-dark); opacity: 0.15; align-self: center;" class="hidden sm:block mx-1"></div>
+      )}
+    </div>
+  )}
 
   <!-- Masonry grid via CSS columns (defined in global.css) -->
   <div id="masonry-container" class="masonry-grid reveal reveal-delay-2">
