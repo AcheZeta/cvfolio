@@ -1528,11 +1528,9 @@ h6 {
 }
 
 .sidebar-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+  width: 120px;
+  height: 120px;
   overflow: hidden;
-  border: 2.5px solid var(--color-dark);
   flex-shrink: 0;
   margin-bottom: 4px;
 }
@@ -1545,16 +1543,16 @@ h6 {
 }
 
 .sidebar-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Neulis', 'Neulis Alt', sans-serif;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 2.2rem;
   color: var(--color-dark);
   margin: 0;
   line-height: 1.2;
 }
 
 .sidebar-headline {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--color-dark-text);
   margin: 0;
@@ -1574,8 +1572,8 @@ h6 {
 }
 
 .sidebar-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background-color: var(--color-sage);
   border: 1.5px solid var(--color-dark);
@@ -1610,7 +1608,7 @@ h6 {
   gap: 8px;
   padding: 7px 10px;
   border-radius: 10px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--color-dark-text);
   text-decoration: none;
@@ -1970,7 +1968,7 @@ h6 {
     overflow-x: visible;
     border-right: none;
     border-bottom: 2px solid var(--color-dark);
-    padding: 16px;
+    padding: 12px;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;
@@ -1979,7 +1977,7 @@ h6 {
   .main-content {
     height: auto;
     overflow-y: visible;
-    padding: 24px 20px;
+    padding: 20px 20px;
   }
 
   .sidebar-profile {
@@ -1991,8 +1989,8 @@ h6 {
   }
 
   .sidebar-avatar {
-    width: 48px;
-    height: 48px;
+    width: 80px;
+    height: 80px;
     margin-bottom: 0;
   }
 
